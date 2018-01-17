@@ -109,7 +109,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -141,6 +141,309 @@
 <div class="container body-wrap">
 
     <ul class="post-list">
+    
+        <li class="post-list-item fade">
+            <article id="post-applets-qr-code"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-01-13 16:20:05" datetime="2018-01-13T08:20:05.000Z"  itemprop="datePublished">2018-01-13</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Coding/">Coding</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/01/13/applets-qr-code/">小程序码生成及分享图绘制</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        场景项目需求为用户创建活动，且生成了小程序码，进而再生成小程序码分享图，即在原小程序码的基础上绘制一张完整的分享图，并展示给用户进行分享。个中过程均交由后台生成并绘制（原因：用户在小程序直接点击某选项，直接转至分享图页面，而图片存储七牛云之上，若由前端生成再交由后台处理并返回，便影响响应速度）
+说明开发环境：JDK1.8开发语言：Java
+正题生成小程序码调用微信SDK，最好的文档便是官网文...
+    
+
+        <a href="/2018/01/13/applets-qr-code/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小程序/">小程序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微信/">微信</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-qiniu-module"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-01-03 10:54:31" datetime="2018-01-03T02:54:31.000Z"  itemprop="datePublished">2018-01-03</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Coding/">Coding</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/01/03/qiniu-module/">七牛云模块化</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        前言闲来无事，搭建了个人私仓来放模块化项目，以便项目引入直接使用。关键是，模块化可以根据项目所需进行版本迭代，每一次的使用都是完善的根基，效果贼棒。
+介绍七牛云是国内领先的企业级公有云服务商，致力于打造以数据为核心的场景化PaaS服务。围绕富媒体场景，七牛先后推出了对象存储，融合CDN加速，数据通用处理，内容反垃圾服务，以及直播云服务等。
+而此次推出的模块化，目的是为了满足项目存储图片的需求...
+    
+
+        <a href="/2018/01/03/qiniu-module/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring-boot/">spring boot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/七牛/">七牛</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/模块化/">模块化</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-linux-process-monitor"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-12-22 09:59:26" datetime="2017-12-22T01:59:26.000Z"  itemprop="datePublished">2017-12-22</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Coding/">Coding</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/12/22/linux-process-monitor/">Linux进程监控 + 钉钉通知</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        进程监控脚本背景启动于正式服务器的项目，有时会因为某种因素，例如docker内存超限因而容器崩溃（前不久就遇过…），如服务器内存不足或IO读写异常而崩溃….等等等等。而这些原因，都可能影响到项目的正常运行，严重地将会被kill掉。那么，在服务器上弄一套进程监控方案就很有必要了！
+说明进程监控采用shell脚本的形式，结合日常开发使用的CI工具（如Jenkins），再通过Linux服务器的定时...
+    
+
+        <a href="/2017/12/22/linux-process-monitor/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/服务器/">服务器</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-spring-data-jpa-record"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-12-22 09:58:37" datetime="2017-12-22T01:58:37.000Z"  itemprop="datePublished">2017-12-22</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Coding/">Coding</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/12/22/spring-data-jpa-record/">Spring Data JPA坑点记录</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        一、分页查询场景：动态查询，分页查询，根据传入不同的状态，分别查询不同数据表，并且在传入page对象之前用map进行VO转换。而pageable的使用地方不同影响到了分页数据的正确性，以此进行探讨。
+
+pageable使用于new PageImpl&lt;&gt;中，且直到最后才将List -&gt; Page
+pageable使用于findAll()中
+
+前提：Page对象封于VO内，返回...
+    
+
+        <a href="/2017/12/22/spring-data-jpa-record/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring-data-jpa/">spring data jpa</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-three-parties-wechat-pay"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-10-22 16:42:38" datetime="2017-10-22T08:42:38.000Z"  itemprop="datePublished">2017-10-22</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Coding/">Coding</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/10/22/three-parties-wechat-pay/">三方银行微信支付流程及配置相关</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        应用场景现在市面上的公众号h5页面大多接的是公众号支付，微信支付的流程大多还是类似的。而这次记录的是三方银行微信支付的流程，会有些许不一样。
+微信公众号配置微信授权配置
+进入具有微信支付权限的微信公众平台
+基本配置，配置网页授权域名、JS接口安全域名
+
+
+                
+                    
+                    
+          ...
+    
+
+        <a href="/2017/10/22/three-parties-wechat-pay/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/三方服务/">三方服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微信/">微信</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-move-formal-server"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-10-15 17:27:10" datetime="2017-10-15T09:27:10.000Z"  itemprop="datePublished">2017-10-15</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Coding/">Coding</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/10/15/move-formal-server/">企业项目之迁移正式服</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        应用场景企业项目制作除了多分支开发外，通常也会使用CI来简化部署流程，提高部署效率，当然，流程也不能少了测试服。毕竟，bug乃家常便饭，联调必不可免，因此，开发至测试服并迁移到正式服的流程也必不可少。
+测试服环境应用开发语言：Java服务器：ECS CentOS7CI：Jenkins容器引擎：Docker执行：Shell运行程序：Jar
+正式服环境服务器：ECS CentOS7（正式服可考虑...
+    
+
+        <a href="/2017/10/15/move-formal-server/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/服务器/">服务器</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
     
         <li class="post-list-item fade">
             <article id="post-java8-lambda"
@@ -175,7 +478,7 @@
     
 
         <a href="/2017/09/18/java8-lambda/" class="post-more waves-effect waves-button">
-            Continue reading...
+            阅读全文…
         </a>
     </div>
     
@@ -222,7 +525,7 @@
     
 
         <a href="/2017/05/28/java-object-serialization/" class="post-more waves-effect waves-button">
-            Continue reading...
+            阅读全文…
         </a>
     </div>
     
@@ -276,7 +579,7 @@
     
 
         <a href="/2017/05/21/web-convert-maven/" class="post-more waves-effect waves-button">
-            Continue reading...
+            阅读全文…
         </a>
     </div>
     
@@ -327,7 +630,7 @@
     
 
         <a href="/2017/05/21/spring-jms-activemq-start/" class="post-more waves-effect waves-button">
-            Continue reading...
+            阅读全文…
         </a>
     </div>
     
@@ -341,254 +644,15 @@
 
         </li>
     
-        <li class="post-list-item fade">
-            <article id="post-think-in-java-01"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2017-05-09 23:56:18" datetime="2017-05-09T15:56:18.000Z"  itemprop="datePublished">2017-05-09</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Learning/">Learning</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/05/09/think-in-java-01/">Think in Java:(1)对象篇</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        前言略读了一些内容，觉得还是不太适合初学者入门，倒适合一开始偏向于项目而后想回头重新拾回Java点点滴滴的猿们。以下总结的都是一些博主觉得有意思的解释，或者忘却了的知识点。正在学习或者已经读完的朋友们，互勉！！！
-    
-
-        <a href="/2017/05/09/think-in-java-01/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/thinking-in-java/">thinking-in-java</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-webservice-demo"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2017-04-15 21:48:04" datetime="2017-04-15T13:48:04.000Z"  itemprop="datePublished">2017-04-15</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Coding/">Coding</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/04/15/webservice-demo/">webservice:(2)体验查询号码归属地demo</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        前言对于webservice的介绍，本文就不再赘余讲述。详见文章 webservice:(1)新手搭建调用webservice那些坑
-首先，先给出一个站点，该站点提供了许多webservice服务，可供调用测试。站点： http://www.webxml.com.cn/zh_cn/index.aspx
-
-                
-                    
-                    
-                
-                
-            
-    
-
-        <a href="/2017/04/15/webservice-demo/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webservice/">webservice</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-github-clone-skill"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2017-02-27 21:57:27" datetime="2017-02-27T13:57:27.000Z"  itemprop="datePublished">2017-02-27</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Coding/">Coding</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/02/27/github-clone-skill/">提高Github Clone速度</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        前言以下操作均在mac下，当然，windows也类似。如题。使用git clone速度之慢，简直绝了。因此，在这里将提出一种较为简单的解决方法，有兴趣花丢丢时间折腾的朋友可以试试。
-虽说git clone跟网速离不了干系（有些地区较快，有些地区较慢），但总体来说，大部分都在10KiB/s-20KiB/s之间，及其慢。若是需要clone大repo，那速度简直捉急。
-    
-
-        <a href="/2017/02/27/github-clone-skill/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-sublimetext-plugin"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2017-02-05 16:57:40" datetime="2017-02-05T08:57:40.000Z"  itemprop="datePublished">2017-02-05</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Coding/">Coding</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/02/05/sublimetext-plugin/">Sublime Text 3(Mac版)常用插件篇</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        前言以下大部份插件Windows安装方法基本与Mac类似.首先，Sublime Text无疑是编程中一款强有力的工具，深受程序猿的喜爱，下面简单介绍下Sublime Text.
-说明Sublime Text一款具有代码高亮、语法提示、自动完成且反应快速的编辑器软件，不仅具有华丽的界面，还支持插件扩展机制，用它来写代码，绝对是一种享受。
-    
-
-        <a href="/2017/02/05/sublimetext-plugin/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/插件/">插件</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编辑器/">编辑器</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-build-webservice"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2016-05-26 13:40:30" datetime="2016-05-26T05:40:30.000Z"  itemprop="datePublished">2016-05-26</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Coding/">Coding</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/05/26/build-webservice/">webservice:(1)新手搭建调用webservice那些坑</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        前言今天主要和大家分享搭建java版webservice，以及php调用webservice遇到的一些坑。博客内容大部分纯手打，纯亲测。注：网上有很多使用Eclipse构建webservice的教程，不过配置较麻烦，而且最后可能还访问不了。因此，此博客采用MyEclipse搭建。需注意一点，MyEclipse10及以下的支持不了pattern库，因此发布的项目如果包含Pattern则无法支持，这也是博主换IDE的原因。
-    
-
-        <a href="/2016/05/26/build-webservice/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/">php</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webservice/">webservice</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
     </ul>
 
     
+<nav id="page-nav">
+    <div class="inner">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    </div>
+</nav>
+
 
 </div>
 
@@ -609,7 +673,7 @@
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
         </p>
     </div>
     <div class="bottom">

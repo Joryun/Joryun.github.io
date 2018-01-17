@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>企业项目之迁移正式服 | Joryun&#39;s Blog | 在最好的年纪做最对的事</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="java,centos,shell,服务器">
+    <meta name="description" content="应用场景企业项目制作除了多分支开发外，通常也会使用CI来简化部署流程，提高部署效率，当然，流程也不能少了测试服。毕竟，bug乃家常便饭，联调必不可免，因此，开发至测试服并迁移到正式服的流程也必不可少。 测试服环境应用开发语言：Java服务器：ECS CentOS7CI：Jenkins容器引擎：Docker执行：Shell运行程序：Jar 正式服环境服务器：ECS CentOS7（正式服可考虑四核八">
+<meta name="keywords" content="java,centos,shell,服务器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="企业项目之迁移正式服">
+<meta property="og:url" content="http://joryun.com/2017/10/15/move-formal-server/index.html">
+<meta property="og:site_name" content="Joryun&#39;s Blog">
+<meta property="og:description" content="应用场景企业项目制作除了多分支开发外，通常也会使用CI来简化部署流程，提高部署效率，当然，流程也不能少了测试服。毕竟，bug乃家常便饭，联调必不可免，因此，开发至测试服并迁移到正式服的流程也必不可少。 测试服环境应用开发语言：Java服务器：ECS CentOS7CI：Jenkins容器引擎：Docker执行：Shell运行程序：Jar 正式服环境服务器：ECS CentOS7（正式服可考虑四核八">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-17T08:29:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="企业项目之迁移正式服">
+<meta name="twitter:description" content="应用场景企业项目制作除了多分支开发外，通常也会使用CI来简化部署流程，提高部署效率，当然，流程也不能少了测试服。毕竟，bug乃家常便饭，联调必不可免，因此，开发至测试服并迁移到正式服的流程也必不可少。 测试服环境应用开发语言：Java服务器：ECS CentOS7CI：Jenkins容器引擎：Docker执行：Shell运行程序：Jar 正式服环境服务器：ECS CentOS7（正式服可考虑四核八">
+    
+        <link rel="alternate" type="application/atom+xml" title="Joryun&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yuan.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">刘家源</h5>
+          <a href="mailto:m18814128406@163.com" title="m18814128406@163.com" class="mail">m18814128406@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Joryun" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">企业项目之迁移正式服</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">企业项目之迁移正式服</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-10-15T09:27:10.000Z" itemprop="datePublished" class="page-time">
+  2017-10-15
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Coding/">Coding</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#应用场景"><span class="post-toc-number">1.</span> <span class="post-toc-text">应用场景</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#测试服环境"><span class="post-toc-number">2.</span> <span class="post-toc-text">测试服环境</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#正式服环境"><span class="post-toc-number">3.</span> <span class="post-toc-text">正式服环境</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#迁移正式服"><span class="post-toc-number">4.</span> <span class="post-toc-text">迁移正式服</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">5.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-move-formal-server"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">企业项目之迁移正式服</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-10-15 17:27:10" datetime="2017-10-15T09:27:10.000Z"  itemprop="datePublished">2017-10-15</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Coding/">Coding</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><p>企业项目制作除了多分支开发外，通常也会使用CI来简化部署流程，提高部署效率，当然，流程也不能少了测试服。毕竟，bug乃家常便饭，联调必不可免，因此，开发至测试服并迁移到正式服的流程也必不可少。</p>
+<h1 id="测试服环境"><a href="#测试服环境" class="headerlink" title="测试服环境"></a>测试服环境</h1><p>应用开发语言：Java<br>服务器：ECS CentOS7<br>CI：Jenkins<br>容器引擎：Docker<br>执行：Shell<br>运行程序：Jar</p>
+<h1 id="正式服环境"><a href="#正式服环境" class="headerlink" title="正式服环境"></a>正式服环境</h1><p>服务器：ECS CentOS7（正式服可考虑四核八G）<br>CI：Jenkins<br>容器引擎：Docker<br>执行：Shell<br>运行程序：Jar</p>
+<h1 id="迁移正式服"><a href="#迁移正式服" class="headerlink" title="迁移正式服"></a>迁移正式服</h1><ul>
+<li>域名购买及备案</li>
+<li>解析域名（可解析多个二级域名，应用于cms or web等等）</li>
+<li>拿到新机 yum update</li>
+<li>JDK</li>
+<li>安装Docker环境并启动（采用systemctl）</li>
+<li>编写DockerFile，或依次pull MySQL，Redis，并Run，映射到相应端口（配置安全组）</li>
+<li>install Nginx</li>
+<li>配置server映射到一开始解析的一级或二级域名</li>
+<li>配置root（h5页面上传，可上传前端使用npm打包完成的xxx.js）</li>
+<li>配置映射location，若为Spring or SpringBoot项目，可通过requestMapping的前半部分进行URL规则映射</li>
+<li>打Jar包，可使用持续集成工具+shell脚本打包，至于会不会新版本的jar替换旧版本的jar，全看shell脚本写的好不好</li>
+<li>后台执行jar，可采用nohup</li>
+<li>Java应用程序一定要记得加log，将日志也打到正式服上，因为…这是个好东西来着</li>
+<li>常用检测：tail -xxx xxx.log / tail -f xxx.log </li>
+<li>部署Jar包经常使用流程：ps xxx(-ef)|grep xxx  -&gt; kill -9 port -&gt; nohup</li>
+<li>若使用Swagger调试的可开启Api文档进行接口调用调试，若不使用，可采取postman等http请求调试工具</li>
+</ul>
+<p>╮(￣▽￣)╭至此，一个大致的正式服也基本可以跑起来了</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>折腾服务器是一件有趣的事情，毕竟可以前沿地接触一些新鲜的技术，可玩性很高，方案也多得多！！！本篇介绍的算是简略总结版，并无开展更多细节，闲下来了估计会出一份详尽版或折腾版。有兴趣的一起交流交流！！！</p>
+<hr>
+<p>编程是一门事业。互励共勉！！！</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-01-17T08:29:01.000Z" itemprop="dateUpdated">2018-01-17 16:29:01</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/10/15/move-formal-server/" target="_blank" rel="external">http://joryun.com/2017/10/15/move-formal-server/</a>
+        
+    </div>
+    <footer>
+        <a href="http://joryun.com">
+            <img src="/img/yuan.jpg" alt="刘家源">
+            刘家源
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/服务器/">服务器</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2017/10/15/move-formal-server/&title=《企业项目之迁移正式服》 — Joryun's Blog&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2017/10/15/move-formal-server/&title=《企业项目之迁移正式服》 — Joryun's Blog&source=TO BE IS TO DO" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2017/10/15/move-formal-server/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《企业项目之迁移正式服》 — Joryun's Blog&url=http://joryun.com/2017/10/15/move-formal-server/&via=http://joryun.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2017/10/15/move-formal-server/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/10/22/three-parties-wechat-pay/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">三方银行微信支付流程及配置相关</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/09/18/java8-lambda/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Java8：Lambda表达式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        undefined
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>刘家源 &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2017/10/15/move-formal-server/&title=《企业项目之迁移正式服》 — Joryun's Blog&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2017/10/15/move-formal-server/&title=《企业项目之迁移正式服》 — Joryun's Blog&source=TO BE IS TO DO" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2017/10/15/move-formal-server/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《企业项目之迁移正式服》 — Joryun's Blog&url=http://joryun.com/2017/10/15/move-formal-server/&via=http://joryun.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2017/10/15/move-formal-server/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMklEQVR42u3aQY7jMAwEwPn/p7PA3AaBnW4xO7uRyqcgiWWXDgRF8usrvh7f1/Pnq/9c/fq8zvNd9+uMLgwMjI9lPG6v5JH39yYbcfVrvj4GBsYJjCTIXi4Rw1pkEdwxMDAwgnDZpn33wR0DAwNjwmgPqMm99+tgYGBg5IfY+7vaUPvPzuIYGBgfyJg0Bv7251/qb2BgYPzHjEd55dQ8iVx7kx/rYGBgbM3Iy175oTfBTwYsigwXAwNjC8baYTU5sibr5y2BF9uBgYFxDGOtfN++1ns3DgMD4wRGW79K/pmkgHkwbdsVGBgYuzLy5GwtKWzLcHk4XuxdYGBgfCBj8qJt6X9tIKNIDTEwMLZjtDljW75fC5p1eQ4DA+MARhvgkoPrZESjfjoGBsYxjMk4RRuyc3wdcDEwMLZjvKtaNXmJxTM3BgbGMYwkCZvszWhUIh8dw8DAOIDRHhrb1PBdAxaXW4CBgXEAYxI684NoUtpbexMMDIy9GWvNyPyb5JF5c2LSUsXAwPhcxlrwui/uT7agHfLAwMA4mdEmeflGTApwL4YtMDAwNmXk4bJtW64dTdcCPQYGxt6MxUL8oACXJ5TF6AYGBsbWjEldvT3W5klh8qy6aoiBgfHhjHyEon3dyeBXHqAxMDDOYbRBdj6i0YJf3IWBgYERtxDWxsKSNBEDAwMjZ6wF0Mn4V7StGBgYBzDmh9g8yLb91ahdgYGBsTWjbQzkYxN5w3LehMDAwNiU8QcApISaP353OgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '别跑呀！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

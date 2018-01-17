@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Linux进程监控 + 钉钉通知 | Joryun&#39;s Blog | 在最好的年纪做最对的事</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="shell,服务器,linux">
+    <meta name="description" content="进程监控脚本背景启动于正式服务器的项目，有时会因为某种因素，例如docker内存超限因而容器崩溃（前不久就遇过…），如服务器内存不足或IO读写异常而崩溃….等等等等。而这些原因，都可能影响到项目的正常运行，严重地将会被kill掉。那么，在服务器上弄一套进程监控方案就很有必要了！ 说明进程监控采用shell脚本的形式，结合日常开发使用的CI工具（如Jenkins），再通过Linux服务器的定时器，定">
+<meta name="keywords" content="shell,服务器,linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux进程监控 + 钉钉通知">
+<meta property="og:url" content="http://joryun.com/2017/12/22/linux-process-monitor/index.html">
+<meta property="og:site_name" content="Joryun&#39;s Blog">
+<meta property="og:description" content="进程监控脚本背景启动于正式服务器的项目，有时会因为某种因素，例如docker内存超限因而容器崩溃（前不久就遇过…），如服务器内存不足或IO读写异常而崩溃….等等等等。而这些原因，都可能影响到项目的正常运行，严重地将会被kill掉。那么，在服务器上弄一套进程监控方案就很有必要了！ 说明进程监控采用shell脚本的形式，结合日常开发使用的CI工具（如Jenkins），再通过Linux服务器的定时器，定">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2929536-fef7603e393bcd95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2929536-8641e255b1e8fb23.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2929536-4d8d86c3e64d1e71.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-01-17T08:36:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux进程监控 + 钉钉通知">
+<meta name="twitter:description" content="进程监控脚本背景启动于正式服务器的项目，有时会因为某种因素，例如docker内存超限因而容器崩溃（前不久就遇过…），如服务器内存不足或IO读写异常而崩溃….等等等等。而这些原因，都可能影响到项目的正常运行，严重地将会被kill掉。那么，在服务器上弄一套进程监控方案就很有必要了！ 说明进程监控采用shell脚本的形式，结合日常开发使用的CI工具（如Jenkins），再通过Linux服务器的定时器，定">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2929536-fef7603e393bcd95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+    
+        <link rel="alternate" type="application/atom+xml" title="Joryun&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yuan.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">刘家源</h5>
+          <a href="mailto:m18814128406@163.com" title="m18814128406@163.com" class="mail">m18814128406@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Joryun" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Linux进程监控 + 钉钉通知</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Linux进程监控 + 钉钉通知</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-12-22T01:59:26.000Z" itemprop="datePublished" class="page-time">
+  2017-12-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Coding/">Coding</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程监控脚本"><span class="post-toc-number">1.</span> <span class="post-toc-text">进程监控脚本</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#背景"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">背景</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#说明"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">说明</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简单介绍Jenkins"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">简单介绍Jenkins</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#进入主题"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">进入主题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#流程"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">流程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#一、Jenkins-shell脚本"><span class="post-toc-number">1.4.1.1.</span> <span class="post-toc-text">一、Jenkins shell脚本</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#二、Linux服务器执行的初始脚本"><span class="post-toc-number">1.4.1.2.</span> <span class="post-toc-text">二、Linux服务器执行的初始脚本</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#三、监控脚本的初始脚本"><span class="post-toc-number">1.4.1.3.</span> <span class="post-toc-text">三、监控脚本的初始脚本</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#四、重点：监控脚本"><span class="post-toc-number">1.4.1.4.</span> <span class="post-toc-text">四、重点：监控脚本</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#拓展部分：集成钉钉通知"><span class="post-toc-number">2.</span> <span class="post-toc-text">拓展部分：集成钉钉通知</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#相关截图"><span class="post-toc-number">3.</span> <span class="post-toc-text">相关截图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">4.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-linux-process-monitor"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Linux进程监控 + 钉钉通知</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-12-22 09:59:26" datetime="2017-12-22T01:59:26.000Z"  itemprop="datePublished">2017-12-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Coding/">Coding</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="进程监控脚本"><a href="#进程监控脚本" class="headerlink" title="进程监控脚本"></a>进程监控脚本</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>启动于正式服务器的项目，有时会因为某种因素，例如docker内存超限因而容器崩溃（前不久就遇过…），如服务器内存不足或IO读写异常而崩溃….等等等等。而这些原因，都可能影响到项目的正常运行，严重地将会被kill掉。那么，在服务器上弄一套进程监控方案就很有必要了！</p>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>进程监控采用shell脚本的形式，结合日常开发使用的CI工具（如Jenkins），再通过Linux服务器的定时器，定时监控进程，当进程被killed，服务自动重启。</p>
+<ul>
+<li>进程：shell script</li>
+<li>集成：Jenkins</li>
+<li>打包：Jar</li>
+</ul>
+<h3 id="简单介绍Jenkins"><a href="#简单介绍Jenkins" class="headerlink" title="简单介绍Jenkins"></a>简单介绍Jenkins</h3><p>Jenkins 是一个开源项目，提供了一种易于使用的持续集成系统，使开发者从繁杂的集成中解脱出来，专注于更为重要的业务逻辑实现上。同时 Jenkins 能实施监控集成中存在的错误，提供详细的日志文件和提醒功能，还能用图表的形式形象地展示项目构建的趋势和稳定性。</p>
+<h3 id="进入主题"><a href="#进入主题" class="headerlink" title="进入主题"></a>进入主题</h3><p>注：install jenkins的过程暂不在本篇介绍，若有时间，会整理出来。</p>
+<p><strong>简单几句话带过：</strong></p>
+<p>jenkins新建一个需持续集成的maven项目，然后配置了从git拉取源码之后，通过执行shell脚本打包到Linux服务器运行。</p>
+<h4 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h4><h5 id="一、Jenkins-shell脚本"><a href="#一、Jenkins-shell脚本" class="headerlink" title="一、Jenkins shell脚本"></a>一、Jenkins shell脚本</h5><p><strong>示例</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">PROJECT</span>=online_store</span><br><span class="line"><span class="attribute">MOD</span>=cms</span><br><span class="line"><span class="attribute">PORT</span>=9065</span><br><span class="line"><span class="attribute">IP</span>=xxx</span><br><span class="line">ssh root@yyy sh -xe deploy-production.sh <span class="variable">$PROJECT</span> <span class="variable">$JOB_NAME</span> <span class="variable">$MOD</span> <span class="variable">$PORT</span> <span class="variable">$IP</span></span><br></pre></td></tr></table></figure>
+<p>解析：<br><strong>xxx</strong>：根据需要传该参数，如远程打包到不同服务器上，内网 or 公网，对传输都会有影响，涉及的东西与本篇侧重点不一样，故不作拓展</p>
+<p><strong>yyy</strong>：这个IP务必是 <strong>deploy-production.sh</strong> 脚本所在的服务器，至关重要，影响着打包及进程监控，可理解为Jenkins持续集成到Linux服务器的入口</p>
+<h5 id="二、Linux服务器执行的初始脚本"><a href="#二、Linux服务器执行的初始脚本" class="headerlink" title="二、Linux服务器执行的初始脚本"></a>二、Linux服务器执行的初始脚本</h5><p>注：初始脚本，言下之意是Jenkins与Linux服务器交互的第一个脚本，其余操作包括监控都与初始脚本息息相关</p>
+<p>由于是博主为公司持续集成写的脚本，涉及一些隐私，故不全贴出来，仅贴关键部分。</p>
+<p>1、接收参数</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">PROJECT</span>=<span class="variable">$1</span></span><br><span class="line"><span class="attr">JOB</span>=<span class="variable">$2</span></span><br><span class="line"><span class="attr">MOD</span>=<span class="variable">$3</span></span><br><span class="line"><span class="attr">PORT</span>=<span class="variable">$4</span></span><br><span class="line"><span class="attr">IP</span>=<span class="variable">$5</span></span><br></pre></td></tr></table></figure>
+<p>2、主要流程代码根据企业需求不同而编写不同代码，关键执行代码如下：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup /usr/bin/java -jar -Dsun<span class="selector-class">.jnu</span><span class="selector-class">.encoding</span>=UTF8 -Dfile.encoding=UTF8 -Dspring<span class="selector-class">.profiles</span><span class="selector-class">.active</span>=production,swagger<span class="variable">$MOD</span> <span class="variable">$JOB</span><span class="selector-class">.jar</span> &gt;&gt; /dev/null <span class="number">2</span>&gt;&amp;<span class="number">1</span> &amp;</span><br></pre></td></tr></table></figure>
+<p>说明：可选择性开启swagger。</p>
+<p>3、注意注意！！！监控代码执行语句…</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sh</span> ~/monitor_exec.<span class="keyword">sh</span> <span class="variable">$PROJECT</span> <span class="variable">$JOB</span> <span class="variable">$MOD</span> <span class="variable">$PORT</span></span><br></pre></td></tr></table></figure>
+<p>解析：显而易见，执行 <strong>monitor_exec.sh</strong> 脚本。</p>
+<h5 id="三、监控脚本的初始脚本"><a href="#三、监控脚本的初始脚本" class="headerlink" title="三、监控脚本的初始脚本"></a>三、监控脚本的初始脚本</h5><p>作用：将监控脚本写入定时器。</p>
+<p>关键代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">PROJECT=<span class="variable">$1</span></span><br><span class="line">JOB=<span class="variable">$2</span></span><br><span class="line">MOD=<span class="variable">$3</span></span><br><span class="line">PORT=<span class="variable">$4</span></span><br><span class="line"></span><br><span class="line">mkdir -p ~/cron/</span><br><span class="line">touch ~/cron/<span class="variable">$PROJECT</span>.cron</span><br><span class="line">file=~/cron/<span class="variable">$PROJECT</span>.cron</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'cron path：'</span><span class="variable">$file</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">test</span> -s <span class="variable">$file</span>; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"cron文件内容不为空"</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"* * * * * sh /root/monitor.sh <span class="variable">$PORT</span> <span class="variable">$PROJECT</span> <span class="variable">$MOD</span> <span class="variable">$JOB</span>"</span> &gt;&gt; ~/cron/<span class="variable">$PROJECT</span>.cron</span><br><span class="line">  crontab ~/cron/<span class="variable">$PROJECT</span>.cron</span><br></pre></td></tr></table></figure>
+<p>解析：中间echo的cron path路径，会输出到Jenkins日志里。目的是将执行 <strong>monitor.sh</strong> 写入服务器定时任务。cron规则就不介绍了，自定义即可。</p>
+<p>说明：监控脚本的执行过程，应该加上日志输出，这是好习惯，以便做记录！</p>
+<h5 id="四、重点：监控脚本"><a href="#四、重点：监控脚本" class="headerlink" title="四、重点：监控脚本"></a>四、<strong>重点：监控脚本</strong></h5><p>关键代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">PID=`/usr/sbin/lsof -i:<span class="variable">$1</span> | grep -E <span class="string">'java|node'</span> | awk <span class="string">'&#123;print $2&#125;'</span>`</span><br><span class="line">PROJECT=<span class="variable">$2</span></span><br><span class="line">MOD=<span class="variable">$3</span></span><br><span class="line">JOB=<span class="variable">$4</span></span><br><span class="line"></span><br><span class="line">mkdir -p ~/<span class="built_in">log</span></span><br><span class="line">touch ~/<span class="built_in">log</span>/<span class="variable">$PROJECT</span>.<span class="built_in">log</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">test</span> -z <span class="string">"<span class="variable">$PID</span>"</span></span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">'后台自启动'</span> &gt;&gt; ~/<span class="built_in">log</span>/<span class="variable">$PROJECT</span>.<span class="built_in">log</span></span><br><span class="line"></span><br><span class="line">  nohup /usr/bin/java -jar -Dsun.jnu.encoding=UTF8 -Dfile.encoding=UTF8 -Dspring.profiles.active=<span class="built_in">test</span>,swagger<span class="variable">$MOD</span> ~/<span class="variable">$PROJECT</span>/<span class="variable">$JOB</span>.jar &gt;&gt; /dev/null 2&gt;&amp;1 &amp;</span><br><span class="line"></span><br><span class="line">  sleep 5</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">'启动成功！！！'</span> &gt;&gt; ~/<span class="built_in">log</span>/<span class="variable">$PROJECT</span>.<span class="built_in">log</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">'service has been started'</span> &gt;&gt; ~/<span class="built_in">log</span>/<span class="variable">$PROJECT</span>.<span class="built_in">log</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<p>解析：Jar包会运行于服务器的一个端口上，与其同时也会对应一个进程号，以一定的时间规则去检查进程号是否存在，判断不在自启动即可，逻辑很简单。</p>
+<h2 id="拓展部分：集成钉钉通知"><a href="#拓展部分：集成钉钉通知" class="headerlink" title="拓展部分：集成钉钉通知"></a>拓展部分：集成钉钉通知</h2><p>背景：进程被kill，若是企业开发人员想要知道被kill的原因，便会查看日志，而通知就很有必要了。由于博主所在企业使用钉钉工作，因此集成在钉钉机器人，可实时通知开发人员。</p>
+<p>关键代码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'钉钉通知开始'</span> &gt;&gt; ~/<span class="built_in">log</span>/<span class="variable">$PROJECT</span>.<span class="built_in">log</span></span><br><span class="line"></span><br><span class="line">curl <span class="string">'https://oapi.dingtalk.com/robot/send?access_token= xxx '</span> \</span><br><span class="line">   -H <span class="string">'Content-Type: application/json'</span> \</span><br><span class="line">   -d <span class="string">'</span></span><br><span class="line"><span class="string">  &#123;"msgtype": "text",</span></span><br><span class="line"><span class="string">    "text": &#123;</span></span><br><span class="line"><span class="string">        "content": "钉钉--- jiayuan 监控测试，killed port：'</span><span class="variable">$1</span><span class="string">'，project：'</span><span class="variable">$PROJECT</span><span class="string">' has been killed，已重启"</span></span><br><span class="line"><span class="string">     &#125;</span></span><br><span class="line"><span class="string">  &#125;'</span></span><br><span class="line"></span><br><span class="line">  sleep 3</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">'钉钉通知结束'</span> &gt;&gt; ~/<span class="built_in">log</span>/<span class="variable">$PROJECT</span>.<span class="built_in">log</span></span><br></pre></td></tr></table></figure></p>
+<p>说明：<br><strong>xxx</strong>：填上对应钉钉机器人的access_token即可。</p>
+<p>注：脚本现在还一直在迭代，为了让脚本更强大、更健壮，我也会一直持续地完善…</p>
+<h2 id="相关截图"><a href="#相关截图" class="headerlink" title="相关截图"></a>相关截图</h2><p><strong>日志</strong></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://upload-images.jianshu.io/upload_images/2929536-fef7603e393bcd95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p><strong>钉钉通知</strong></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://upload-images.jianshu.io/upload_images/2929536-8641e255b1e8fb23.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>查看定时任务</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://upload-images.jianshu.io/upload_images/2929536-4d8d86c3e64d1e71.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>好了，真真真好久没写博客了，最近有些许忙，虽然有好多好多新鲜玩意想写，但一直没机会分享！</p>
+<p>本篇依旧介绍一直以来颇有兴趣的服务器部分，但架构一个更完善、更健壮的开发体系，还有很多很多东西要学…</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-01-17T08:36:21.000Z" itemprop="dateUpdated">2018-01-17 16:36:21</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/12/22/linux-process-monitor/" target="_blank" rel="external">http://joryun.com/2017/12/22/linux-process-monitor/</a>
+        
+    </div>
+    <footer>
+        <a href="http://joryun.com">
+            <img src="/img/yuan.jpg" alt="刘家源">
+            刘家源
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/服务器/">服务器</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2017/12/22/linux-process-monitor/&title=《Linux进程监控 + 钉钉通知》 — Joryun's Blog&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2017/12/22/linux-process-monitor/&title=《Linux进程监控 + 钉钉通知》 — Joryun's Blog&source=TO BE IS TO DO" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2017/12/22/linux-process-monitor/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux进程监控 + 钉钉通知》 — Joryun's Blog&url=http://joryun.com/2017/12/22/linux-process-monitor/&via=http://joryun.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2017/12/22/linux-process-monitor/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/01/03/qiniu-module/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">七牛云模块化</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/12/22/spring-data-jpa-record/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Spring Data JPA坑点记录</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        undefined
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>刘家源 &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2017/12/22/linux-process-monitor/&title=《Linux进程监控 + 钉钉通知》 — Joryun's Blog&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2017/12/22/linux-process-monitor/&title=《Linux进程监控 + 钉钉通知》 — Joryun's Blog&source=TO BE IS TO DO" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2017/12/22/linux-process-monitor/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux进程监控 + 钉钉通知》 — Joryun's Blog&url=http://joryun.com/2017/12/22/linux-process-monitor/&via=http://joryun.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2017/12/22/linux-process-monitor/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACI0lEQVR42u3aQQ7CMAxE0d7/0rAFIcLMOEWK/buqCgp+XRjHznXJ12N5ffvO5/P1N18/ve64YMCAcSwjC1EJ9zOs7H79uzBgwJjD+JbBlKWzUNY5U48NBgwYMNwkmJWPyu/CgAEDhstYl4Pr0lPZ3MKAAQNGtomth+g24G7Zi8OAAeNAht51///9LfMNGDBgHMXYuxF1BwaVLfHbmjBgwGjN0BOcWzjqm1v9+Y/1YcCA0ZRRCUh5vmvr+wMGAwaMMQwFU0mdbrlpRAUDBozxjF2jAnckYLw+GDBgDGAorflKAVdKpsqIAgYMGAMYehBZwZetpqwf7pthwIBxFCM76OAWi26I2d8ADBgwejOyjajSdJMSpfxqtg0MYMCAcSBDLxDdQxhK4taru211LgwYMA5kKKnNvXcHlsoBjst9NzBgwGjHcFv82WoVksGDAQNGO4abLusNfeW92qUqDBgwmjKyRrzbgNMPgWVNPRgwYPRmuCnPZevrVIpLGDBgTGCEqS1KrG6jzRgtwIABYwCj0mLLjqWG4d43DIABA8aBDOW4Q1Ym6t9fRyslXBgwYBzOeJhXNhJwAfZrggEDRmuGW5y5aTQ7qOGCYcCAMYHhJtm929Qs4cKAAWMmY1fi05v+9U2sPcKEAQPGGEZlJJA17yQqDBgwYESHTbPf0l9WqTSEAQPGgQwl/dWfhFNWpUCEAQNGa4abKF1qJdzK3wAMGDBaMJ6a1mqYRhqoGgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '别跑呀！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

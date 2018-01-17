@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Spring Data JPA坑点记录 | Joryun&#39;s Blog | 在最好的年纪做最对的事</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="spring,spring data jpa">
+    <meta name="description" content="一、分页查询场景：动态查询，分页查询，根据传入不同的状态，分别查询不同数据表，并且在传入page对象之前用map进行VO转换。而pageable的使用地方不同影响到了分页数据的正确性，以此进行探讨。  pageable使用于new PageImpl&amp;lt;&amp;gt;中，且直到最后才将List -&amp;gt; Page pageable使用于findAll()中  前提：Page对象封于VO内，返回数据包">
+<meta name="keywords" content="spring,spring data jpa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Data JPA坑点记录">
+<meta property="og:url" content="http://joryun.com/2017/12/22/spring-data-jpa-record/index.html">
+<meta property="og:site_name" content="Joryun&#39;s Blog">
+<meta property="og:description" content="一、分页查询场景：动态查询，分页查询，根据传入不同的状态，分别查询不同数据表，并且在传入page对象之前用map进行VO转换。而pageable的使用地方不同影响到了分页数据的正确性，以此进行探讨。  pageable使用于new PageImpl&amp;lt;&amp;gt;中，且直到最后才将List -&amp;gt; Page pageable使用于findAll()中  前提：Page对象封于VO内，返回数据包">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-17T08:34:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring Data JPA坑点记录">
+<meta name="twitter:description" content="一、分页查询场景：动态查询，分页查询，根据传入不同的状态，分别查询不同数据表，并且在传入page对象之前用map进行VO转换。而pageable的使用地方不同影响到了分页数据的正确性，以此进行探讨。  pageable使用于new PageImpl&amp;lt;&amp;gt;中，且直到最后才将List -&amp;gt; Page pageable使用于findAll()中  前提：Page对象封于VO内，返回数据包">
+    
+        <link rel="alternate" type="application/atom+xml" title="Joryun&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yuan.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">刘家源</h5>
+          <a href="mailto:m18814128406@163.com" title="m18814128406@163.com" class="mail">m18814128406@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Joryun" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Spring Data JPA坑点记录</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Spring Data JPA坑点记录</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-12-22T01:58:37.000Z" itemprop="datePublished" class="page-time">
+  2017-12-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Coding/">Coding</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、分页查询"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、分页查询</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、事务，更新实体，并查询"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、事务，更新实体，并查询</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">3.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-spring-data-jpa-record"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Spring Data JPA坑点记录</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-12-22 09:58:37" datetime="2017-12-22T01:58:37.000Z"  itemprop="datePublished">2017-12-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Coding/">Coding</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="一、分页查询"><a href="#一、分页查询" class="headerlink" title="一、分页查询"></a>一、分页查询</h2><p>场景：动态查询，分页查询，根据传入不同的状态，分别查询不同数据表，并且在传入page对象之前用map进行VO转换。而pageable的使用地方不同影响到了分页数据的正确性，以此进行探讨。</p>
+<ul>
+<li>pageable使用于new PageImpl&lt;&gt;中，且直到最后才将List -&gt; Page</li>
+<li>pageable使用于findAll()中</li>
+</ul>
+<p>前提：Page对象封于VO内，返回数据包括了分页数据</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ApiModelProperty(<span class="meta-string">"记录"</span>)</span></span><br><span class="line"><span class="keyword">private</span> Page&lt;ActivityRecordVO&gt; activityRecordVOList;</span><br><span class="line"></span><br><span class="line"><span class="meta">@ApiModelProperty(<span class="meta-string">"数量"</span>)</span></span><br><span class="line"><span class="keyword">private</span> Integer num = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@ApiModelProperty(<span class="meta-string">"金额"</span>)</span></span><br><span class="line"><span class="keyword">private</span> BigDecimal totalMoney = BigDecimal.valueOf(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<p>错误运用：</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">List</span>&lt;ActivityRecordVO&gt; activityRecordVOList = <span class="literal">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (receiveSendRecordRequestVO.getSendOrReceiveType() == SendOrReceiveType.RECEIVE) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="built_in">List</span>&lt;ChallengeRecord&gt; challengeRecordList = challengeRecordDao.findByUserIdAndDeleteType(userId,</span><br><span class="line">                    DeleteType.<span class="literal">FALSE</span>);</span><br><span class="line">            <span class="keyword">if</span> (!CollectionUtils.isEmpty(challengeRecordList)) &#123;</span><br><span class="line">                activityRecordVOList = challengeRecordList.stream()</span><br><span class="line">                        .<span class="built_in">map</span>(this<span class="type">::challengeRecordToActivityRecordVO</span>)</span><br><span class="line">                        .collect(Collectors.toList());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (receiveSendRecordRequestVO.getSendOrReceiveType() == SendOrReceiveType.SEND) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="built_in">List</span>&lt;Activity&gt; activityList = activityDao.findByUserIdAndDeleteType(userId, DeleteType.<span class="literal">FALSE</span>);</span><br><span class="line">            <span class="keyword">if</span> (!CollectionUtils.isEmpty(activityList)) &#123;</span><br><span class="line">                activityRecordVOList = activityList.stream()</span><br><span class="line">                        .<span class="built_in">map</span>(this<span class="type">::activityTOActivityRecordVO</span>)</span><br><span class="line">                        .collect(Collectors.toList());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">activityReceiveSendRecordVO.setActivityRecordVOList(<span class="keyword">new</span> PageImpl&lt;&gt;(activityRecordVOList,</span><br><span class="line">                    pageable, activityRecordVOList.<span class="built_in">size</span>()));</span><br></pre></td></tr></table></figure>
+<p>解析：传入的pageable只在set进VO的时候，用new PageIml将List转为page对象，前端报的问题 <strong>虽然总页数、总条数均为正确，但第一页的条数是全部</strong> ，数据异常！</p>
+<p>正确参考做法：</p>
+<p>采用Specifications先根据查询条件动态查询并map出相应分页对象(此块代码因需求而异)，这时 <strong>findAll</strong> 传入的pageable是生效的，便会显现正确的分页信息。</p>
+<p>代码块参考：</p>
+<p><strong>xxxCommonSpecUtil</strong> 是自封的specification工具类，与原生spring data jpa原生查询方法类似。<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Page&lt;ActivityRecordVO&gt;<span class="built_in"> page </span>= new PageImpl&lt;&gt;(activityRecordVOList, pageable, activityRecordVOList.size());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (receiveSendRecordRequestVO.getSendOrReceiveType() == SendOrReceiveType.RECEIVE) &#123;</span><br><span class="line"></span><br><span class="line">            Specifications&lt;ChallengeRecord&gt; spec = Specifications.where(</span><br><span class="line">                    challengeCommonSpecUtil.equal(<span class="string">"userId"</span>, userId))</span><br><span class="line">                    .<span class="keyword">and</span>(challengeCommonSpecUtil.equal(<span class="string">"deleteType"</span>, DeleteType.<span class="literal">FALSE</span>));</span><br><span class="line">           <span class="built_in"> page </span>= challengeRecordDao.findAll(spec, pageable).map(this::challengeRecordToActivityRecordVO);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (receiveSendRecordRequestVO.getSendOrReceiveType() == SendOrReceiveType.SEND) &#123;</span><br><span class="line"></span><br><span class="line">            Specifications&lt;Activity&gt; spec = Specifications.where(</span><br><span class="line">                    activityCommonSpecUtil.equal(<span class="string">"userId"</span>, userId))</span><br><span class="line">                    .<span class="keyword">and</span>(activityCommonSpecUtil.equal(<span class="string">"deleteType"</span>, DeleteType.<span class="literal">FALSE</span>));</span><br><span class="line">           <span class="built_in"> page </span>= activityDao.findAll(spec, pageable).map(this::activityTOActivityRecordVO);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
+<p>注：activityReceiveSendRecordVO为封装的VO，包含了返回的Page对象<br><figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">activityReceiveSendRecordVO.setActivityRecordVOList(page)<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="二、事务，更新实体，并查询"><a href="#二、事务，更新实体，并查询" class="headerlink" title="二、事务，更新实体，并查询"></a>二、事务，更新实体，并查询</h2><p>场景：@Transactional事务，更新用户余额（处理并发问题），更新完毕返回VO带上用户剩余余额，但却非更新后的余额。</p>
+<p>更新逻辑代码：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">userWebService</span><span class="selector-class">.updateBalanceAfterTransaction</span>(<span class="selector-tag">userId</span>, <span class="selector-tag">transactionRecordAddVO</span><span class="selector-class">.getMoney</span>(),<span class="selector-tag">user</span><span class="selector-class">.getBalance</span>());</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">updateBalanceAfterTransaction</span><span class="params">(Integer userId, BigDecimal money, BigDecimal userBalance)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = userDao.updateBalanceAfterTransaction(userId, money, userBalance);</span><br><span class="line">        <span class="keyword">if</span> (i == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ValidationException(MessageCodes.TRANSACTION_RECEIVE_IS_ERROR);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@Modifying</span></span><br><span class="line">    <span class="variable">@Query</span>(value = <span class="string">"update User u set u.balance = u.balance - ?2 where u.id = ?1 and u.balance = ?3"</span>)</span><br><span class="line">    int updateBalanceAfterTransaction(Integer userId, BigDecimal money, BigDecimal userBalance);</span><br></pre></td></tr></table></figure>
+<p>解析：<br>在jpa中使用 <strong>@Modifying</strong> ，虽然事务已经能够更新，但是在循环更新的时候，执行modify语句后的查询的实体仍然是没有更新的。</p>
+<p>执行完modifying query， EntityManager可能会包含过时的数据，因为EntityManager不会自动清除实体。<br>只有添加clearAutomatically属性，EntityManager才会自动清除实体对象。</p>
+<p>添加代码：<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Modifying</span>(clearAutomatically = <span class="keyword">true</span>)</span><br></pre></td></tr></table></figure></p>
+<p>改正后的示例代码：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@Modifying</span>(clearAutomatically = true)</span><br><span class="line">    <span class="variable">@Query</span>(value = <span class="string">"update User u set u.balance = u.balance - ?2 where u.id = ?1 and u.balance = ?3"</span>)</span><br><span class="line">    int updateBalanceAfterTransaction(Integer userId, BigDecimal money, BigDecimal userBalance);</span><br></pre></td></tr></table></figure></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>使用了这么长时间spring data jpa，觉得Specifications巨好用，也不容易出错，也是我喜欢的编码风格，而new PageImpl&lt;&gt;()这种简单粗暴的方法我一般都用在查询数据关联太多表的情况，在最后直接返回，更深层次的还需要再探讨！</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-01-17T08:34:23.000Z" itemprop="dateUpdated">2018-01-17 16:34:23</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/12/22/spring-data-jpa-record/" target="_blank" rel="external">http://joryun.com/2017/12/22/spring-data-jpa-record/</a>
+        
+    </div>
+    <footer>
+        <a href="http://joryun.com">
+            <img src="/img/yuan.jpg" alt="刘家源">
+            刘家源
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring-data-jpa/">spring data jpa</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2017/12/22/spring-data-jpa-record/&title=《Spring Data JPA坑点记录》 — Joryun's Blog&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2017/12/22/spring-data-jpa-record/&title=《Spring Data JPA坑点记录》 — Joryun's Blog&source=TO BE IS TO DO" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2017/12/22/spring-data-jpa-record/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Spring Data JPA坑点记录》 — Joryun's Blog&url=http://joryun.com/2017/12/22/spring-data-jpa-record/&via=http://joryun.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2017/12/22/spring-data-jpa-record/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/12/22/linux-process-monitor/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Linux进程监控 + 钉钉通知</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/10/22/three-parties-wechat-pay/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">三方银行微信支付流程及配置相关</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        undefined
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>刘家源 &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2017/12/22/spring-data-jpa-record/&title=《Spring Data JPA坑点记录》 — Joryun's Blog&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2017/12/22/spring-data-jpa-record/&title=《Spring Data JPA坑点记录》 — Joryun's Blog&source=TO BE IS TO DO" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2017/12/22/spring-data-jpa-record/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Spring Data JPA坑点记录》 — Joryun's Blog&url=http://joryun.com/2017/12/22/spring-data-jpa-record/&via=http://joryun.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2017/12/22/spring-data-jpa-record/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACO0lEQVR42u3aQW7DMAxEUd//0i7QVYFGzh/SKWrqaxUUju2XxZQidRx4nd/r5+ffa3U9ucP1d29bMmTIeCzjvFzXr7W6cvVdAiA/2QuqDBkyNmDwkCWw1R3SwCXvJkOGDBmkXEtDdhmaMmTIkHFT4KaRuvoLLzRlyJAhg29i74rUj4S1DBkyRjNqg4G/+fzx+YYMGTL+PeMMV+1uaSEYv5UMGTJGM8jBCPJ4EppkbJmWpAc/3yFDhozHMkhE1lpgNTBv0r2IWhkyZAxldCKVH+dqvRAZCciQIWM0o7Np5I+vhXhwpEyGDBmjGfF+N2yxkYZaZ9N7pL+NDBkyHsgghRqJwlo01/Av3kSGDBkbMNKhYxqdtWKRt/NkyJAxm8FLsfSgGB8S8PFnsc6VIUPGwxnpUbBO4yw9ZBaMImTIkLElo1b88aKQY9A/ABkyZIxmBJvDsAQMRo+Ntt1yPCBDhoxBDF7q8YZa+uo8spdIGTJkbMC4q7nPt6ydAScaYcqQIWMQIz1OUYvm2lg0HlfIkCFjKKPWYus8uFNWvmm0yZAhYzSDl4BkhMDZdwW0DBkyZjPSbWfauE+Pf/HxpwwZMvZhnOHqjDx5Qy1u1cmQIWM0Iw27dLiItqA4lDv3lCFDxtMZtZBNv5sy4qCXIUPGBgzeaKvFdKukI3eQIUOGjEZrjB8CS9t/MmTIkNGJy+DxeJP85v4yZMjYgFHbiNaGBPyIGB8YyJAhYzajv4EkD6hdc1cLT4YMGY9lfAF9KtE/GNr0wQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '别跑呀！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
