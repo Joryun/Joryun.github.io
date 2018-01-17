@@ -93,11 +93,11 @@
       <category term="Coding" scheme="http://joryun.com/categories/Coding/"/>
     
     
+      <category term="linux" scheme="http://joryun.com/tags/linux/"/>
+    
       <category term="shell" scheme="http://joryun.com/tags/shell/"/>
     
       <category term="服务器" scheme="http://joryun.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    
-      <category term="linux" scheme="http://joryun.com/tags/linux/"/>
     
   </entry>
   
@@ -178,11 +178,11 @@
     
       <category term="java" scheme="http://joryun.com/tags/java/"/>
     
-      <category term="centos" scheme="http://joryun.com/tags/centos/"/>
-    
       <category term="shell" scheme="http://joryun.com/tags/shell/"/>
     
       <category term="服务器" scheme="http://joryun.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+      <category term="centos" scheme="http://joryun.com/tags/centos/"/>
     
   </entry>
   
