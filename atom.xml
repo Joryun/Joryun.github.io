@@ -206,11 +206,11 @@
       <category term="Coding" scheme="http://joryun.com/categories/Coding/"/>
     
     
+      <category term="java" scheme="http://joryun.com/tags/java/"/>
+    
       <category term="shell" scheme="http://joryun.com/tags/shell/"/>
     
       <category term="服务器" scheme="http://joryun.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    
-      <category term="java" scheme="http://joryun.com/tags/java/"/>
     
       <category term="centos" scheme="http://joryun.com/tags/centos/"/>
     
@@ -320,9 +320,9 @@
       <category term="Coding" scheme="http://joryun.com/categories/Coding/"/>
     
     
-      <category term="spring" scheme="http://joryun.com/tags/spring/"/>
-    
       <category term="java" scheme="http://joryun.com/tags/java/"/>
+    
+      <category term="spring" scheme="http://joryun.com/tags/spring/"/>
     
       <category term="jms" scheme="http://joryun.com/tags/jms/"/>
     
