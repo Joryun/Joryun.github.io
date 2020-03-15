@@ -1,102 +1,26 @@
 <!DOCTYPE html>
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html>
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
-<meta name="theme-color" content="#222"/>
+    
+
+    
+
+    
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0"/>
-
-<link rel="stylesheet" href="/css/main.css?v=7.1.2"/>
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.2">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
-
-
-
-
-
-
-
-<script id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Gemini',
-    version: '7.1.2',
-    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
-    back2top: true,
-    back2top_sidebar: false,
-    fancybox: false,
-    fastclick: false,
-    lazyload: false,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-  
-
-
-
-
-  <meta name="description" content="前言闲来无事，搭建了个人私仓来放模块化项目，以便项目引入直接使用。关键是，模块化可以根据项目所需进行版本迭代，每一次的使用都是完善的根基，效果贼棒。 介绍七牛云是国内领先的企业级公有云服务商，致力于打造以数据为核心的场景化PaaS服务。围绕富媒体场景，七牛先后推出了对象存储，融合CDN加速，数据通用处理，内容反垃圾服务，以及直播云服务等。 而此次推出的模块化，目的是为了满足项目存储图片的需求，才有">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>七牛云模块化 | Joryun&#39;s Notes | 多读书多看报少吃零食多睡觉</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="七牛,模块化,spring boot">
+    <meta name="description" content="前言闲来无事，搭建了个人私仓来放模块化项目，以便项目引入直接使用。关键是，模块化可以根据项目所需进行版本迭代，每一次的使用都是完善的根基，效果贼棒。 介绍七牛云是国内领先的企业级公有云服务商，致力于打造以数据为核心的场景化PaaS服务。围绕富媒体场景，七牛先后推出了对象存储，融合CDN加速，数据通用处理，内容反垃圾服务，以及直播云服务等。 而此次推出的模块化，目的是为了满足项目存储图片的需求，才有">
 <meta name="keywords" content="七牛,模块化,spring boot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="七牛云模块化">
@@ -111,358 +35,159 @@
 <meta name="twitter:title" content="七牛云模块化">
 <meta name="twitter:description" content="前言闲来无事，搭建了个人私仓来放模块化项目，以便项目引入直接使用。关键是，模块化可以根据项目所需进行版本迭代，每一次的使用都是完善的根基，效果贼棒。 介绍七牛云是国内领先的企业级公有云服务商，致力于打造以数据为核心的场景化PaaS服务。围绕富媒体场景，七牛先后推出了对象存储，融合CDN加速，数据通用处理，内容反垃圾服务，以及直播云服务等。 而此次推出的模块化，目的是为了满足项目存储图片的需求，才有">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2929536-9a7eaebbc08aba6c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+    
+        <link rel="alternate" type="application/atom+xml" title="Joryun&#39;s Notes" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
 
-
-
-  <link rel="alternate" href="/atom.xml" title="Joryun's Notes" type="application/atom+xml"/>
-
-
-
-  
-  
-  <link rel="canonical" href="http://joryun.com/2018/01/03/七牛云模块化/"/>
-
-
-
-<script id="page.configurations">
-  CONFIG.page = {
-    sidebar: "",
-  };
-</script>
-
-  <title>七牛云模块化 | Joryun's Notes</title>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .motion-element,
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
-
-  .use-motion .logo,
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
+    <!-- custom head -->
+    
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body>
+    <div id="loading" class="active"></div>
 
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Joryun's Notes</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yuan.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">刘家源</h5>
+          <a href="mailto:m18814128406@163.com" title="m18814128406@163.com" class="mail">m18814128406@163.com</a>
+        </hgroup>
+      </div>
     </div>
-    
-      
-        <p class="site-subtitle">多读书多看报少吃零食多睡觉</p>
-      
-    
-    
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Joryun" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
   </div>
+</aside>
 
-  <div class="site-nav-toggle">
-    <button aria-label="Toggle navigation bar">
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-
-
-<nav class="site-nav">
-  
-    <ul id="menu" class="menu">
-      
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">七牛云模块化</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
         
         
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
         
-          
-          <li class="menu-item menu-item-home">
+    </div>
+</header>
+<header class="content-header post-header">
 
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>Home</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-about">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>About</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-tags">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>Tags</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-categories">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>Categories</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>Archives</a>
-
-  </li>
-
-      
-      
-    </ul>
-  
-
-  
-
-  
-</nav>
-
-
-
-  
-
-
-
-</div>
-    </header>
-
-    
-
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
+    <div class="container fade-scale">
+        <h1 class="title">七牛云模块化</h1>
+        <h5 class="subtitle">
             
+                <time datetime="2018-01-03T02:54:31.000Z" itemprop="datePublished" class="page-time">
+  2018-01-03
+</time>
 
-          
-          <div id="content" class="content">
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Coding/">Coding</a></li></ul>
+
             
+        </h5>
+    </div>
 
-  <div id="posts" class="posts-expand">
     
 
-  
 
-  
-  
-  
+</header>
 
-  
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://joryun.com/2018/01/03/七牛云模块化/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="刘家源"/>
-      <meta itemprop="description" content="TO BE IS TO DO"/>
-      <meta itemprop="image" content="/images/avatar.gif"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Joryun's Notes"/>
-    </span>
-
+<div class="container body-wrap">
     
-      <header class="post-header">
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#介绍"><span class="post-toc-number">2.</span> <span class="post-toc-text">介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#模块化说明文档"><span class="post-toc-number">3.</span> <span class="post-toc-text">模块化说明文档</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、上传交互方式-两种"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">一、上传交互方式(两种)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、配置需知"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">二、配置需知</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、返回token情况分析"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">三、返回token情况分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-提供空间名bucket，其余默认"><span class="post-toc-number">3.3.0.1.</span> <span class="post-toc-text">1.提供空间名bucket，其余默认</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-提供空间名bucket，上传指定key，其余默认"><span class="post-toc-number">3.3.0.2.</span> <span class="post-toc-text">2. 提供空间名bucket，上传指定key，其余默认</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-提供空间名bucket，上传指定key，有效时长expires，上传策略policy（详见官方SDK上传策略）"><span class="post-toc-number">3.3.0.3.</span> <span class="post-toc-text">3. 提供空间名bucket，上传指定key，有效时长expires，上传策略policy（详见官方SDK上传策略）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-提供空间名bucket，上传指定key，有效时长expires，上传策略policy，是否去除非限定的策略字段strict"><span class="post-toc-number">3.3.0.4.</span> <span class="post-toc-text">4. 提供空间名bucket，上传指定key，有效时长expires，上传策略policy，是否去除非限定的策略字段strict</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#模块化使用文档"><span class="post-toc-number">4.</span> <span class="post-toc-text">模块化使用文档</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Maven依赖七牛云"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">Maven依赖七牛云</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置文件"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">配置文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#API（接口调用）"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">API（接口调用）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#前端上传（推荐方式）"><span class="post-toc-number">4.3.1.</span> <span class="post-toc-text">前端上传（推荐方式）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#后端上传（推荐方式）"><span class="post-toc-number">4.3.2.</span> <span class="post-toc-text">后端上传（推荐方式）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#拓展小知识"><span class="post-toc-number">4.3.3.</span> <span class="post-toc-text">拓展小知识</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">5.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-七牛云模块化"
+  class="post-article article-type-post fade" itemprop="blogPost">
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">七牛云模块化
-
-              
-            
-          </h1>
-        
-
+    <div class="post-card">
+        <h1 class="post-card-title">七牛云模块化</h1>
         <div class="post-meta">
-          <span class="post-time">
+            <time class="post-time" title="2018-01-03 10:54:31" datetime="2018-01-03T02:54:31.000Z"  itemprop="datePublished">2018-01-03</time>
 
             
-            
-            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Coding/">Coding</a></li></ul>
+
+
 
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
 
-              
-                
-              
-
-              <time title="Created: 2018-01-03 10:54:31" itemprop="dateCreated datePublished" datetime="2018-01-03T10:54:31+08:00">2018-01-03</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-01-17 16:38:07" itemprop="dateModified" datetime="2018-01-17T16:38:07+08:00">2018-01-17</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Coding/" itemprop="url" rel="index"><span itemprop="name">Coding</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
 
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>闲来无事，搭建了个人私仓来放模块化项目，以便项目引入直接使用。关键是，模块化可以根据项目所需进行版本迭代，每一次的使用都是完善的根基，效果贼棒。</p>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>闲来无事，搭建了个人私仓来放模块化项目，以便项目引入直接使用。关键是，模块化可以根据项目所需进行版本迭代，每一次的使用都是完善的根基，效果贼棒。</p>
 <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>七牛云是国内领先的企业级公有云服务商，致力于打造以数据为核心的场景化PaaS服务。围绕富媒体场景，七牛先后推出了对象存储，融合CDN加速，数据通用处理，内容反垃圾服务，以及直播云服务等。</p>
 <p>而此次推出的模块化，目的是为了满足项目存储图片的需求，才有了此番封模块化的构思。</p>
 <p>话不多说…进入主题吧！</p>
@@ -470,9 +195,21 @@
 <li>前端上传(推荐方式)</li>
 </ul>
 <p>客户端在上传资源到七牛云前，要先从业务服务器获取一个有效的上传凭证Token，即请求相应项目的七牛云接口拿到Token，<br>接着使用Token调用前端上传七牛云的api，上传文件至七牛云，返回数据(得到图片URl，即可传给后台存储)。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2929536-9a7eaebbc08aba6c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://upload-images.jianshu.io/upload_images/2929536-9a7eaebbc08aba6c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p>PS：如果有设置回调，则上传完成时七牛云存储会自动发起回调到指定的业务服务器。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2929536-afc8dbbe91e5dacd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://upload-images.jianshu.io/upload_images/2929536-afc8dbbe91e5dacd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <ul>
 <li>后台上传</li>
 </ul>
@@ -538,458 +275,288 @@
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>个人的项目里，七牛模块化已基本足够使用了。<br>按上面提供的使用文档引入模块化，可以很方便地存储图片（为什么一直说存储图片呢…因为做了好多项目，大多是存储图片需要）。<br>好了，功能完善的项目并非一日功夫，需要时间一步步完善，但模块化绝对是很好的一个idea，甚至是思维。闲着没事做，封些模块化使用，可以一点点抽离项目服务，其实挺类似 <strong>服务提供者</strong> 暴露服务的。</p>
 <p>互励共勉吧！！！</p>
 
-      
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最終更新：<time datetime="2018-01-17T08:38:07.000Z" itemprop="dateUpdated">2018-01-17 16:38:07</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2018/01/03/七牛云模块化/" target="_blank" rel="external">http://joryun.com/2018/01/03/七牛云模块化/</a>
+        
     </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-        
-          
-        
-        <div class="post-tags">
-          
-            <a href="/tags/七牛/" rel="tag"># 七牛</a>
-          
-            <a href="/tags/模块化/" rel="tag"># 模块化</a>
-          
-            <a href="/tags/spring-boot/" rel="tag"># spring boot</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/12/22/Linux进程监控 + 钉钉通知/" rel="next" title="Linux进程监控 + 钉钉通知">
-                <i class="fa fa-chevron-left"></i> Linux进程监控 + 钉钉通知
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/13/小程序码生成及分享图绘制/" rel="prev" title="小程序码生成及分享图绘制">
-                小程序码生成及分享图绘制 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
+    <footer>
+        <a href="http://joryun.com">
+            <img src="/img/yuan.jpg" alt="刘家源">
+            刘家源
+        </a>
     </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-  </div>
-
-
-          </div>
-          
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">刘家源</p>
-              <div class="site-description motion-element" itemprop="description">TO BE IS TO DO</div>
-          </div>
-
-          
-            <nav class="site-state motion-element">
-              
-                <div class="site-state-item site-state-posts">
-                
-                  <a href="/archives/">
-                
-                    <span class="site-state-item-count">16</span>
-                    <span class="site-state-item-name">posts</span>
-                  </a>
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-categories">
-                  
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">3</span>
-                    <span class="site-state-item-name">categories</span>
-                  
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">30</span>
-                    <span class="site-state-item-name">tags</span>
-                  
-                </div>
-              
-            </nav>
-          
-
-          
-            <div class="feed-link motion-element">
-              <a href="/atom.xml" rel="alternate">
-                <i class="fa fa-rss"></i>
-                RSS
-              </a>
-            </div>
-          
-
-          
-
-          
-
-          
-
-          
-          
-
-          
-            
-          
-          
-
-        </div>
-      </div>
-
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">2.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块化说明文档"><span class="nav-number">3.</span> <span class="nav-text">模块化说明文档</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、上传交互方式-两种"><span class="nav-number">3.1.</span> <span class="nav-text">一、上传交互方式(两种)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、配置需知"><span class="nav-number">3.2.</span> <span class="nav-text">二、配置需知</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、返回token情况分析"><span class="nav-number">3.3.</span> <span class="nav-text">三、返回token情况分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-提供空间名bucket，其余默认"><span class="nav-number">3.3.0.1.</span> <span class="nav-text">1.提供空间名bucket，其余默认</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-提供空间名bucket，上传指定key，其余默认"><span class="nav-number">3.3.0.2.</span> <span class="nav-text">2. 提供空间名bucket，上传指定key，其余默认</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-提供空间名bucket，上传指定key，有效时长expires，上传策略policy（详见官方SDK上传策略）"><span class="nav-number">3.3.0.3.</span> <span class="nav-text">3. 提供空间名bucket，上传指定key，有效时长expires，上传策略policy（详见官方SDK上传策略）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-提供空间名bucket，上传指定key，有效时长expires，上传策略policy，是否去除非限定的策略字段strict"><span class="nav-number">3.3.0.4.</span> <span class="nav-text">4. 提供空间名bucket，上传指定key，有效时长expires，上传策略policy，是否去除非限定的策略字段strict</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块化使用文档"><span class="nav-number">4.</span> <span class="nav-text">模块化使用文档</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven依赖七牛云"><span class="nav-number">4.1.</span> <span class="nav-text">Maven依赖七牛云</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件"><span class="nav-number">4.2.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#API（接口调用）"><span class="nav-number">4.3.</span> <span class="nav-text">API（接口调用）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#前端上传（推荐方式）"><span class="nav-number">4.3.1.</span> <span class="nav-text">前端上传（推荐方式）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后端上传（推荐方式）"><span class="nav-number">4.3.2.</span> <span class="nav-text">后端上传（推荐方式）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拓展小知识"><span class="nav-number">4.3.3.</span> <span class="nav-text">拓展小知识</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-  
-
+</blockquote>
 
         
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
-  <span class="with-love" id="animate">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">刘家源</span>
-
-  
-
-  
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.4.4</div>
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring-boot/">spring boot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/七牛/">七牛</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/模块化/">模块化</a></li></ul>
 
 
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.2</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
+            
+<div class="page-share-wrap">
     
 
-    
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2018/01/03/七牛云模块化/&title=《七牛云模块化》 — Joryun's Notes&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2018/01/03/七牛云模块化/&title=《七牛云模块化》 — Joryun's Notes&source=TO BE IS TO DO" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2018/01/03/七牛云模块化/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《七牛云模块化》 — Joryun's Notes&url=http://joryun.com/2018/01/03/七牛云模块化/&via=http://joryun.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2018/01/03/七牛云模块化/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
 
     
-
-    
-  </div>
-
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/01/13/小程序码生成及分享图绘制/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">小程序码生成及分享图绘制</h4>
+      </a>
+    </div>
   
 
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/12/22/Linux进程监控 + 钉钉通知/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Linux进程监控 + 钉钉通知</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        undefined
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>刘家源 &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2018/01/03/七牛云模块化/&title=《七牛云模块化》 — Joryun's Notes&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2018/01/03/七牛云模块化/&title=《七牛云模块化》 — Joryun's Notes&source=TO BE IS TO DO" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2018/01/03/七牛云模块化/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《七牛云模块化》 — Joryun's Notes&url=http://joryun.com/2018/01/03/七牛云模块化/&via=http://joryun.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2018/01/03/七牛云模块化/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACNUlEQVR42u3aS46DMBBFUfa/aXrKIDH3VUFHtq9HUUSDD5Gq6+PjwOu8rOs33z5fvyHXf7vy4SVDhoxpGedwjTc3vuf4RXDkeG8yZMjYh8FvnYbm8SvjYf1mzzJkyJAxDL4kcSQpI399MmTIkMHLTpJQkjT0ZwFXhgwZUzH4hvima42212txGTJkTMhI22f/+fmV+YYMGTKmYpzh4gOAp8pdtCsZMmQszeABjg81+UGKTsCVIUPGPoynykjyV2SQmb4sGTJk7MCoBb40iaxtiySRxa6eDBkypmKQJjsPtf1ylA8bgpNoMmTIWIiRDhefSvXS8eSHfcqQIWMbRnqEtBO4+0fQ0K1lyJCxBCPdOmmckSDeb7fFFbkMGTImZ9QenwbNtFTmL0uGDBn7MGolK8nQ+DU8Jb35jyFDhozlGLUxAEn4eGnKi2oZMmTsyegfhki32L8barTJkCFjOQa5aXAAArft0qfLkCFjT8azYZc0y2pHMRBShgwZizLSY1i8BOVsPkBFv4MMGTI2Y/Sv4UVp+pQg4MqQIWMhxolXP+CmY9EgNZQhQ8ZmjFqPK72yBpAhQ8YOjDNc5KY8TNfacx8CtAwZMpZmpJPB2mgzDbL86MaRLhkyZEzLqDXrO4PJWpl6c08ZMmRswOg39NPkr498ZS4hQ4aM5RhkE7yUbeWwMmTIkIEfnwZcPk54JTWUIUPGVAzeyiehth+U+ShChgwZOzA6xynS8jVtqHUOdsiQIWMJxh9C5zf1JU4lSAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 <script>
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '别跑呀！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
 </script>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-
-  
-
-
-  <script src="/js/utils.js?v=7.1.2"></script>
-
-  <script src="/js/motion.js?v=7.1.2"></script>
-
-
-
-  
-  
-
-
-  <script src="/js/affix.js?v=7.1.2"></script>
-
-  <script src="/js/schemes/pisces.js?v=7.1.2"></script>
-
-
-
-
-  
-  <script src="/js/scrollspy.js?v=7.1.2"></script>
-<script src="/js/post-details.js?v=7.1.2"></script>
-
-
-
-  
-
-
-  <script src="/js/next-boot.js?v=7.1.2"></script>
-
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-
-  
-
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 </body>
 </html>
