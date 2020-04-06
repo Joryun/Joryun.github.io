@@ -20,13 +20,13 @@
     
     
     <meta name="keywords" content="Java,RestTemplate,Encode">
-    <meta name="description" content="背景业务方经过某些业务处理之后，带过来了一系列参数。其中，有个url参数供回调使用，但这个url经业务方处理后很特殊，带过来回调时频频出错，无法正常回调给业务方。于是，通过分析部分源码，剖析一下回调的流程。 编码 解码说到url的回调，很容易联想到decode、encode，即编码解码操作。 12通常来说，需要编码操作即意味着不适合直接传输，某些字符可能有歧义，如中文、特殊字符等等。而通过编码之后">
+    <meta name="description" content="背景业务方经过某些业务处理之后，带过来了一系列参数。其中，有个url参数供回调使用，但这个url经业务方处理后很特殊，带过来回调时频频出错，无法正常回调给业务方。于是，通过分析部分源码，剖析一下回调的流程。 编码 解码说到url的回调，很容易联想到decode、encode，即编码解码操作。 12通常来说，需要编码操作即意味着不适合直接传输，某些字符可能有歧义，如中文、特殊字符等等。而通过编码">
 <meta name="keywords" content="Java,RestTemplate,Encode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RestTemplate源码剖析：Encode">
 <meta property="og:url" content="http://joryun.com/2019/04/15/RestTemplate源码剖析：Encode/index.html">
 <meta property="og:site_name" content="Joryun&#39;s Notes">
-<meta property="og:description" content="背景业务方经过某些业务处理之后，带过来了一系列参数。其中，有个url参数供回调使用，但这个url经业务方处理后很特殊，带过来回调时频频出错，无法正常回调给业务方。于是，通过分析部分源码，剖析一下回调的流程。 编码 解码说到url的回调，很容易联想到decode、encode，即编码解码操作。 12通常来说，需要编码操作即意味着不适合直接传输，某些字符可能有歧义，如中文、特殊字符等等。而通过编码之后">
+<meta property="og:description" content="背景业务方经过某些业务处理之后，带过来了一系列参数。其中，有个url参数供回调使用，但这个url经业务方处理后很特殊，带过来回调时频频出错，无法正常回调给业务方。于是，通过分析部分源码，剖析一下回调的流程。 编码 解码说到url的回调，很容易联想到decode、encode，即编码解码操作。 12通常来说，需要编码操作即意味着不适合直接传输，某些字符可能有歧义，如中文、特殊字符等等。而通过编码">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2929536-8119d0fdedfa08dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2929536-4a5ca9875d27f738.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -59,10 +59,10 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2929536-ffc6baf2c99adaec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2929536-d56a66b576a68199.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2929536-1c628eac72380231.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2020-04-06T15:04:27.754Z">
+<meta property="og:updated_time" content="2020-04-06T15:13:05.707Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RestTemplate源码剖析：Encode">
-<meta name="twitter:description" content="背景业务方经过某些业务处理之后，带过来了一系列参数。其中，有个url参数供回调使用，但这个url经业务方处理后很特殊，带过来回调时频频出错，无法正常回调给业务方。于是，通过分析部分源码，剖析一下回调的流程。 编码 解码说到url的回调，很容易联想到decode、encode，即编码解码操作。 12通常来说，需要编码操作即意味着不适合直接传输，某些字符可能有歧义，如中文、特殊字符等等。而通过编码之后">
+<meta name="twitter:description" content="背景业务方经过某些业务处理之后，带过来了一系列参数。其中，有个url参数供回调使用，但这个url经业务方处理后很特殊，带过来回调时频频出错，无法正常回调给业务方。于是，通过分析部分源码，剖析一下回调的流程。 编码 解码说到url的回调，很容易联想到decode、encode，即编码解码操作。 12通常来说，需要编码操作即意味着不适合直接传输，某些字符可能有歧义，如中文、特殊字符等等。而通过编码">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/2929536-8119d0fdedfa08dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
     
         <link rel="alternate" type="application/atom+xml" title="Joryun&#39;s Notes" href="/atom.xml">
@@ -216,7 +216,9 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>业务方经过某些业务处理之后，带过来了一系列参数。其中，有个url参数供回调使用，但这个url经业务方处理后很特殊，带过来回调时频频出错，无法正常回调给业务方。于是，通过分析部分源码，剖析一下回调的流程。</p>
+            <meta name="referrer" content="no-referrer">
+
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>业务方经过某些业务处理之后，带过来了一系列参数。其中，有个url参数供回调使用，但这个url经业务方处理后很特殊，带过来回调时频频出错，无法正常回调给业务方。于是，通过分析部分源码，剖析一下回调的流程。</p>
 <h2 id="编码-解码"><a href="#编码-解码" class="headerlink" title="编码 解码"></a>编码 解码</h2><p>说到url的回调，很容易联想到decode、encode，即编码解码操作。</p>
 <figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">通常来说，需要编码操作即意味着不适合直接传输，某些字符可能有歧义，如中文、特殊字符等等。</span><br><span class="line">而通过编码之后<span class="comment">(如 utf-8)</span>，传输给服务端，服务端自行解码，便不会出现一系列乱码问题。</span><br></pre></td></tr></table></figure>
 <h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>按照如上所说，业务方带过来了处理后的url，另附上说明，url无需解码，直接回调即可，但事情往往没那么顺利。不管是使用spring5 webclient，还是restTemplate以get请求回调业务方，均会出错。由于最终使用了restTemplate解决了问题，对此本次剖析一下restTemplate。</p>
@@ -549,7 +551,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-04-06T15:04:27.754Z" itemprop="dateUpdated">2020-04-06 23:04:27</time>
+    Last updated: <time datetime="2020-04-06T15:13:05.707Z" itemprop="dateUpdated">2020-04-06 23:13:05</time>
 </span><br>
 
 
