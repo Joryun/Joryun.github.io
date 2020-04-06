@@ -29,7 +29,7 @@
 <meta property="og:description" content="前言创建对象时，只要我们需要，便会一直存在。而若是程序终止，那无论如何它都不会继续存在。但某些情况下，如果对象能够在程序不运行时仍能保存其信息，那将非常有用。这样，在下次运行程序时，该对象将被重建并且拥有的信息与在程序上次运行时它所拥有的信息相同。此时，对象序列化便隆重登场了…">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2929536-5b62dec1e427308b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-01-17T08:17:25.000Z">
+<meta property="og:updated_time" content="2020-04-06T15:14:52.906Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="谈谈Java对象序列化">
 <meta name="twitter:description" content="前言创建对象时，只要我们需要，便会一直存在。而若是程序终止，那无论如何它都不会继续存在。但某些情况下，如果对象能够在程序不运行时仍能保存其信息，那将非常有用。这样，在下次运行程序时，该对象将被重建并且拥有的信息与在程序上次运行时它所拥有的信息相同。此时，对象序列化便隆重登场了…">
@@ -186,7 +186,9 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>创建对象时，只要我们需要，便会一直存在。而若是程序终止，那无论如何它都不会继续存在。但某些情况下，如果对象能够在程序不运行时仍能保存其信息，那将非常有用。这样，在下次运行程序时，该对象将被重建并且拥有的信息与在程序上次运行时它所拥有的信息相同。此时，对象序列化便隆重登场了…</p>
+            <meta name="referrer" content="no-referrer">
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>创建对象时，只要我们需要，便会一直存在。而若是程序终止，那无论如何它都不会继续存在。但某些情况下，如果对象能够在程序不运行时仍能保存其信息，那将非常有用。这样，在下次运行程序时，该对象将被重建并且拥有的信息与在程序上次运行时它所拥有的信息相同。此时，对象序列化便隆重登场了…</p>
 <a id="more"></a>
 <h1 id="关于对象序列化"><a href="#关于对象序列化" class="headerlink" title="关于对象序列化"></a>关于对象序列化</h1><p>当我们在内存中创建可复用的Java对象时，一般情况下会依赖于JVM的生命周期，即会随着JVM的停止而销毁。但Java对象序列化可实现JVM停止运行之后保存(持久化)指定的对象，并可随时读取该对象。</p>
 <p><strong>引用《Thinking in Java》里面的一段话：</strong><br>利用它(对象序列化)可以实现轻量级持久性，“持久性”意味着一个对象的生存周期并不取决于程序是否正在执行；它可生存于程序的调用之间。</p>
@@ -242,7 +244,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2018-01-17T08:17:25.000Z" itemprop="dateUpdated">2018-01-17 16:17:25</time>
+    Last updated: <time datetime="2020-04-06T15:14:52.906Z" itemprop="dateUpdated">2020-04-06 23:14:52</time>
 </span><br>
 
 
@@ -287,7 +289,9 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2017/05/28/谈谈Java对象序列化/&title=《谈谈Java对象序列化》 — Joryun's Notes&source=前言创建对象时，只要我们需要，便会一直存在。而若是程序终止，那无论如何它都不会继续存在。但某些情况下，如果对象能够在程序不运行时仍能保存其信息，那将非常有..." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2017/05/28/谈谈Java对象序列化/&title=《谈谈Java对象序列化》 — Joryun's Notes&source=
+
+前言创建对象时，只要我们需要，便会一直存在。而若是程序终止，那无论如何它都不会继续存在。但某些情况下，如果对象能够在程序不运行时仍能保存其信息，那将非..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -430,7 +434,9 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2017/05/28/谈谈Java对象序列化/&title=《谈谈Java对象序列化》 — Joryun's Notes&source=前言创建对象时，只要我们需要，便会一直存在。而若是程序终止，那无论如何它都不会继续存在。但某些情况下，如果对象能够在程序不运行时仍能保存其信息，那将非常有..." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2017/05/28/谈谈Java对象序列化/&title=《谈谈Java对象序列化》 — Joryun's Notes&source=
+
+前言创建对象时，只要我们需要，便会一直存在。而若是程序终止，那无论如何它都不会继续存在。但某些情况下，如果对象能够在程序不运行时仍能保存其信息，那将非..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>

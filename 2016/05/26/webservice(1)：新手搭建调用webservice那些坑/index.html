@@ -20,13 +20,13 @@
     
     
     <meta name="keywords" content="java,webservice,php">
-    <meta name="description" content="前言今天主要和大家分享搭建java版webservice，以及php调用webservice遇到的一些坑。博客内容大部分纯手打，纯亲测。注：网上有很多使用Eclipse构建webservice的教程，不过配置较麻烦，而且最后可能还访问不了。因此，此博客采用MyEclipse搭建。需注意一点，MyEclipse10及以下的支持不了pattern库，因此发布的项目如果包含Pattern则无法支持，这也">
+    <meta name="description" content="前言今天主要和大家分享搭建java版webservice，以及php调用webservice遇到的一些坑。博客内容大部分纯手打，纯亲测。注：网上有很多使用Eclipse构建webservice的教程，不过配置较麻烦，而且最后可能还访问不了。因此，此博客采用MyEclipse搭建。需注意一点，MyEclipse10及以下的支持不了pattern库，因此发布的项目如果包含Pattern则无法支持，">
 <meta name="keywords" content="java,webservice,php">
 <meta property="og:type" content="article">
 <meta property="og:title" content="webservice(1)：新手搭建调用webservice那些坑">
 <meta property="og:url" content="http://joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/index.html">
 <meta property="og:site_name" content="Joryun&#39;s Notes">
-<meta property="og:description" content="前言今天主要和大家分享搭建java版webservice，以及php调用webservice遇到的一些坑。博客内容大部分纯手打，纯亲测。注：网上有很多使用Eclipse构建webservice的教程，不过配置较麻烦，而且最后可能还访问不了。因此，此博客采用MyEclipse搭建。需注意一点，MyEclipse10及以下的支持不了pattern库，因此发布的项目如果包含Pattern则无法支持，这也">
+<meta property="og:description" content="前言今天主要和大家分享搭建java版webservice，以及php调用webservice遇到的一些坑。博客内容大部分纯手打，纯亲测。注：网上有很多使用Eclipse构建webservice的教程，不过配置较麻烦，而且最后可能还访问不了。因此，此博客采用MyEclipse搭建。需注意一点，MyEclipse10及以下的支持不了pattern库，因此发布的项目如果包含Pattern则无法支持，">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.blog.csdn.net/20160526144616800">
 <meta property="og:image" content="http://img.blog.csdn.net/20160526144930826">
@@ -53,10 +53,10 @@
 <meta property="og:image" content="http://img.blog.csdn.net/20160526155851882">
 <meta property="og:image" content="http://img.blog.csdn.net/20160526160147935">
 <meta property="og:image" content="http://img.blog.csdn.net/20160526160403623">
-<meta property="og:updated_time" content="2020-03-30T15:23:52.950Z">
+<meta property="og:updated_time" content="2020-04-06T15:15:46.464Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webservice(1)：新手搭建调用webservice那些坑">
-<meta name="twitter:description" content="前言今天主要和大家分享搭建java版webservice，以及php调用webservice遇到的一些坑。博客内容大部分纯手打，纯亲测。注：网上有很多使用Eclipse构建webservice的教程，不过配置较麻烦，而且最后可能还访问不了。因此，此博客采用MyEclipse搭建。需注意一点，MyEclipse10及以下的支持不了pattern库，因此发布的项目如果包含Pattern则无法支持，这也">
+<meta name="twitter:description" content="前言今天主要和大家分享搭建java版webservice，以及php调用webservice遇到的一些坑。博客内容大部分纯手打，纯亲测。注：网上有很多使用Eclipse构建webservice的教程，不过配置较麻烦，而且最后可能还访问不了。因此，此博客采用MyEclipse搭建。需注意一点，MyEclipse10及以下的支持不了pattern库，因此发布的项目如果包含Pattern则无法支持，">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20160526144616800">
     
         <link rel="alternate" type="application/atom+xml" title="Joryun&#39;s Notes" href="/atom.xml">
@@ -210,7 +210,9 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>今天主要和大家分享搭建java版webservice，以及php调用webservice遇到的一些坑。博客内容大部分纯手打，纯亲测。<br>注：网上有很多使用Eclipse构建webservice的教程，不过配置较麻烦，而且最后可能还访问不了。因此，此博客采用MyEclipse搭建。需注意一点，MyEclipse10及以下的支持不了pattern库，因此发布的项目如果包含Pattern则无法支持，这也是博主换IDE的原因。</p>
+            <meta name="referrer" content="no-referrer">
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>今天主要和大家分享搭建java版webservice，以及php调用webservice遇到的一些坑。博客内容大部分纯手打，纯亲测。<br>注：网上有很多使用Eclipse构建webservice的教程，不过配置较麻烦，而且最后可能还访问不了。因此，此博客采用MyEclipse搭建。需注意一点，MyEclipse10及以下的支持不了pattern库，因此发布的项目如果包含Pattern则无法支持，这也是博主换IDE的原因。</p>
 <a id="more"></a>
 <p>#说明</p>
 <h4 id="开发环境：MyEclipse2014，JAX-WS构建（容易使用），Tomcat-7"><a href="#开发环境：MyEclipse2014，JAX-WS构建（容易使用），Tomcat-7" class="headerlink" title="开发环境：MyEclipse2014，JAX-WS构建（容易使用），Tomcat 7"></a>开发环境：MyEclipse2014，JAX-WS构建（容易使用），Tomcat 7</h4><h4 id="何为WebService？"><a href="#何为WebService？" class="headerlink" title="何为WebService？"></a>何为WebService？</h4><p>它是一种构建应用程序的普遍模型,可以在任何支持网络通信的操作系统中实施运行;它是一种新的web应用程序分支，是自包含、自描述、模块化的应用，可以发布、定位、通过web调用。 <strong>WebService</strong> 是一个应用组件,它逻辑性的为其他应用程序提供数据与服务.各应用程序通过网络协议和规定的一些标准数据格式（Http，XML，Soap)来访问 <strong>WebService</strong> ,通过 <strong>WebService</strong> 内部执行得到所需结果. <strong>WebService</strong> 可以执行从简单的请求到复杂商务处理的任何功能。一旦部署以后，其他 <strong>WebService</strong> 应用程序可以发现并调用它部署的服务。</p>
@@ -422,7 +424,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-03-30T15:23:52.950Z" itemprop="dateUpdated">2020-03-30 23:23:52</time>
+    Last updated: <time datetime="2020-04-06T15:15:46.464Z" itemprop="dateUpdated">2020-04-06 23:15:46</time>
 </span><br>
 
 
@@ -467,7 +469,9 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/&title=《webservice(1)：新手搭建调用webservice那些坑》 — Joryun's Notes&source=前言今天主要和大家分享搭建java版webservice，以及php调用webservice遇到的一些坑。博客内容大部分纯手打，纯亲测。注：网上有很多使用..." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/&title=《webservice(1)：新手搭建调用webservice那些坑》 — Joryun's Notes&source=
+
+前言今天主要和大家分享搭建java版webservice，以及php调用webservice遇到的一些坑。博客内容大部分纯手打，纯亲测。注：网上有很多..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -603,7 +607,9 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/&title=《webservice(1)：新手搭建调用webservice那些坑》 — Joryun's Notes&source=前言今天主要和大家分享搭建java版webservice，以及php调用webservice遇到的一些坑。博客内容大部分纯手打，纯亲测。注：网上有很多使用..." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/&title=《webservice(1)：新手搭建调用webservice那些坑》 — Joryun's Notes&source=
+
+前言今天主要和大家分享搭建java版webservice，以及php调用webservice遇到的一些坑。博客内容大部分纯手打，纯亲测。注：网上有很多..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>

@@ -20,19 +20,19 @@
     
     
     <meta name="keywords" content="数据结构,算法,二叉树">
-    <meta name="description" content="背景整理几道有意思的题目，比较有趣的破题技巧与思想，均为学习笔记。~~ 说明=&amp;gt; 五道 / 篇 =&amp;gt; Java =&amp;gt; 二叉树相关 题目1、重建二叉树输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回">
+    <meta name="description" content="背景整理几道有意思的题目，比较有趣的破题技巧与思想，均为学习笔记。~~ 说明=&amp;gt; 五道 / 篇 =&amp;gt; Java =&amp;gt; 二叉树相关 题目1、重建二叉树输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并">
 <meta name="keywords" content="数据结构,算法,二叉树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="整理五道算法题系列：二叉树相关">
 <meta property="og:url" content="http://joryun.com/2018/04/14/整理五道算法题系列：二叉树相关/index.html">
 <meta property="og:site_name" content="Joryun&#39;s Notes">
-<meta property="og:description" content="背景整理几道有意思的题目，比较有趣的破题技巧与思想，均为学习笔记。~~ 说明=&amp;gt; 五道 / 篇 =&amp;gt; Java =&amp;gt; 二叉树相关 题目1、重建二叉树输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回">
+<meta property="og:description" content="背景整理几道有意思的题目，比较有趣的破题技巧与思想，均为学习笔记。~~ 说明=&amp;gt; 五道 / 篇 =&amp;gt; Java =&amp;gt; 二叉树相关 题目1、重建二叉树输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2929536-1693edfd06b1f40a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2020-03-30T15:25:05.788Z">
+<meta property="og:updated_time" content="2020-04-06T15:15:01.557Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="整理五道算法题系列：二叉树相关">
-<meta name="twitter:description" content="背景整理几道有意思的题目，比较有趣的破题技巧与思想，均为学习笔记。~~ 说明=&amp;gt; 五道 / 篇 =&amp;gt; Java =&amp;gt; 二叉树相关 题目1、重建二叉树输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回">
+<meta name="twitter:description" content="背景整理几道有意思的题目，比较有趣的破题技巧与思想，均为学习笔记。~~ 说明=&amp;gt; 五道 / 篇 =&amp;gt; Java =&amp;gt; 二叉树相关 题目1、重建二叉树输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/2929536-1693edfd06b1f40a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
     
         <link rel="alternate" type="application/atom+xml" title="Joryun&#39;s Notes" href="/atom.xml">
@@ -186,7 +186,9 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>整理几道有意思的题目，比较有趣的破题技巧与思想，均为学习笔记。~~</p>
+            <meta name="referrer" content="no-referrer">
+
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>整理几道有意思的题目，比较有趣的破题技巧与思想，均为学习笔记。~~</p>
 <h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p><strong>=&gt; 五道 / 篇</strong></p>
 <p><strong>=&gt; Java</strong></p>
 <p><strong>=&gt; 二叉树相关</strong></p>
@@ -218,7 +220,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-03-30T15:25:05.788Z" itemprop="dateUpdated">2020-03-30 23:25:05</time>
+    Last updated: <time datetime="2020-04-06T15:15:01.557Z" itemprop="dateUpdated">2020-04-06 23:15:01</time>
 </span><br>
 
 
