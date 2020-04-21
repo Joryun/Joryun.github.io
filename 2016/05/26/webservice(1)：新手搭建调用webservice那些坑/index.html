@@ -24,7 +24,7 @@
 <meta name="keywords" content="java,webservice,php">
 <meta property="og:type" content="article">
 <meta property="og:title" content="webservice(1)：新手搭建调用webservice那些坑">
-<meta property="og:url" content="http://joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/index.html">
+<meta property="og:url" content="http://notes.joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/index.html">
 <meta property="og:site_name" content="Joryun&#39;s Notes">
 <meta property="og:description" content="前言今天主要和大家分享搭建java版webservice，以及php调用webservice遇到的一些坑。博客内容大部分纯手打，纯亲测。注：网上有很多使用Eclipse构建webservice的教程，不过配置较麻烦，而且最后可能还访问不了。因此，此博客采用MyEclipse搭建。需注意一点，MyEclipse10及以下的支持不了pattern库，因此发布的项目如果包含Pattern则无法支持，">
 <meta property="og:locale" content="zh-Hans">
@@ -122,8 +122,8 @@
         
             <li class="waves-block waves-effect">
               <a href="https://www.jianshu.com/u/85656cc35708" target="_blank" >
-                <i class="icon icon-lg icon-jianshu"></i>
-                Jianshu
+                <i class="icon icon-lg icon-link"></i>
+                Link
               </a>
             </li>
         
@@ -185,7 +185,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#开发环境：MyEclipse2014，JAX-WS构建（容易使用），Tomcat-7"><span class="post-toc-number">1.0.0.1.</span> <span class="post-toc-text">开发环境：MyEclipse2014，JAX-WS构建（容易使用），Tomcat 7</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#何为WebService？"><span class="post-toc-number">1.0.0.2.</span> <span class="post-toc-text">何为WebService？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#关键的技术和规则"><span class="post-toc-number">1.0.0.3.</span> <span class="post-toc-text">关键的技术和规则</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#XML"><span class="post-toc-number">1.0.0.4.</span> <span class="post-toc-text">XML</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#SOAP"><span class="post-toc-number">1.0.0.5.</span> <span class="post-toc-text">SOAP</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#WSDL"><span class="post-toc-number">1.0.0.6.</span> <span class="post-toc-text">WSDL</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#UDDI"><span class="post-toc-number">1.0.0.7.</span> <span class="post-toc-text">UDDI</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#具体实例"><span class="post-toc-number">2.</span> <span class="post-toc-text">具体实例</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一-开始搭建webservice"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">(一) 开始搭建webservice</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#前提"><span class="post-toc-number">2.1.0.1.</span> <span class="post-toc-text">前提</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#编码"><span class="post-toc-number">2.1.0.2.</span> <span class="post-toc-text">编码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-创建发布webservice"><span class="post-toc-number">2.1.0.2.1.</span> <span class="post-toc-text">1. 创建发布webservice</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-然后新建一类文件UserInfo-java"><span class="post-toc-number">2.1.0.2.2.</span> <span class="post-toc-text">2. 然后新建一类文件UserInfo.java</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-接下来发布web-service"><span class="post-toc-number">2.1.0.2.3.</span> <span class="post-toc-text">3. 接下来发布web service</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-选择从java类创建web-service"><span class="post-toc-number">2.1.0.2.4.</span> <span class="post-toc-text">4. 选择从java类创建web service</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#5-选择访问的java-class"><span class="post-toc-number">2.1.0.2.5.</span> <span class="post-toc-text">5. 选择访问的java class</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#6-生成WSDL（WSDL以上有介绍，不懂可以回去看）"><span class="post-toc-number">2.1.0.2.6.</span> <span class="post-toc-text">6. 生成WSDL（WSDL以上有介绍，不懂可以回去看）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#7-发布后的项目结构如下"><span class="post-toc-number">2.1.0.2.7.</span> <span class="post-toc-text">7. 发布后的项目结构如下</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二-配置Tomcat"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">(二) 配置Tomcat</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#前提-1"><span class="post-toc-number">2.2.0.1.</span> <span class="post-toc-text">前提</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#过程"><span class="post-toc-number">2.2.0.2.</span> <span class="post-toc-text">过程</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#部署项目并启动Tomcat服务器"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">部署项目并启动Tomcat服务器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#添加JAX-WS库"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">添加JAX-WS库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#测试webservice"><span class="post-toc-number">2.2.3.</span> <span class="post-toc-text">测试webservice</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#PHP调用webservice"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">PHP调用webservice</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#说明"><span class="post-toc-number">2.3.0.1.</span> <span class="post-toc-text">说明</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-引入nusoap-php，调用call-方法"><span class="post-toc-number">2.3.0.2.</span> <span class="post-toc-text">1. 引入nusoap.php，调用call()方法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-php5自带函数测试，classMap方式传值"><span class="post-toc-number">2.3.0.3.</span> <span class="post-toc-text">2. php5自带函数测试，classMap方式传值</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">3.</span> <span class="post-toc-text">总结</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#开发环境：MyEclipse2014，JAX-WS构建（容易使用），Tomcat-7"><span class="post-toc-text">开发环境：MyEclipse2014，JAX-WS构建（容易使用），Tomcat 7</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#何为WebService？"><span class="post-toc-text">何为WebService？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#关键的技术和规则"><span class="post-toc-text">关键的技术和规则</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#XML"><span class="post-toc-text">XML</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#SOAP"><span class="post-toc-text">SOAP</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#WSDL"><span class="post-toc-text">WSDL</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#UDDI"><span class="post-toc-text">UDDI</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#具体实例"><span class="post-toc-text">具体实例</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一-开始搭建webservice"><span class="post-toc-text">(一) 开始搭建webservice</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#前提"><span class="post-toc-text">前提</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#编码"><span class="post-toc-text">编码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-创建发布webservice"><span class="post-toc-text">1. 创建发布webservice</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-然后新建一类文件UserInfo-java"><span class="post-toc-text">2. 然后新建一类文件UserInfo.java</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-接下来发布web-service"><span class="post-toc-text">3. 接下来发布web service</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-选择从java类创建web-service"><span class="post-toc-text">4. 选择从java类创建web service</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#5-选择访问的java-class"><span class="post-toc-text">5. 选择访问的java class</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#6-生成WSDL（WSDL以上有介绍，不懂可以回去看）"><span class="post-toc-text">6. 生成WSDL（WSDL以上有介绍，不懂可以回去看）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#7-发布后的项目结构如下"><span class="post-toc-text">7. 发布后的项目结构如下</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二-配置Tomcat"><span class="post-toc-text">(二) 配置Tomcat</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#前提-1"><span class="post-toc-text">前提</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#过程"><span class="post-toc-text">过程</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#部署项目并启动Tomcat服务器"><span class="post-toc-text">部署项目并启动Tomcat服务器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#添加JAX-WS库"><span class="post-toc-text">添加JAX-WS库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#测试webservice"><span class="post-toc-text">测试webservice</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#PHP调用webservice"><span class="post-toc-text">PHP调用webservice</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#说明"><span class="post-toc-text">说明</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-引入nusoap-php，调用call-方法"><span class="post-toc-text">1. 引入nusoap.php，调用call()方法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-php5自带函数测试，classMap方式传值"><span class="post-toc-text">2. php5自带函数测试，classMap方式传值</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
         </nav>
     </aside>
     
@@ -429,11 +429,11 @@
 
 
         
-        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/" target="_blank" rel="external">http://joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/</a>
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/" target="_blank" rel="external">http://notes.joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/</a>
         
     </div>
     <footer>
-        <a href="http://joryun.com">
+        <a href="http://notes.joryun.com">
             <img src="/img/yuan.jpg" alt="刘家源">
             刘家源
         </a>
@@ -441,10 +441,6 @@
 </blockquote>
 
         
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
 
 
         <div class="post-footer">
@@ -459,7 +455,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/&title=《webservice(1)：新手搭建调用webservice那些坑》 — Joryun's Notes&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://notes.joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/&title=《webservice(1)：新手搭建调用webservice那些坑》 — Joryun's Notes&pic=http://notes.joryun.com/img/yuan.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -469,24 +465,24 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/&title=《webservice(1)：新手搭建调用webservice那些坑》 — Joryun's Notes&source=
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://notes.joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/&title=《webservice(1)：新手搭建调用webservice那些坑》 — Joryun's Notes&source=
 
 前言今天主要和大家分享搭建java版webservice，以及php调用webservice遇到的一些坑。博客内容大部分纯手打，纯亲测。注：网上有很多..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://notes.joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《webservice(1)：新手搭建调用webservice那些坑》 — Joryun's Notes&url=http://joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/&via=http://joryun.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《webservice(1)：新手搭建调用webservice那些坑》 — Joryun's Notes&url=http://notes.joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/&via=http://notes.joryun.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://notes.joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -538,22 +534,6 @@
 
 </article>
 
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        undefined
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/" alt="打赏二维码">
-        </div>
-        
-    </div>
-</div>
-
 
 
 </div>
@@ -597,7 +577,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/&title=《webservice(1)：新手搭建调用webservice那些坑》 — Joryun's Notes&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://notes.joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/&title=《webservice(1)：新手搭建调用webservice那些坑》 — Joryun's Notes&pic=http://notes.joryun.com/img/yuan.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -607,24 +587,24 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/&title=《webservice(1)：新手搭建调用webservice那些坑》 — Joryun's Notes&source=
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://notes.joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/&title=《webservice(1)：新手搭建调用webservice那些坑》 — Joryun's Notes&source=
 
 前言今天主要和大家分享搭建java版webservice，以及php调用webservice遇到的一些坑。博客内容大部分纯手打，纯亲测。注：网上有很多..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://notes.joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《webservice(1)：新手搭建调用webservice那些坑》 — Joryun's Notes&url=http://joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/&via=http://joryun.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《webservice(1)：新手搭建调用webservice那些坑》 — Joryun's Notes&url=http://notes.joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/&via=http://notes.joryun.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://notes.joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -635,7 +615,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtklEQVR42u3aUU7EMAwFwL3/peEA0Pa9OFkWafq1WkrqKVJsHL9e8fV1cV3d8/P7+5Wv7rx/4rYLDw8Pb1PoPx+cf98G166QxIyHh4d3mpdv2cmLSIJLUsUVPokZDw8P73N47eaebOVriQEPDw/vv/MSUpsG7lMOHh4e3t/y8kI5KXPzhsX9/ck923oteHh4eDEv3+I/5/OR8z08PDy88al6cvjUjhfcp5lJbL88Fw8PD+8Ab96iTcroyShA0iB+iBMPDw/vAO++udC2CZJHtu2GNSQeHh7eCV7bBl0bt8rBOXLUjMDDw8Pbylvb0PPQ80TSpqtfVsbDw8M7wKsHmMo2RB5o8tM8Njw8PLxzvHYTnzdqd1XCyZ14eHh453gtrA2oHQhoY7uMAQ8PD+8Ab61Ezjf95Pv2FbfFNx4eHt4J3qRdO29A5I2S5EU/9Krx8PDwDvDaJZJtPR9QWGvjPkSCh4eHt5XXPmzvcVq7xdfHYHh4eHgHePMRqDYLzQcI8j8JHh4e3nt4bTN315H/wdXw8PDwtq422cTz0atXebVp5vIzHh4e3jFeG9Bas7UdGmhf1mViwMPDw9vKWzv4z/ula42MtVZycb6Hh4eHN+C1Q1GTkjpp1+avO0pIeHh4eAd4k6GrpOyeFOg5KepS4+Hh4R3gzcPNWxLzlnHxuvHw8PDewmsTwz1gMgSw9od5SAx4eHh4m3jtGMHaEVdeuOdb/8Nv4eHh4W3lfZXXpGrdVYIXa+Lh4eEd4K21ZdsiOD9US5LT2hADHh4e3l7epMDNU8gkteSv6ZWHiIeHhzfm1T2MwTr5cdervIrRATw8PLy38/JvkmI6T1H50/Hw8PA+hzcpoPNGQ9v+wMPDw3s/b7LoWgJIyu68bVFMRuDh4eGNefk/+XmLYa3dkCM3X3h4eHjp9Q1qOrtg4JutKQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADLUlEQVR42u3a0W7iQAwFUP7/p6lU9aFVl3BtpytiTp4QzU7mBGkt+87tFl/3z+v35/yb6lOSp9+/Xbe/uLCxsbEvwr4fXnPYo40ePyV/ucn6/9gtNjY29jp2vt18Ezk+/z65MyqN2NjY2G/Jzj8fby4pQvNGBRsbGxu7N77Ji01e/JKVsbGxsbGTcU/ygMkYKBk89YZW2NjY2LvZk6D31T7/p3wbGxsb+2XY9+LVG/QnT6wOiXr7/1oNGxsbexG7ehxnfmf+OpL1Ry0TNjY29gp2XpbO2lD1yM6kKEa/MzY2NvbF2fmm8wCg1zBU91MNd5/sExsbG/uy7Gp56EWtSRuT/LV3/8NZGjY2NvYi9qSQ9CLhfM3e63iyGjY2NvYidl6KeiWtl1dUW5feN9jY2Nib2JOhfz5y6o2o8iakOmbCxsbG3sE+q5xUg9vqQP/cIoqNjY29iT0Z1ucjm+rLzYPe3kvHxsbG3sc+LhvJor2t99qYeUHFxsbG3sfON9FD5gd65mFAXoaxsbGxd7CrcWyV0YsNzhpOPZmlYWNjY78Nex7ozktdb+WH92BjY2MvYidDn2ofUx0/TWKJZhKCjY2NvYhdBfeOUfbG9NXDPYWYGRsbG3sR+6zAtRrNzktj/txb78LGxsa+CDv/r7/XnCTj+0m5ah4PwsbGxl7K7k2kJkFvLxjoNTk/7sTGxsZex+4d1ukVmLzJqa5WaGCwsbGxF7Enw/1CktwaXeVPycshNjY29j725N3kRyGrA6a8Hcojhx/fY2NjY69jVzHVgtFrYKqxbh4eYGNjY29iV8vA5HN1u5PXV542YWNjY1+WPW858vFTtf2oxsOFHxIbGxt7Hbs3aZmMkHpr5j/Vk2KGjY2NvY49bwOSAVA17p0n2FHdxsbGxr44e36kpvdvq8Fwb+DVK3vY2NjYV2RX49XeuCcvjdWC1GyNsLGxsdexq0VrMoSqrjxpbKKQABsbG/tt2NXOpked8AqhNTY2Nvbbs084OhMUy/nhzijlxsbGxl7B7oWpx2WsOkjK4+feK27GA9jY2Ngvz+4dpsk3Olk/L2B/0eRgY2Njvzz7A3PZd8ue3AZXAAAAAElFTkSuQmCC" alt="微信分享二维码">
 </div>
 
 
@@ -643,7 +623,7 @@
 
     <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 <script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 
 
 </script>

@@ -24,7 +24,7 @@
 <meta name="keywords" content="linux,shell,服务器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux进程监控 + 钉钉通知">
-<meta property="og:url" content="http://joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/index.html">
+<meta property="og:url" content="http://notes.joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/index.html">
 <meta property="og:site_name" content="Joryun&#39;s Notes">
 <meta property="og:description" content="进程监控脚本背景启动于正式服务器的项目，有时会因为某种因素，例如docker内存超限因而容器崩溃（前不久就遇过…），如服务器内存不足或IO读写异常而崩溃….等等等等。而这些原因，都可能影响到项目的正常运行，严重地将会被kill掉。那么，在服务器上弄一套进程监控方案就很有必要了！ 说明进程监控采用shell脚本的形式，结合日常开发使用的CI工具（如Jenkins），再通过Linux服务器的定时器">
 <meta property="og:locale" content="zh-Hans">
@@ -100,8 +100,8 @@
         
             <li class="waves-block waves-effect">
               <a href="https://www.jianshu.com/u/85656cc35708" target="_blank" >
-                <i class="icon icon-lg icon-jianshu"></i>
-                Jianshu
+                <i class="icon icon-lg icon-link"></i>
+                Link
               </a>
             </li>
         
@@ -163,7 +163,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程监控脚本"><span class="post-toc-number">1.</span> <span class="post-toc-text">进程监控脚本</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#背景"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">背景</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#说明"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">说明</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简单介绍Jenkins"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">简单介绍Jenkins</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#进入主题"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">进入主题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#流程"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">流程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#一、Jenkins-shell脚本"><span class="post-toc-number">1.4.1.1.</span> <span class="post-toc-text">一、Jenkins shell脚本</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#二、Linux服务器执行的初始脚本"><span class="post-toc-number">1.4.1.2.</span> <span class="post-toc-text">二、Linux服务器执行的初始脚本</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#三、监控脚本的初始脚本"><span class="post-toc-number">1.4.1.3.</span> <span class="post-toc-text">三、监控脚本的初始脚本</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#四、重点：监控脚本"><span class="post-toc-number">1.4.1.4.</span> <span class="post-toc-text">四、重点：监控脚本</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#拓展部分：集成钉钉通知"><span class="post-toc-number">2.</span> <span class="post-toc-text">拓展部分：集成钉钉通知</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#相关截图"><span class="post-toc-number">3.</span> <span class="post-toc-text">相关截图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">4.</span> <span class="post-toc-text">总结</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程监控脚本"><span class="post-toc-text">进程监控脚本</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#背景"><span class="post-toc-text">背景</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#说明"><span class="post-toc-text">说明</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简单介绍Jenkins"><span class="post-toc-text">简单介绍Jenkins</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#进入主题"><span class="post-toc-text">进入主题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#流程"><span class="post-toc-text">流程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#一、Jenkins-shell脚本"><span class="post-toc-text">一、Jenkins shell脚本</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#二、Linux服务器执行的初始脚本"><span class="post-toc-text">二、Linux服务器执行的初始脚本</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#三、监控脚本的初始脚本"><span class="post-toc-text">三、监控脚本的初始脚本</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#四、重点：监控脚本"><span class="post-toc-text">四、重点：监控脚本</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#拓展部分：集成钉钉通知"><span class="post-toc-text">拓展部分：集成钉钉通知</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#相关截图"><span class="post-toc-text">相关截图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
         </nav>
     </aside>
     
@@ -265,11 +265,11 @@
 
 
         
-        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/12/22/Linux进程监控 + 钉钉通知/" target="_blank" rel="external">http://joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/</a>
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/12/22/Linux进程监控 + 钉钉通知/" target="_blank" rel="external">http://notes.joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/</a>
         
     </div>
     <footer>
-        <a href="http://joryun.com">
+        <a href="http://notes.joryun.com">
             <img src="/img/yuan.jpg" alt="刘家源">
             刘家源
         </a>
@@ -277,10 +277,6 @@
 </blockquote>
 
         
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
 
 
         <div class="post-footer">
@@ -295,7 +291,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/&title=《Linux进程监控 + 钉钉通知》 — Joryun's Notes&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://notes.joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/&title=《Linux进程监控 + 钉钉通知》 — Joryun's Notes&pic=http://notes.joryun.com/img/yuan.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -305,22 +301,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/&title=《Linux进程监控 + 钉钉通知》 — Joryun's Notes&source=TO BE IS TO DO" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://notes.joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/&title=《Linux进程监控 + 钉钉通知》 — Joryun's Notes&source=TO BE IS TO DO" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://notes.joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux进程监控 + 钉钉通知》 — Joryun's Notes&url=http://joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/&via=http://joryun.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux进程监控 + 钉钉通知》 — Joryun's Notes&url=http://notes.joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/&via=http://notes.joryun.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://notes.joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -379,22 +375,6 @@
 
 </article>
 
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        undefined
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/" alt="打赏二维码">
-        </div>
-        
-    </div>
-</div>
-
 
 
 </div>
@@ -438,7 +418,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/&title=《Linux进程监控 + 钉钉通知》 — Joryun's Notes&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://notes.joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/&title=《Linux进程监控 + 钉钉通知》 — Joryun's Notes&pic=http://notes.joryun.com/img/yuan.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -448,22 +428,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/&title=《Linux进程监控 + 钉钉通知》 — Joryun's Notes&source=TO BE IS TO DO" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://notes.joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/&title=《Linux进程监控 + 钉钉通知》 — Joryun's Notes&source=TO BE IS TO DO" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://notes.joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux进程监控 + 钉钉通知》 — Joryun's Notes&url=http://joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/&via=http://joryun.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux进程监控 + 钉钉通知》 — Joryun's Notes&url=http://notes.joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/&via=http://notes.joryun.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://notes.joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -474,7 +454,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACM0lEQVR42u3aQW7DMAxEUd//0i7QVYFEzgzHDirya2Ukqa3nBUuRPA55nb/r9Xr1yd/PX9f1PVd3u2HBgAFjW8Z5ua63vvqly74mXe8NBgwYcxhukF1tWsHU/urDnmHAgAFDfnDtddReHwwYMGB8J+DqaSIMGDBgKIdY/eCqbLcGvuEsDgMGjA0ZSWPg6esv9TdgwIDxjxlnsJTkspY+2juBAQNGa4ZeMssHMmpHWSMQw4ABYwBDGaqoPUAvmbnH1DcBFwYMGGMYtTaAcjd31Mz4NwADBowBjOTgquDdBoPeeIABA0Zvhv4Ae/QhSBldPAwYMCYw3EOsm6fpv9HD+rK/AQMGjHaMvPTvHl/dgO4mizBgwOjKcMte+aE0edPLb2HAgNGa4SZzemuzNmDh1v9hwIDRm+GGSzekuuMabsvzqEV9GDBgbMVQQupdI1zJIdkOzTBgwGjE0AteSqsyL8C5FcE3wxYwYMBox9DTxLuamnqZTz88w4ABYwLjuZK9Mk6RtD/tFiYMGDA2Z7hF+VrorBXgjIgOAwaMMQyl0JYklEkaavRgYcCA0YihtzOV67wtqo9Z2OU2GDBgbMg4zZU0GmtppRT6YcCA0Zrx9BiEkvbVBj6KQx4wYMDYluEG2QSvvwh7DzBgwBjAqG0iSdrc2G93YmHAgDGecVvr0Ww5fGgJwIABYzxDL5/VGqLunWHAgDGNobcea2ncE6dOGDBgzGG4SVvyGyV8J0EZBgwY7Rg/negD8TlogbwAAAAASUVORK5CYII=" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACvUlEQVR42u3a0W7CMAwF0P3/T2+vkwblXicpTDp9mkqBnEyKje2vr/j6fnL9fjV5fvbeZ09uu/Dw8PA2Lf3vRz9byvUzyfPJNybvffDteHh4eMd4yVJWgsr1oleoLyx4eHh4H8Nrw0YbGK7XgIeHh/cfefkSr9/VBhU8PDy8z+HlxdbrxV0f8UnS3BY+ttVa8PDw8GLerKDw3r+P9Pfw8PDwlrvqbbM/T5rz+3kweLBaPDw8vAO8/MBNkuD2fE62ZkOZAw8PD+8Ab5aFtsd6fme9WIyHh4d3D69ltGWCvNzQDmBFa8DDw8PbxJuNUq20tRJ2cicKCXh4eHjHePnhm29KO0yQB5UiNcfDw8M7wJstbtaUmrXHNoxe4eHh4W3lJYvIA0nb7spT5+Ha8PDw8A7w8tJAm0bnn9AWMtrQhYeHh7eXlxQC8tGr+pheGM+qwwAeHh7eJt6usYBky/KScRIkNsyU4eHh4Y14s3JqOxrVpuZ5sl7/r/Dw8PA28ZLkuE2v83LtypDBi+3Aw8PDu53XtvDz1DlPkZc2HQ8PD+8Ary0WzNpjbcGiLVJEhV08PDy8Tbx2BGo92Z2VLdrKNB4eHt5p3so41EozLLmft+Lw8PDw7ue1afH1gvLGf7LovFDyIKXGw8PD28pLlp4vK38mP9zbtB4PDw/vHl5eMM0Hp9rgkWxx+yoeHh7ePbx2gGClSdZu93CkAA8PD+8YL//i/P5KeFjZDjw8PLxzvO/ySgoH7bGeB6Ft1RQ8PDy8BV5+rRzibeNqV3KPh4eHd47XfnR7WLchpx0jeIHHw8PDO8bLD/RZ26zdppWkGQ8PD+8zebMyblvsaJP4ogGGh4eH91ZeUhTIg0SykiKE4OHh4R3jJcWIvHialGsTQFuBrgcI8PDw8Ea8+ud9XKrIQ8WshbbU08PDw8Ob8H4AbkM1ynLEVSoAAAAASUVORK5CYII=" alt="微信分享二维码">
 </div>
 
 
@@ -482,7 +462,7 @@
 
     <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 <script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 
 
 </script>

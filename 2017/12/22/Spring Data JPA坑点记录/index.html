@@ -24,7 +24,7 @@
 <meta name="keywords" content="spring,spring data jpa">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring Data JPA坑点记录">
-<meta property="og:url" content="http://joryun.com/2017/12/22/Spring Data JPA坑点记录/index.html">
+<meta property="og:url" content="http://notes.joryun.com/2017/12/22/Spring Data JPA坑点记录/index.html">
 <meta property="og:site_name" content="Joryun&#39;s Notes">
 <meta property="og:description" content="一、分页查询场景：动态查询，分页查询，根据传入不同的状态，分别查询不同数据表，并且在传入page对象之前用map进行VO转换。而pageable的使用地方不同影响到了分页数据的正确性，以此进行探讨。  pageable使用于new PageImpl&amp;lt;&amp;gt;中，且直到最后才将List -&amp;gt; Page pageable使用于findAll()中  前提：Page对象封于VO内，返回数">
 <meta property="og:locale" content="zh-Hans">
@@ -96,8 +96,8 @@
         
             <li class="waves-block waves-effect">
               <a href="https://www.jianshu.com/u/85656cc35708" target="_blank" >
-                <i class="icon icon-lg icon-jianshu"></i>
-                Jianshu
+                <i class="icon icon-lg icon-link"></i>
+                Link
               </a>
             </li>
         
@@ -159,7 +159,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、分页查询"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、分页查询</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、事务，更新实体，并查询"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、事务，更新实体，并查询</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">3.</span> <span class="post-toc-text">总结</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、分页查询"><span class="post-toc-text">一、分页查询</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、事务，更新实体，并查询"><span class="post-toc-text">二、事务，更新实体，并查询</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
         </nav>
     </aside>
     
@@ -223,11 +223,11 @@
 
 
         
-        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/12/22/Spring Data JPA坑点记录/" target="_blank" rel="external">http://joryun.com/2017/12/22/Spring Data JPA坑点记录/</a>
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/12/22/Spring Data JPA坑点记录/" target="_blank" rel="external">http://notes.joryun.com/2017/12/22/Spring Data JPA坑点记录/</a>
         
     </div>
     <footer>
-        <a href="http://joryun.com">
+        <a href="http://notes.joryun.com">
             <img src="/img/yuan.jpg" alt="刘家源">
             刘家源
         </a>
@@ -235,10 +235,6 @@
 </blockquote>
 
         
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
 
 
         <div class="post-footer">
@@ -253,7 +249,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2017/12/22/Spring Data JPA坑点记录/&title=《Spring Data JPA坑点记录》 — Joryun's Notes&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://notes.joryun.com/2017/12/22/Spring Data JPA坑点记录/&title=《Spring Data JPA坑点记录》 — Joryun's Notes&pic=http://notes.joryun.com/img/yuan.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -263,22 +259,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2017/12/22/Spring Data JPA坑点记录/&title=《Spring Data JPA坑点记录》 — Joryun's Notes&source=TO BE IS TO DO" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://notes.joryun.com/2017/12/22/Spring Data JPA坑点记录/&title=《Spring Data JPA坑点记录》 — Joryun's Notes&source=TO BE IS TO DO" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2017/12/22/Spring Data JPA坑点记录/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://notes.joryun.com/2017/12/22/Spring Data JPA坑点记录/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Spring Data JPA坑点记录》 — Joryun's Notes&url=http://joryun.com/2017/12/22/Spring Data JPA坑点记录/&via=http://joryun.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Spring Data JPA坑点记录》 — Joryun's Notes&url=http://notes.joryun.com/2017/12/22/Spring Data JPA坑点记录/&via=http://notes.joryun.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2017/12/22/Spring Data JPA坑点记录/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://notes.joryun.com/2017/12/22/Spring Data JPA坑点记录/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -337,22 +333,6 @@
 
 </article>
 
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        undefined
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/" alt="打赏二维码">
-        </div>
-        
-    </div>
-</div>
-
 
 
 </div>
@@ -396,7 +376,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2017/12/22/Spring Data JPA坑点记录/&title=《Spring Data JPA坑点记录》 — Joryun's Notes&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://notes.joryun.com/2017/12/22/Spring Data JPA坑点记录/&title=《Spring Data JPA坑点记录》 — Joryun's Notes&pic=http://notes.joryun.com/img/yuan.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -406,22 +386,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2017/12/22/Spring Data JPA坑点记录/&title=《Spring Data JPA坑点记录》 — Joryun's Notes&source=TO BE IS TO DO" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://notes.joryun.com/2017/12/22/Spring Data JPA坑点记录/&title=《Spring Data JPA坑点记录》 — Joryun's Notes&source=TO BE IS TO DO" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2017/12/22/Spring Data JPA坑点记录/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://notes.joryun.com/2017/12/22/Spring Data JPA坑点记录/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Spring Data JPA坑点记录》 — Joryun's Notes&url=http://joryun.com/2017/12/22/Spring Data JPA坑点记录/&via=http://joryun.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Spring Data JPA坑点记录》 — Joryun's Notes&url=http://notes.joryun.com/2017/12/22/Spring Data JPA坑点记录/&via=http://notes.joryun.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2017/12/22/Spring Data JPA坑点记录/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://notes.joryun.com/2017/12/22/Spring Data JPA坑点记录/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -432,7 +412,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACLklEQVR42u3awW7DIBBFUf//T7vbSm7wfQNtBXNZRXFic7x4gmGuC497OL7/Zvzf5y+f//p0nwVDhgwZ2zL4FJ/f86uE+unzeG4yZMjow+C3Jt+Q8B2/Dj43GTJkyEgZJLJXvQ4ZMmTIWLBcA+B/C1wZMmRsyOCltHE5jN+BMxbvxWXIkLEhg1fd//7zr5xvyJAhYyvGHY7awSRZOPKQ/WFWMmTIOJrBA26+waIW4mQ+MmTI6MkgbRbz7Rfk8IAfJ8iQIaMDg5fbZmK6VmhDc5AhQ8ahjFrxi1zlW9OZAwAZMmR0YAQXwBa0tvnkERw8S4YMGccxas0TPEZXxfRUyMqQIWNzRoohRwI8oHkDGZqDDBkyDmXw0nztYJKX23hp7+UIU4YMGccxZhq54qUbfmJ6LCpDhoxTGfMNE2lzBv8vbweRIUNGBwZP5fnmsPTwsthsIUOGjIMYpFh248HLc+lCMD5qlSFDxtGMdPOZLvVmFqPBjlyGDBnHMWbK9LXwrS0cXwJXhgwZDRi1KKwtHMnL4oEuQ4aMzoy09LaqXaN2OCFDhowOjLVTIRNNd9IvT5chQ8ahjDsc48fX7pAuQ6/ag2XIkLEtoxZ2q0r56eY2aLaQIUPGcYxaRPIYDYr74f1lyJDRjZEGX4pMo7y4lZUhQ4YMUIxb22YRrGdlyJAhAxfIeGjyKaIXJ0OGjAYMEn8zi0XO4EekMmTI6MNII7JYDsNNG7w8J0OGjAaML//OqHa8411uAAAAAElFTkSuQmCC" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACoUlEQVR42u3aS3LCQAwFQO5/aXIAQ3iSRsSpaq8oPva0F9bwpMcjPp6X4/r+u29eP313/nevr+c5fODh4eGNl54senL53hWTT1+sAQ8PD2+Nlz+sf/9m77f5rczXjIeHh3d/3qnykG+18fDw8P4LL48Yfi8bvevi4eHh3YeXx6/5siahRlIkDmcteHh4eDEv3/7e5/VKfw8PDw9v3IjK2//5MEE1qM2LwYtz4uHh4S3w8gdudZNdHbo6FRDj4eHhfZNXXXp1EWfHuQqxMh4eHt4yrxcKJC2uZKFJpFuOKvDw8PCO8pIT7YUIyW/zIYYPm2k8PDy8o7wqNX+UV29fFC7koQYeHh7eAm9CnReP6phCdbQLDw8Pb5uXjKJO2lrVopKHts1KiIeHh9fi5dvZfHs9HxFI3o++g4eHh7fAm4ezvaXnr/NQo9AGw8PDwxvw9uKG6k3pxRYfzoCHh4e3zKv2jPLg9VQ3Kt8tR3ttPDw8vDHvbMyaxxZ50ysvV3h4eHh7vHIkGsQEPXbSeKs26vDw8PC2efOl5M3+3ohAHprg4eHhbfPyC08KwGQcobopL9xpPDw8vDGv94jPl95roU3GtvDw8PDO8iatpmTRvVGteayMh4eHt8fba+TnC5pgRmEEHh4e3pjXO1GvePSKRDJMMKppeHh4eGNe9UQJIx8UOFUw8PDw8PZ4yYN7XhKq1Ed84OHh4X2H9ywevULSKxvV8YVCxcPDw8Mb8KqP3XxDfDbk7QUZeHh4eHu8SYybtMTyW5CEHXmwi4eHh7fN641k5b+dbMF7kQQeHh7enXn5p/PIOMG/Tanx8PDw/pTX2y7Pm2HJxvpAYcDDw8MLeHtNr3xzHA1RVSNmPDw8vAVe9U9+gp9vms9Gw3h4eHiHeD/LLiIWL74bxwAAAABJRU5ErkJggg==" alt="微信分享二维码">
 </div>
 
 
@@ -440,7 +420,7 @@
 
     <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 <script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 
 
 </script>

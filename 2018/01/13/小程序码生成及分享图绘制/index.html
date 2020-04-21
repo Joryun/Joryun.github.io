@@ -24,7 +24,7 @@
 <meta name="keywords" content="微信,小程序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="小程序码生成及分享图绘制">
-<meta property="og:url" content="http://joryun.com/2018/01/13/小程序码生成及分享图绘制/index.html">
+<meta property="og:url" content="http://notes.joryun.com/2018/01/13/小程序码生成及分享图绘制/index.html">
 <meta property="og:site_name" content="Joryun&#39;s Notes">
 <meta property="og:description" content="场景项目需求为用户创建活动，且生成了小程序码，进而再生成小程序码分享图，即在原小程序码的基础上绘制一张完整的分享图，并展示给用户进行分享。个中过程均交由后台生成并绘制（原因：用户在小程序直接点击某选项，直接转至分享图页面，而图片存储七牛云之上，若由前端生成再交由后台处理并返回，便影响响应速度） 说明开发环境：JDK1.8开发语言：Java 正题生成小程序码调用微信SDK，最好的文档便是官网文档">
 <meta property="og:locale" content="zh-Hans">
@@ -101,8 +101,8 @@
         
             <li class="waves-block waves-effect">
               <a href="https://www.jianshu.com/u/85656cc35708" target="_blank" >
-                <i class="icon icon-lg icon-jianshu"></i>
-                Jianshu
+                <i class="icon icon-lg icon-link"></i>
+                Link
               </a>
             </li>
         
@@ -164,7 +164,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#场景"><span class="post-toc-number">1.</span> <span class="post-toc-text">场景</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#说明"><span class="post-toc-number">2.</span> <span class="post-toc-text">说明</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#正题"><span class="post-toc-number">3.</span> <span class="post-toc-text">正题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#生成小程序码"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">生成小程序码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#步骤"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">步骤</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#绘制小程序码分享图"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">绘制小程序码分享图</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">4.</span> <span class="post-toc-text">总结</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#场景"><span class="post-toc-text">场景</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#说明"><span class="post-toc-text">说明</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#正题"><span class="post-toc-text">正题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#生成小程序码"><span class="post-toc-text">生成小程序码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#步骤"><span class="post-toc-text">步骤</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#绘制小程序码分享图"><span class="post-toc-text">绘制小程序码分享图</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
         </nav>
     </aside>
     
@@ -217,7 +217,7 @@
 <ul>
 <li>编码</li>
 </ul>
-<p>说明：<br>1、获取小程序码需要获取access_token。<br>2、scene值需跟前端进行规约，具体的传值格式（以下代码scene值以加密形式传入，可自定义加密规则）<br>3、以下 <strong>七牛上传</strong> 功能使用的便是博主介绍到的七牛云模块化，想了解的见上篇 <a href="http://joryun.com/2018/01/03/qiniu-module/">《七牛云模块化文档》</a></p>
+<p>说明：<br>1、获取小程序码需要获取access_token。<br>2、scene值需跟前端进行规约，具体的传值格式（以下代码scene值以加密形式传入，可自定义加密规则）<br>3、以下 <strong>七牛上传</strong> 功能使用的便是博主介绍到的七牛云模块化，想了解的见上篇 <a href="http://joryun.com/2018/01/03/qiniu-module/" target="_blank" rel="noopener">《七牛云模块化文档》</a></p>
 <figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">String</span> getminiqrQr(<span class="keyword">String</span> sceneStr, <span class="keyword">String</span> accessToken) &#123;</span><br><span class="line">        RestTemplate rest = <span class="keyword">new</span> RestTemplate();</span><br><span class="line">        InputStream inputStream = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">String</span> path = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">String</span> url = <span class="string">"https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token="</span> + accessToken;</span><br><span class="line">            Map&lt;<span class="keyword">String</span>, <span class="keyword">Object</span>&gt; param = <span class="keyword">new</span> <span class="keyword">HashMap</span>&lt;&gt;();</span><br><span class="line">            param.put(<span class="string">"scene"</span>, <span class="string">"activity_"</span> + sceneStr);</span><br><span class="line"><span class="comment">//            param.put("page", "pages/Activity/Situation/Situation");</span></span><br><span class="line">            param.put(<span class="string">"width"</span>, <span class="number">200</span>);</span><br><span class="line">            logger.info(<span class="string">"调用生成微信URL接口传参："</span> + param);</span><br><span class="line"></span><br><span class="line">            MultiValueMap&lt;<span class="keyword">String</span>, <span class="keyword">String</span>&gt; headers = <span class="keyword">new</span> LinkedMultiValueMap&lt;&gt;();</span><br><span class="line">            org.springframework.http.HttpEntity requestEntity = <span class="keyword">new</span> org.springframework.http.HttpEntity(param, headers);</span><br><span class="line">            ResponseEntity&lt;<span class="built_in">byte</span>[]&gt; entity = rest.exchange(url, HttpMethod.POST, requestEntity, <span class="built_in">byte</span>[].class);</span><br><span class="line">            logger.info(<span class="string">"调用小程序生成微信小程序码URL接口返回结果："</span> + entity.getBody());</span><br><span class="line"></span><br><span class="line">            <span class="built_in">byte</span>[] result = entity.getBody();</span><br><span class="line">            logger.info(Base64.encodeBase64String(result));</span><br><span class="line">            inputStream = <span class="keyword">new</span> ByteArrayInputStream(result);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//七牛上传</span></span><br><span class="line">            path = qiniuService.uploadByStream(inputStream);</span><br><span class="line">            logger.info(<span class="string">"----------------path：&#123;&#125;"</span>, path);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            logger.error(<span class="string">"调用小程序生成微信小程序码URL接口异常"</span>, e);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (inputStream != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    inputStream.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> path;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p>以上最终便会返回小程序码的url，算挺简单的吧！</p>
 <h3 id="绘制小程序码分享图"><a href="#绘制小程序码分享图" class="headerlink" title="绘制小程序码分享图"></a>绘制小程序码分享图</h3><p>效果如下：</p>
@@ -256,11 +256,11 @@
 
 
         
-        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2018/01/13/小程序码生成及分享图绘制/" target="_blank" rel="external">http://joryun.com/2018/01/13/小程序码生成及分享图绘制/</a>
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2018/01/13/小程序码生成及分享图绘制/" target="_blank" rel="external">http://notes.joryun.com/2018/01/13/小程序码生成及分享图绘制/</a>
         
     </div>
     <footer>
-        <a href="http://joryun.com">
+        <a href="http://notes.joryun.com">
             <img src="/img/yuan.jpg" alt="刘家源">
             刘家源
         </a>
@@ -268,10 +268,6 @@
 </blockquote>
 
         
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
 
 
         <div class="post-footer">
@@ -286,7 +282,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2018/01/13/小程序码生成及分享图绘制/&title=《小程序码生成及分享图绘制》 — Joryun's Notes&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://notes.joryun.com/2018/01/13/小程序码生成及分享图绘制/&title=《小程序码生成及分享图绘制》 — Joryun's Notes&pic=http://notes.joryun.com/img/yuan.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -296,22 +292,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2018/01/13/小程序码生成及分享图绘制/&title=《小程序码生成及分享图绘制》 — Joryun's Notes&source=TO BE IS TO DO" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://notes.joryun.com/2018/01/13/小程序码生成及分享图绘制/&title=《小程序码生成及分享图绘制》 — Joryun's Notes&source=TO BE IS TO DO" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2018/01/13/小程序码生成及分享图绘制/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://notes.joryun.com/2018/01/13/小程序码生成及分享图绘制/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《小程序码生成及分享图绘制》 — Joryun's Notes&url=http://joryun.com/2018/01/13/小程序码生成及分享图绘制/&via=http://joryun.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《小程序码生成及分享图绘制》 — Joryun's Notes&url=http://notes.joryun.com/2018/01/13/小程序码生成及分享图绘制/&via=http://notes.joryun.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2018/01/13/小程序码生成及分享图绘制/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://notes.joryun.com/2018/01/13/小程序码生成及分享图绘制/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -370,22 +366,6 @@
 
 </article>
 
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        undefined
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/" alt="打赏二维码">
-        </div>
-        
-    </div>
-</div>
-
 
 
 </div>
@@ -429,7 +409,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2018/01/13/小程序码生成及分享图绘制/&title=《小程序码生成及分享图绘制》 — Joryun's Notes&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://notes.joryun.com/2018/01/13/小程序码生成及分享图绘制/&title=《小程序码生成及分享图绘制》 — Joryun's Notes&pic=http://notes.joryun.com/img/yuan.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -439,22 +419,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2018/01/13/小程序码生成及分享图绘制/&title=《小程序码生成及分享图绘制》 — Joryun's Notes&source=TO BE IS TO DO" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://notes.joryun.com/2018/01/13/小程序码生成及分享图绘制/&title=《小程序码生成及分享图绘制》 — Joryun's Notes&source=TO BE IS TO DO" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2018/01/13/小程序码生成及分享图绘制/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://notes.joryun.com/2018/01/13/小程序码生成及分享图绘制/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《小程序码生成及分享图绘制》 — Joryun's Notes&url=http://joryun.com/2018/01/13/小程序码生成及分享图绘制/&via=http://joryun.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《小程序码生成及分享图绘制》 — Joryun's Notes&url=http://notes.joryun.com/2018/01/13/小程序码生成及分享图绘制/&via=http://notes.joryun.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2018/01/13/小程序码生成及分享图绘制/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://notes.joryun.com/2018/01/13/小程序码生成及分享图绘制/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -465,7 +445,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACrklEQVR42u3a0U7sMAwEUP7/p7nSfYWlM3aCFun0CS1LmxOkxhr74yO+Pv9frz5Jfvv1O6+e8vV69ZRjFx4eHt5o6cmt209e3f/nOyRbnKwZDw8P7zYvuV3++n545BqfrBkPDw/vHXjtck8Vyvlf4eHh4f0tXgLYH0J4eHh478PbvL7zYCIPbWdlPR4eHt7v8NoG2Dv8fLG/h4eHh7foqu/j2s14QX4MvFwJHh4e3gVeGzrMhgna13qylUW8i4eHh3eUlxeys/I3jyfygyfZejw8PLzbvLYpFbWdykJ5VkY/WPDw8PAu8NoSNlli2wDbb+vDevDw8PCO8vLFtUMAs2Gs/KCKPsHDw8O7wDvcavrxkUmM245PRWEHHh4e3lHe5tWcBBDJIXF2Dd+U1Hh4eHgXePlo1B6QRxKzjStSZDw8PLwRLymjk+L41EBV/uovVo6Hh4d3jTcLXjcjXJuwuNhcPDw8vKO8dul5fJDj8xq4bonh4eHhXeANp7TKb7YtrnaUoVgDHh4e3pq3L2o3A1tti6sOR/Dw8PAu8NpgdBaw7ptY7ZgCHh4e3j1e3vqaBQp5GT07MB6+iYeHh/crvLZllcev+W9n7G/ujIeHh3eNtx+NOtv0Olam4+Hh4V3mtS2u/au/jWXzowsPDw/vHq99Qc9aVnnLfzP+NRy6wsPDwyt5sxGoWYGbl8v5pjysFg8PD+8Cr73ySDe/Q7spV2B4eHh4Me+zvDbh76aAHh45eHh4eBd47Qt9Fvi24wV5zDFrtuHh4eHteflh0B4hm1i2/ebL/xgeHh7eNV5yGAy7autjpo058PDw8N6Tl48LtIHF7P7RZBkeHh7er/PaAYINqYU9tMHw8PDwLvDyMOLU8EHLaJtkeHh4ePd4s/igbVbt22btNuHh4eFd4P0DpUDaT4wHFHUAAAAASUVORK5CYII=" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACs0lEQVR42u3aQXLjMAwEQP//09mqve7angFIx4fWyaWIEpsHAgH4eMTXz9/r39/Pnsn/+nrU7Mn6wsPDwxtN/dn1mvfsyZyajH39lWdzxsPDw7vNa4NBAksWKw8Dw+CEh4eH96u819PNQ0K7oPkC4eHh4X0bL2cn4PydH417eHh4eDEv3/r3S5AkzcnYw7UWPDw8vG6XHjbAfuv3h/p7eHh4eGVXPdl296ubN8/qeeLh4eFd4OXN/lM7cJ4ot423aHJ4eHh4a17b+N9Mq22VtS2x/4zCw8PDu8BrS6JJUyoZlQSVttm2aoDh4eHhLXhtorzZxNskO0/N8fDw8O7xZi9qy7htmz/5VrSIeHh4eNd4s+24PTjVNsxm+Df9PTw8PLxDvPZjmxbXprBbF3/x8PDwPsLLp9h+LC/O5qHicH8PDw8Pb8GbJbv5e9pDAMOiCR4eHt4FXtvu2jS9Nin4gcXCw8PDO8rLG05JgjtrlSWktiGHh4eH90nefhOflRI2YQYPDw/vM7y6pbTYsjcp8iO+np6MwMPDwzvESxLiWeo8CxhJMbdN1vHw8PDO8vKpzDD58aw2HU9ScDw8PLwbvCQk7Iu8efm1ZUdlDjw8PLzLvLbwmoSBvGiblzny4ggeHh7eDV6bRrfl1H1QyUPXmzIuHh4e3jVeXjDd38kPMbSNNDw8PLx7vM3gdkLt0YH8AEER8fDw8PCO8vJC6mxUkii3sDej8PDw8I7yfsorb1m1m3h7JypY4OHh4V3gDSNJuenvkZtAhYeHh3eD1zb+2015c392dGB1rgEPDw8v5iUtsVmEydPx/WEFPDw8vG/mnd2+82NY+eEGPDw8vG/gtWl3XhqevS0KVHh4eHjXeLPtvl2UNrFuDyKsai14eHh4Ma/9V39ffk3S680xAjw8PLxrvD9zGJKXeAgmvwAAAABJRU5ErkJggg==" alt="微信分享二维码">
 </div>
 
 
@@ -473,7 +453,7 @@
 
     <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 <script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 
 
 </script>

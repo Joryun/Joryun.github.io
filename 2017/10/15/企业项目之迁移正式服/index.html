@@ -24,7 +24,7 @@
 <meta name="keywords" content="java,shell,服务器,centos">
 <meta property="og:type" content="article">
 <meta property="og:title" content="企业项目之迁移正式服">
-<meta property="og:url" content="http://joryun.com/2017/10/15/企业项目之迁移正式服/index.html">
+<meta property="og:url" content="http://notes.joryun.com/2017/10/15/企业项目之迁移正式服/index.html">
 <meta property="og:site_name" content="Joryun&#39;s Notes">
 <meta property="og:description" content="应用场景企业项目制作除了多分支开发外，通常也会使用CI来简化部署流程，提高部署效率，当然，流程也不能少了测试服。毕竟，bug乃家常便饭，联调必不可免，因此，开发至测试服并迁移到正式服的流程也必不可少。 测试服环境应用开发语言：Java服务器：ECS CentOS7CI：Jenkins容器引擎：Docker执行：Shell运行程序：Jar 正式服环境服务器：ECS CentOS7（正式服可考虑四">
 <meta property="og:locale" content="zh-Hans">
@@ -96,8 +96,8 @@
         
             <li class="waves-block waves-effect">
               <a href="https://www.jianshu.com/u/85656cc35708" target="_blank" >
-                <i class="icon icon-lg icon-jianshu"></i>
-                Jianshu
+                <i class="icon icon-lg icon-link"></i>
+                Link
               </a>
             </li>
         
@@ -159,7 +159,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#应用场景"><span class="post-toc-number">1.</span> <span class="post-toc-text">应用场景</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#测试服环境"><span class="post-toc-number">2.</span> <span class="post-toc-text">测试服环境</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#正式服环境"><span class="post-toc-number">3.</span> <span class="post-toc-text">正式服环境</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#迁移正式服"><span class="post-toc-number">4.</span> <span class="post-toc-text">迁移正式服</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">5.</span> <span class="post-toc-text">总结</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#应用场景"><span class="post-toc-text">应用场景</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#测试服环境"><span class="post-toc-text">测试服环境</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#正式服环境"><span class="post-toc-text">正式服环境</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#迁移正式服"><span class="post-toc-text">迁移正式服</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
         </nav>
     </aside>
     
@@ -223,11 +223,11 @@
 
 
         
-        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/10/15/企业项目之迁移正式服/" target="_blank" rel="external">http://joryun.com/2017/10/15/企业项目之迁移正式服/</a>
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/10/15/企业项目之迁移正式服/" target="_blank" rel="external">http://notes.joryun.com/2017/10/15/企业项目之迁移正式服/</a>
         
     </div>
     <footer>
-        <a href="http://joryun.com">
+        <a href="http://notes.joryun.com">
             <img src="/img/yuan.jpg" alt="刘家源">
             刘家源
         </a>
@@ -235,10 +235,6 @@
 </blockquote>
 
         
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
 
 
         <div class="post-footer">
@@ -253,7 +249,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2017/10/15/企业项目之迁移正式服/&title=《企业项目之迁移正式服》 — Joryun's Notes&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://notes.joryun.com/2017/10/15/企业项目之迁移正式服/&title=《企业项目之迁移正式服》 — Joryun's Notes&pic=http://notes.joryun.com/img/yuan.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -263,22 +259,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2017/10/15/企业项目之迁移正式服/&title=《企业项目之迁移正式服》 — Joryun's Notes&source=TO BE IS TO DO" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://notes.joryun.com/2017/10/15/企业项目之迁移正式服/&title=《企业项目之迁移正式服》 — Joryun's Notes&source=TO BE IS TO DO" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2017/10/15/企业项目之迁移正式服/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://notes.joryun.com/2017/10/15/企业项目之迁移正式服/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《企业项目之迁移正式服》 — Joryun's Notes&url=http://joryun.com/2017/10/15/企业项目之迁移正式服/&via=http://joryun.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《企业项目之迁移正式服》 — Joryun's Notes&url=http://notes.joryun.com/2017/10/15/企业项目之迁移正式服/&via=http://notes.joryun.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2017/10/15/企业项目之迁移正式服/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://notes.joryun.com/2017/10/15/企业项目之迁移正式服/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -337,22 +333,6 @@
 
 </article>
 
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        undefined
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/" alt="打赏二维码">
-        </div>
-        
-    </div>
-</div>
-
 
 
 </div>
@@ -396,7 +376,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2017/10/15/企业项目之迁移正式服/&title=《企业项目之迁移正式服》 — Joryun's Notes&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://notes.joryun.com/2017/10/15/企业项目之迁移正式服/&title=《企业项目之迁移正式服》 — Joryun's Notes&pic=http://notes.joryun.com/img/yuan.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -406,22 +386,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2017/10/15/企业项目之迁移正式服/&title=《企业项目之迁移正式服》 — Joryun's Notes&source=TO BE IS TO DO" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://notes.joryun.com/2017/10/15/企业项目之迁移正式服/&title=《企业项目之迁移正式服》 — Joryun's Notes&source=TO BE IS TO DO" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2017/10/15/企业项目之迁移正式服/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://notes.joryun.com/2017/10/15/企业项目之迁移正式服/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《企业项目之迁移正式服》 — Joryun's Notes&url=http://joryun.com/2017/10/15/企业项目之迁移正式服/&via=http://joryun.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《企业项目之迁移正式服》 — Joryun's Notes&url=http://notes.joryun.com/2017/10/15/企业项目之迁移正式服/&via=http://notes.joryun.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2017/10/15/企业项目之迁移正式服/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://notes.joryun.com/2017/10/15/企业项目之迁移正式服/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -432,7 +412,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJ0lEQVR42u3aQU7EMAwFUO5/6WGLhKbzv1OQmrysUAVtXhbGjv31Fa/Xj9X+5vWT3+9MvjJcGBgYj2W8Lle+uWQr7zb9+8353jAwMM5hXH+yDZfXz9vDio4JAwMDY/TzLHRiYGBg3Mtoy9f2OQYGBkabtF2nhtfXZMm12kqYxsDA2JuR37r//89/0t/AwMB4FONVrv9pWNa7wsDA2JqRB7j2gixJ4Nr254cyGAMDY1PGrDTNr+fyduZspKP4MAYGxsMZ+UZXwvH62Nnbw8XAwDiA0ZaObap3/f7ZgRapIQYGxkaMNrDmqd7seq5oUWBgYBzDWB+tmCV27YjYh7k2DAyM7RgJaVasrlztrbQ/MTAw9mMkZWpefM54K4eIgYFxAmNpRiMY7Wq3OytlMTAwTmO0yVmePq4XtBgYGCczbgt5QTOgTS7z/WBgYOzKmA1stQE0STTzQymu2zAwMLZgtPE4D44rF/35OzEwMM5htI3G/MPt3640UDEwMPZm5MpZOTpL++oQj4GBcRijHb9IAmibRNb/BjAwMA5gtEMSyZO7mhAJFQMDY1fGq1x5YJ0NW7TjGlF/AwMD4+GMfLWku9qWN8yPYGBgbMHIg2ybiSXjYu2RvT0+DAyMAxgrxW1+oTbsrCbtBAwMDIwy+M7K3ZXmAQYGBkZbuLbBNHnbBxIGBsYBjFnonKWJdZc1CO4YGBh7M1ZKx+tiddbmTArmYZcDAwPjeYxvIC76CBD1w4MAAAAASUVORK5CYII=" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACpElEQVR42u3awUpDMRAF0P7/T1dwJYj23plEuzhvVaTm5aSQDDfzeMTP8/P5+vn7M/v+s3weNx48PDy80dSTSSQj/PSX5JvJW/I54+Hh4d3mtcMljJ/GzzHtcuPh4eG9Gy+fbltq/z5yMgc8PDy89+TNprsPLPDw8PDek5eHrbNtvT14NuEvHh4e3m3e7ALsfz9fv9/Dw8PDG92qJxvuqSg2OVTq2eLh4eFd4LWl8GyK+7/PImA8PDy8G7z95GZNA/kSr2IRPDw8vMu8fNCWnR8zbWvCizHx8PDwLvDyK//Zhp7HwXmI3EYeeHh4eGd5s+I4PwBmJXsblxQ9EXh4eHgXeHnpnCzQsbMrHgEPDw/vNm9fQJ8qss++EQ8PD+8e79TBkBwYeRNVG+BeL6nx8PDwguNhM902zpgdD3mQgYeHh3eDl1yAJeVse7S0LVl5GxYeHh7ePV57zZ8PPaPmzVV1GIGHh4d3iNe+YPP6/H8PF/d4eHh4R3ntdPMAN//cRgzJ0fKY/Rp4eHh4Ae9UUTuLcfMiPj8wVuceHh4eXjB+Tkqm3l787+OJ+kjAw8PDO8qbbb6zBdo0WhXvwsPDw7vG28S1+QK1C3HgwgwPDw/vGm8TRiQtBW0bQRvd1k0DeHh4eGve5vJp36SVxxP1T4KHh4d3gdcGEJtmqbYx6/flLhYIDw8P7ygvKYXbACLf3PPoYdiygIeHh3eZlwcH7aLk230bcLx4Ox4eHt4FXv7kF/x5TDCLIdqyHg8PD+8GbzOtdv3yRoHNwYCHh4f3N7z25v3Upr9ZyqikxsPDw/tXXrIR52FEHmHM2hTw8PDw3oeXl9GzqLddxGMlNR4eHt6FMGJTWBdF8DqkwMPDw7vNay/A2mNg1nBQt1htHjw8PLyU9wGWzTcrDClMpAAAAABJRU5ErkJggg==" alt="微信分享二维码">
 </div>
 
 
@@ -440,7 +420,7 @@
 
     <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 <script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 
 
 </script>

@@ -24,7 +24,7 @@
 <meta name="keywords" content="七牛,模块化,spring boot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="七牛云模块化">
-<meta property="og:url" content="http://joryun.com/2018/01/03/七牛云模块化/index.html">
+<meta property="og:url" content="http://notes.joryun.com/2018/01/03/七牛云模块化/index.html">
 <meta property="og:site_name" content="Joryun&#39;s Notes">
 <meta property="og:description" content="前言闲来无事，搭建了个人私仓来放模块化项目，以便项目引入直接使用。关键是，模块化可以根据项目所需进行版本迭代，每一次的使用都是完善的根基，效果贼棒。 介绍七牛云是国内领先的企业级公有云服务商，致力于打造以数据为核心的场景化PaaS服务。围绕富媒体场景，七牛先后推出了对象存储，融合CDN加速，数据通用处理，内容反垃圾服务，以及直播云服务等。 而此次推出的模块化，目的是为了满足项目存储图片的需求，">
 <meta property="og:locale" content="zh-Hans">
@@ -99,8 +99,8 @@
         
             <li class="waves-block waves-effect">
               <a href="https://www.jianshu.com/u/85656cc35708" target="_blank" >
-                <i class="icon icon-lg icon-jianshu"></i>
-                Jianshu
+                <i class="icon icon-lg icon-link"></i>
+                Link
               </a>
             </li>
         
@@ -162,7 +162,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#介绍"><span class="post-toc-number">2.</span> <span class="post-toc-text">介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#模块化说明文档"><span class="post-toc-number">3.</span> <span class="post-toc-text">模块化说明文档</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、上传交互方式-两种"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">一、上传交互方式(两种)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、配置需知"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">二、配置需知</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、返回token情况分析"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">三、返回token情况分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-提供空间名bucket，其余默认"><span class="post-toc-number">3.3.0.1.</span> <span class="post-toc-text">1.提供空间名bucket，其余默认</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-提供空间名bucket，上传指定key，其余默认"><span class="post-toc-number">3.3.0.2.</span> <span class="post-toc-text">2. 提供空间名bucket，上传指定key，其余默认</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-提供空间名bucket，上传指定key，有效时长expires，上传策略policy（详见官方SDK上传策略）"><span class="post-toc-number">3.3.0.3.</span> <span class="post-toc-text">3. 提供空间名bucket，上传指定key，有效时长expires，上传策略policy（详见官方SDK上传策略）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-提供空间名bucket，上传指定key，有效时长expires，上传策略policy，是否去除非限定的策略字段strict"><span class="post-toc-number">3.3.0.4.</span> <span class="post-toc-text">4. 提供空间名bucket，上传指定key，有效时长expires，上传策略policy，是否去除非限定的策略字段strict</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#模块化使用文档"><span class="post-toc-number">4.</span> <span class="post-toc-text">模块化使用文档</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Maven依赖七牛云"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">Maven依赖七牛云</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置文件"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">配置文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#API（接口调用）"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">API（接口调用）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#前端上传（推荐方式）"><span class="post-toc-number">4.3.1.</span> <span class="post-toc-text">前端上传（推荐方式）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#后端上传（推荐方式）"><span class="post-toc-number">4.3.2.</span> <span class="post-toc-text">后端上传（推荐方式）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#拓展小知识"><span class="post-toc-number">4.3.3.</span> <span class="post-toc-text">拓展小知识</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">5.</span> <span class="post-toc-text">总结</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#介绍"><span class="post-toc-text">介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#模块化说明文档"><span class="post-toc-text">模块化说明文档</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、上传交互方式-两种"><span class="post-toc-text">一、上传交互方式(两种)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、配置需知"><span class="post-toc-text">二、配置需知</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、返回token情况分析"><span class="post-toc-text">三、返回token情况分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-提供空间名bucket，其余默认"><span class="post-toc-text">1.提供空间名bucket，其余默认</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-提供空间名bucket，上传指定key，其余默认"><span class="post-toc-text">2. 提供空间名bucket，上传指定key，其余默认</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-提供空间名bucket，上传指定key，有效时长expires，上传策略policy（详见官方SDK上传策略）"><span class="post-toc-text">3. 提供空间名bucket，上传指定key，有效时长expires，上传策略policy（详见官方SDK上传策略）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-提供空间名bucket，上传指定key，有效时长expires，上传策略policy，是否去除非限定的策略字段strict"><span class="post-toc-text">4. 提供空间名bucket，上传指定key，有效时长expires，上传策略policy，是否去除非限定的策略字段strict</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#模块化使用文档"><span class="post-toc-text">模块化使用文档</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Maven依赖七牛云"><span class="post-toc-text">Maven依赖七牛云</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置文件"><span class="post-toc-text">配置文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#API（接口调用）"><span class="post-toc-text">API（接口调用）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#前端上传（推荐方式）"><span class="post-toc-text">前端上传（推荐方式）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#后端上传（推荐方式）"><span class="post-toc-text">后端上传（推荐方式）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#拓展小知识"><span class="post-toc-text">拓展小知识</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
         </nav>
     </aside>
     
@@ -288,11 +288,11 @@
 
 
         
-        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2018/01/03/七牛云模块化/" target="_blank" rel="external">http://joryun.com/2018/01/03/七牛云模块化/</a>
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2018/01/03/七牛云模块化/" target="_blank" rel="external">http://notes.joryun.com/2018/01/03/七牛云模块化/</a>
         
     </div>
     <footer>
-        <a href="http://joryun.com">
+        <a href="http://notes.joryun.com">
             <img src="/img/yuan.jpg" alt="刘家源">
             刘家源
         </a>
@@ -300,10 +300,6 @@
 </blockquote>
 
         
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
 
 
         <div class="post-footer">
@@ -318,7 +314,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2018/01/03/七牛云模块化/&title=《七牛云模块化》 — Joryun's Notes&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://notes.joryun.com/2018/01/03/七牛云模块化/&title=《七牛云模块化》 — Joryun's Notes&pic=http://notes.joryun.com/img/yuan.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -328,22 +324,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2018/01/03/七牛云模块化/&title=《七牛云模块化》 — Joryun's Notes&source=TO BE IS TO DO" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://notes.joryun.com/2018/01/03/七牛云模块化/&title=《七牛云模块化》 — Joryun's Notes&source=TO BE IS TO DO" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2018/01/03/七牛云模块化/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://notes.joryun.com/2018/01/03/七牛云模块化/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《七牛云模块化》 — Joryun's Notes&url=http://joryun.com/2018/01/03/七牛云模块化/&via=http://joryun.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《七牛云模块化》 — Joryun's Notes&url=http://notes.joryun.com/2018/01/03/七牛云模块化/&via=http://notes.joryun.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2018/01/03/七牛云模块化/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://notes.joryun.com/2018/01/03/七牛云模块化/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -402,22 +398,6 @@
 
 </article>
 
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        undefined
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/" alt="打赏二维码">
-        </div>
-        
-    </div>
-</div>
-
 
 
 </div>
@@ -461,7 +441,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2018/01/03/七牛云模块化/&title=《七牛云模块化》 — Joryun's Notes&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://notes.joryun.com/2018/01/03/七牛云模块化/&title=《七牛云模块化》 — Joryun's Notes&pic=http://notes.joryun.com/img/yuan.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -471,22 +451,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2018/01/03/七牛云模块化/&title=《七牛云模块化》 — Joryun's Notes&source=TO BE IS TO DO" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://notes.joryun.com/2018/01/03/七牛云模块化/&title=《七牛云模块化》 — Joryun's Notes&source=TO BE IS TO DO" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2018/01/03/七牛云模块化/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://notes.joryun.com/2018/01/03/七牛云模块化/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《七牛云模块化》 — Joryun's Notes&url=http://joryun.com/2018/01/03/七牛云模块化/&via=http://joryun.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《七牛云模块化》 — Joryun's Notes&url=http://notes.joryun.com/2018/01/03/七牛云模块化/&via=http://notes.joryun.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2018/01/03/七牛云模块化/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://notes.joryun.com/2018/01/03/七牛云模块化/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -497,7 +477,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACNUlEQVR42u3aS46DMBBFUfa/aXrKIDH3VUFHtq9HUUSDD5Gq6+PjwOu8rOs33z5fvyHXf7vy4SVDhoxpGedwjTc3vuf4RXDkeG8yZMjYh8FvnYbm8SvjYf1mzzJkyJAxDL4kcSQpI399MmTIkMHLTpJQkjT0ZwFXhgwZUzH4hvima42212txGTJkTMhI22f/+fmV+YYMGTKmYpzh4gOAp8pdtCsZMmQszeABjg81+UGKTsCVIUPGPoynykjyV2SQmb4sGTJk7MCoBb40iaxtiySRxa6eDBkypmKQJjsPtf1ylA8bgpNoMmTIWIiRDhefSvXS8eSHfcqQIWMbRnqEtBO4+0fQ0K1lyJCxBCPdOmmckSDeb7fFFbkMGTImZ9QenwbNtFTmL0uGDBn7MGolK8nQ+DU8Jb35jyFDhozlGLUxAEn4eGnKi2oZMmTsyegfhki32L8barTJkCFjOQa5aXAAArft0qfLkCFjT8azYZc0y2pHMRBShgwZizLSY1i8BOVsPkBFv4MMGTI2Y/Sv4UVp+pQg4MqQIWMhxolXP+CmY9EgNZQhQ8ZmjFqPK72yBpAhQ8YOjDNc5KY8TNfacx8CtAwZMpZmpJPB2mgzDbL86MaRLhkyZEzLqDXrO4PJWpl6c08ZMmRswOg39NPkr498ZS4hQ4aM5RhkE7yUbeWwMmTIkIEfnwZcPk54JTWUIUPGVAzeyiehth+U+ShChgwZOzA6xynS8jVtqHUOdsiQIWMJxh9C5zf1JU4lSAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMElEQVR42u3aQXKEIBAF0Nz/0pNtqjKa/4EkJTxW1jgqz0VLd/PxEY/Xl9H+/v3s93/e323ZwMDAeCzjdTuuHnB1nL+I/Ph+bhgYGOcwklCYnL2f7n04Tq69/B0DAwOjvHX+n/wFYWBgYIwxkgVlsgz954CLgYHxEEY+oXwSSahNGItzcQwMjAcy8qr73x//Sn8DAwPjUYxXOZJCf75wHAuyb+6GgYGxNeNvGpBt82BsPhgYGLsy8gvGmprJhrD5+2BgYOzNSIpf84u8vMTWBuU33w0MDIwDGG05ftXZ9pOAgYFxJqNNO9vSWHtVuwLEwMDYldFekCzpZrqN+VK1yMUxMDA2ZeS/51O5L6vlS8M3MAwMjAMYbfq6qtDWTv1yqYqBgXEMI59u+8i2ANcGdwwMjHMYedtyppFQl/uTRSQGBsYBjDb45tsj5tPdqFGBgYGxNWNmWmOLy3yjattywMDA2Jsx85gFxbLp5BYDA+MExlhIXfXmViW6GBgYpzGSonwbv9sWQvJq3iSxGBgYBzDystqqbRZjWzF+CLgYGBgHMPJg2gbiscJclEhjYGBsyniVY6w8l/PaQF/k2RgYGI9ltCno2PavmQJcsdkCAwNja0YyuaQB0BbpxjaQXZbwMDAwDmDkgW/tFo35tBkDAwOjTTLzsFsE07EeKQYGxsGM/OzMtrAkGV7w3cDAwHgUIwmIY42EmcS1aJdiYGBszZhPTfOp3IfambYBBgbGpoxP6yDRP/6MpC8AAAAASUVORK5CYII=" alt="微信分享二维码">
 </div>
 
 
@@ -505,7 +485,7 @@
 
     <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 <script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 
 
 </script>

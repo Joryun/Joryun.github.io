@@ -24,7 +24,7 @@
 <meta name="keywords" content="java,spring,jms,avtivemq">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring全家桶：Spring JMS + ActiveMQ起步">
-<meta property="og:url" content="http://joryun.com/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/index.html">
+<meta property="og:url" content="http://notes.joryun.com/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/index.html">
 <meta property="og:site_name" content="Joryun&#39;s Notes">
 <meta property="og:description" content="前言说明开发环境：IDEA，Active MQ 项目构建：Maven 软件环境：Spring，Spring JMS，Active MQ 项目描述：Spring JMS与Active MQ进行通讯 目的入门Spring JMS、Active MQ，使用Spring JMS向Active MQ的Message Queue发消息和读消息。">
 <meta property="og:locale" content="zh-Hans">
@@ -100,8 +100,8 @@
         
             <li class="waves-block waves-effect">
               <a href="https://www.jianshu.com/u/85656cc35708" target="_blank" >
-                <i class="icon icon-lg icon-jianshu"></i>
-                Jianshu
+                <i class="icon icon-lg icon-link"></i>
+                Link
               </a>
             </li>
         
@@ -163,7 +163,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#说明"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">说明</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#目的"><span class="post-toc-number">1.0.2.</span> <span class="post-toc-text">目的</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#编码"><span class="post-toc-number">2.</span> <span class="post-toc-text">编码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-开启Active-MQ服务"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">1. 开启Active MQ服务</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-使用maven导入依赖库"><span class="post-toc-number">2.0.2.</span> <span class="post-toc-text">2. 使用maven导入依赖库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-创建application-properties，封装Message-Queue的配置"><span class="post-toc-number">2.0.3.</span> <span class="post-toc-text">3. 创建application.properties，封装Message Queue的配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-JMS全局配置，配置与ActiveMQ的连接"><span class="post-toc-number">2.0.4.</span> <span class="post-toc-text">4. JMS全局配置，配置与ActiveMQ的连接</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-创建MessageSender，提供发送消息的服务"><span class="post-toc-number">2.0.5.</span> <span class="post-toc-text">5. 创建MessageSender，提供发送消息的服务</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-配置一个Listener来监听和处理当前的Message-Queue"><span class="post-toc-number">2.0.6.</span> <span class="post-toc-text">6. 配置一个Listener来监听和处理当前的Message Queue</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-创建MessageListener的具体实现"><span class="post-toc-number">2.0.7.</span> <span class="post-toc-text">7. 创建MessageListener的具体实现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8-创建两个测试类，一个用于发送消息到ActiveMQ的MessageQueue中，一个用于从MessageQueue中读取消息"><span class="post-toc-number">2.0.8.</span> <span class="post-toc-text">8. 创建两个测试类，一个用于发送消息到ActiveMQ的MessageQueue中，一个用于从MessageQueue中读取消息</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-测试：运行SenderApp-java，在控制台输入消息，接着运行ReceiverApp-java，结果如下"><span class="post-toc-number">2.0.9.</span> <span class="post-toc-text">9. 测试：运行SenderApp.java，在控制台输入消息，接着运行ReceiverApp.java，结果如下</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">3.</span> <span class="post-toc-text">总结</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#说明"><span class="post-toc-text">说明</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#目的"><span class="post-toc-text">目的</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#编码"><span class="post-toc-text">编码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-开启Active-MQ服务"><span class="post-toc-text">1. 开启Active MQ服务</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-使用maven导入依赖库"><span class="post-toc-text">2. 使用maven导入依赖库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-创建application-properties，封装Message-Queue的配置"><span class="post-toc-text">3. 创建application.properties，封装Message Queue的配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-JMS全局配置，配置与ActiveMQ的连接"><span class="post-toc-text">4. JMS全局配置，配置与ActiveMQ的连接</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-创建MessageSender，提供发送消息的服务"><span class="post-toc-text">5. 创建MessageSender，提供发送消息的服务</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-配置一个Listener来监听和处理当前的Message-Queue"><span class="post-toc-text">6. 配置一个Listener来监听和处理当前的Message Queue</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-创建MessageListener的具体实现"><span class="post-toc-text">7. 创建MessageListener的具体实现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8-创建两个测试类，一个用于发送消息到ActiveMQ的MessageQueue中，一个用于从MessageQueue中读取消息"><span class="post-toc-text">8. 创建两个测试类，一个用于发送消息到ActiveMQ的MessageQueue中，一个用于从MessageQueue中读取消息</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-测试：运行SenderApp-java，在控制台输入消息，接着运行ReceiverApp-java，结果如下"><span class="post-toc-text">9. 测试：运行SenderApp.java，在控制台输入消息，接着运行ReceiverApp.java，结果如下</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
         </nav>
     </aside>
     
@@ -260,11 +260,11 @@
 
 
         
-        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/" target="_blank" rel="external">http://joryun.com/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/</a>
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/" target="_blank" rel="external">http://notes.joryun.com/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/</a>
         
     </div>
     <footer>
-        <a href="http://joryun.com">
+        <a href="http://notes.joryun.com">
             <img src="/img/yuan.jpg" alt="刘家源">
             刘家源
         </a>
@@ -272,10 +272,6 @@
 </blockquote>
 
         
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
 
 
         <div class="post-footer">
@@ -290,7 +286,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/&title=《Spring全家桶：Spring JMS + ActiveMQ起步》 — Joryun's Notes&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://notes.joryun.com/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/&title=《Spring全家桶：Spring JMS + ActiveMQ起步》 — Joryun's Notes&pic=http://notes.joryun.com/img/yuan.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -300,7 +296,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/&title=《Spring全家桶：Spring JMS + ActiveMQ起步》 — Joryun's Notes&source=
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://notes.joryun.com/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/&title=《Spring全家桶：Spring JMS + ActiveMQ起步》 — Joryun's Notes&source=
 
 前言说明开发环境：IDEA，Active MQ
 项目构建：Maven
@@ -310,17 +306,17 @@
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://notes.joryun.com/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Spring全家桶：Spring JMS + ActiveMQ起步》 — Joryun's Notes&url=http://joryun.com/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/&via=http://joryun.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Spring全家桶：Spring JMS + ActiveMQ起步》 — Joryun's Notes&url=http://notes.joryun.com/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/&via=http://notes.joryun.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://notes.joryun.com/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -379,22 +375,6 @@
 
 </article>
 
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        undefined
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/" alt="打赏二维码">
-        </div>
-        
-    </div>
-</div>
-
 
 
 </div>
@@ -438,7 +418,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/&title=《Spring全家桶：Spring JMS + ActiveMQ起步》 — Joryun's Notes&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://notes.joryun.com/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/&title=《Spring全家桶：Spring JMS + ActiveMQ起步》 — Joryun's Notes&pic=http://notes.joryun.com/img/yuan.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -448,7 +428,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/&title=《Spring全家桶：Spring JMS + ActiveMQ起步》 — Joryun's Notes&source=
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://notes.joryun.com/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/&title=《Spring全家桶：Spring JMS + ActiveMQ起步》 — Joryun's Notes&source=
 
 前言说明开发环境：IDEA，Active MQ
 项目构建：Maven
@@ -458,17 +438,17 @@
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://notes.joryun.com/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Spring全家桶：Spring JMS + ActiveMQ起步》 — Joryun's Notes&url=http://joryun.com/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/&via=http://joryun.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Spring全家桶：Spring JMS + ActiveMQ起步》 — Joryun's Notes&url=http://notes.joryun.com/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/&via=http://notes.joryun.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://notes.joryun.com/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -479,7 +459,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACvUlEQVR42u3a0U7rQAwEUP7/p4t0n0AQOmNnuUU6eapI0+wJUrwa++0tPh7/jvY7V1c9Phxf/3L1O8kahgceHh7eaOlXR76gr2cTUrKG/O7fPAI8PDy8Y7yfX/Qbdn6Xdj1RAcPDw8P7r7wZqS0SyZYdDw8P72/xZsUj2Yi/RGHAw8PDi3l5uJAsKw8mknu14QUeHh7eaV7bAHuFzwf7e3h4eHiLrvqm+ZTEEHkoPFwtHh4e3gHevmW1HyloI+OkCjwpD3h4eHhrXjsalSw0X2Ie7Oahw+VZPDw8vFt57dJnYwFtHDzboOPh4eGd421aX5tHkGBmTbVPn/Hw8PAO8KJddhlA5FfNgt18zXh4eHgnePloVP4I9t+ZxbWXW2o8PDy8A7yEMWvhzxpaeZl5Uirw8PDwjvH2P9pGErPhqnpVeHh4eAd4ebjQxg37QCEftKr34Hh4eHhr3mZcoIgG1snqbUNXeHh4eAverADsAcnZduv/zVk8PDy8Y7xNsz+pOW382j7cy1/Aw8PDO8Bro4f8lT1rp91VMPDw8PDO8fLh0fyWeUCc5yVtxIyHh4d3mpfcsm10zcKLzVa+nl/Aw8PDu5WXj0DNhqU2v1mUIjw8PLwDvLtGoDav8vYRt406PDw8vNO8fcyab7XzRlc7rFD8D/Hw8PBKXnLLtjwUL+j47T0MiPHw8PAO84rGUtmmmhWVPBaJxq3w8PDwbuLNgoM8DkjiiXq/H4caeHh4eCd4j/LIC0bCS4YVbgsj8PDw8G7ibaKBfLM7W0pybd36wsPDw7uJNxu92res2pLTDmDh4eHhnebNGlqzLXgecySMYg4CDw8P79d594a8SQtt9nDx8PDwXo2Xv/pngwVtkPEEiYeHh3eMNwsjkuGD5Kr99y//goeHh3eA12ahyca6bX39/PhmAQceHh7eAd47S/wiFkSExBQAAAAASUVORK5CYII=" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuUlEQVR42u3aS44CMQwFQO5/aUZiO+rmPScBFtUrNJ/GlUVs2X484uf5eu4/J/919fdXv33+ex4nHjw8PLxR6FfP1dcnoSTB5bCreN58Cx4eHt4xXpsM2ss6TydJYkhixsPDw/sF3v0lnrztPgGsHxAeHh7eb/JWgsh5SUmNh4eH913e7HXJMd1jklZFkqg29Frw8PDwum7qhgHYJz9/Yb6Hh4eHF4+sZmkjWSkoyuJRtHh4eHgneLN2bdsUyAf/eRldxIOHh4e3lTdbokqu8mRItp5aiv40Hh4e3iZekgzaVydpYNYKGbab8fDw8A7w7oNoi9q8vM7Dnb0fDw8P7wSvbQS0l/hKgd6W3ZcNXDw8PLytvLaEzVcKkhI8//lSxsPDw8M7wGsbBHnTdjbiylNOdEB4eHh4B3gnZkZtelhvBBcx4+Hh4S3wWkA7dsqbwm3ZHbUt8PDw8I7x2sZBG3QOmC14bav98fDw8JabC7Ofr6wa5OOupTYuHh4e3ibeSlNgtkT1oePDw8PD28qbFcqzCz251vO/r5sReHh4eFt5sxWo2fh/fWBWLIfh4eHhHePNgs6v7/wIkoFc0erFw8PDO8bb29tIgpsh6wUFPDw8vAO82bC/TSR1KRyveSXvwcPDw9vL23vRJ0P9fDlgljbw8PDwTvPaBaZkSJYfymyBoG2O4OHh4e3ltesC+RVfDPiDEjlf23rTa8HDw8Nb5s3arHlwdV8kXiwY/hceHh7eMu9ZPrOTywdsSfleJDM8PDy8A7yVa3f2xW1ro33bMLXg4eHhlby2BdBe+rPiuz1EPDw8vM/zdo3/15cAZrnr8m14eHh4P8ybtW7bSr9+Dx4eHt5XebPlgLyNO1vG2pYY8PDw8EreepugHXe1g7E8JWzoteDh4eFtna3Pxlp5ELtawHh4eHgHeH+xD+Qp1hRmQAAAAABJRU5ErkJggg==" alt="微信分享二维码">
 </div>
 
 
@@ -487,7 +467,7 @@
 
     <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 <script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 
 
 </script>

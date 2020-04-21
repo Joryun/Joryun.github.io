@@ -5,9 +5,9 @@
   <subtitle>多读书多看报少吃零食多睡觉</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://joryun.com/"/>
+  <link href="http://notes.joryun.com/"/>
   <updated>2020-04-06T15:32:03.778Z</updated>
-  <id>http://joryun.com/</id>
+  <id>http://notes.joryun.com/</id>
   
   <author>
     <name>刘家源</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>RestTemplate源码剖析：Encode</title>
-    <link href="http://joryun.com/2019/04/15/RestTemplate%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%9AEncode/"/>
-    <id>http://joryun.com/2019/04/15/RestTemplate源码剖析：Encode/</id>
+    <link href="http://notes.joryun.com/2019/04/15/RestTemplate%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%9AEncode/"/>
+    <id>http://notes.joryun.com/2019/04/15/RestTemplate源码剖析：Encode/</id>
     <published>2019-04-15T10:23:09.000Z</published>
     <updated>2020-04-06T15:32:03.778Z</updated>
     
@@ -36,25 +36,25 @@
     
     </summary>
     
-      <category term="源码" scheme="http://joryun.com/categories/%E6%BA%90%E7%A0%81/"/>
+      <category term="源码" scheme="http://notes.joryun.com/categories/%E6%BA%90%E7%A0%81/"/>
     
     
-      <category term="Java" scheme="http://joryun.com/tags/Java/"/>
+      <category term="Java" scheme="http://notes.joryun.com/tags/Java/"/>
     
-      <category term="RestTemplate" scheme="http://joryun.com/tags/RestTemplate/"/>
+      <category term="RestTemplate" scheme="http://notes.joryun.com/tags/RestTemplate/"/>
     
-      <category term="Encode" scheme="http://joryun.com/tags/Encode/"/>
+      <category term="Encode" scheme="http://notes.joryun.com/tags/Encode/"/>
     
   </entry>
   
   <entry>
     <title>小程序码生成及分享图绘制</title>
-    <link href="http://joryun.com/2018/01/13/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%A0%81%E7%94%9F%E6%88%90%E5%8F%8A%E5%88%86%E4%BA%AB%E5%9B%BE%E7%BB%98%E5%88%B6/"/>
-    <id>http://joryun.com/2018/01/13/小程序码生成及分享图绘制/</id>
+    <link href="http://notes.joryun.com/2018/01/13/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%A0%81%E7%94%9F%E6%88%90%E5%8F%8A%E5%88%86%E4%BA%AB%E5%9B%BE%E7%BB%98%E5%88%B6/"/>
+    <id>http://notes.joryun.com/2018/01/13/小程序码生成及分享图绘制/</id>
     <published>2018-01-13T08:20:05.000Z</published>
     <updated>2020-04-06T15:14:59.122Z</updated>
     
-    <content type="html"><![CDATA[<meta name="referrer" content="no-referrer"><h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>项目需求为用户创建活动，且生成了小程序码，进而再生成小程序码分享图，即在原小程序码的基础上绘制一张完整的分享图，并展示给用户进行分享。个中过程均交由后台生成并绘制（原因：用户在小程序直接点击某选项，直接转至分享图页面，而图片存储七牛云之上，若由前端生成再交由后台处理并返回，便影响响应速度）</p><h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>开发环境：<strong>JDK1.8</strong><br>开发语言：<strong>Java</strong></p><h2 id="正题"><a href="#正题" class="headerlink" title="正题"></a>正题</h2><h3 id="生成小程序码"><a href="#生成小程序码" class="headerlink" title="生成小程序码"></a>生成小程序码</h3><p>调用微信SDK，最好的文档便是官网文档了，虽然坑是真的多…<br>进入正题！！！</p><p>参考文档：<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/api/qrcode.html" target="_blank" rel="noopener">https://mp.weixin.qq.com/debug/wxadoc/dev/api/qrcode.html</a></p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://upload-images.jianshu.io/upload_images/2929536-1a0846174ac1eca4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><p>根据业务需求选择调用的相应接口，博主所做的小程序业务需求是用于临时场景，且需要多次分享、频繁分享，因此选了接口B类型。</p><h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><ul><li>看文档</li></ul><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://upload-images.jianshu.io/upload_images/2929536-45292efa73668cc0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><p>坑点：<br>1、注意场景值scene的说明，这个也很重要<br>2、注意page参数的说明，“必须是已经发布的小程序页面”（之前做的小程序由于前期未通过审核没发布，很同意略过关键字眼。<strong>经验：未发布的小程序，无需传该参数，可正常获取小程序码，与scene不一样，scene会涉及后续的业务需求，里面的值会有具体的业务操作</strong>）</p><ul><li>编码</li></ul><p>说明：<br>1、获取小程序码需要获取access_token。<br>2、scene值需跟前端进行规约，具体的传值格式（以下代码scene值以加密形式传入，可自定义加密规则）<br>3、以下 <strong>七牛上传</strong> 功能使用的便是博主介绍到的七牛云模块化，想了解的见上篇 <a href="http://joryun.com/2018/01/03/qiniu-module/">《七牛云模块化文档》</a></p><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">String</span> getminiqrQr(<span class="keyword">String</span> sceneStr, <span class="keyword">String</span> accessToken) &#123;</span><br><span class="line">        RestTemplate rest = <span class="keyword">new</span> RestTemplate();</span><br><span class="line">        InputStream inputStream = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">String</span> path = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">String</span> url = <span class="string">"https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token="</span> + accessToken;</span><br><span class="line">            Map&lt;<span class="keyword">String</span>, <span class="keyword">Object</span>&gt; param = <span class="keyword">new</span> <span class="keyword">HashMap</span>&lt;&gt;();</span><br><span class="line">            param.put(<span class="string">"scene"</span>, <span class="string">"activity_"</span> + sceneStr);</span><br><span class="line"><span class="comment">//            param.put("page", "pages/Activity/Situation/Situation");</span></span><br><span class="line">            param.put(<span class="string">"width"</span>, <span class="number">200</span>);</span><br><span class="line">            logger.info(<span class="string">"调用生成微信URL接口传参："</span> + param);</span><br><span class="line"></span><br><span class="line">            MultiValueMap&lt;<span class="keyword">String</span>, <span class="keyword">String</span>&gt; headers = <span class="keyword">new</span> LinkedMultiValueMap&lt;&gt;();</span><br><span class="line">            org.springframework.http.HttpEntity requestEntity = <span class="keyword">new</span> org.springframework.http.HttpEntity(param, headers);</span><br><span class="line">            ResponseEntity&lt;<span class="built_in">byte</span>[]&gt; entity = rest.exchange(url, HttpMethod.POST, requestEntity, <span class="built_in">byte</span>[].class);</span><br><span class="line">            logger.info(<span class="string">"调用小程序生成微信小程序码URL接口返回结果："</span> + entity.getBody());</span><br><span class="line"></span><br><span class="line">            <span class="built_in">byte</span>[] result = entity.getBody();</span><br><span class="line">            logger.info(Base64.encodeBase64String(result));</span><br><span class="line">            inputStream = <span class="keyword">new</span> ByteArrayInputStream(result);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//七牛上传</span></span><br><span class="line">            path = qiniuService.uploadByStream(inputStream);</span><br><span class="line">            logger.info(<span class="string">"----------------path：&#123;&#125;"</span>, path);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            logger.error(<span class="string">"调用小程序生成微信小程序码URL接口异常"</span>, e);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (inputStream != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    inputStream.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> path;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><p>以上最终便会返回小程序码的url，算挺简单的吧！</p><h3 id="绘制小程序码分享图"><a href="#绘制小程序码分享图" class="headerlink" title="绘制小程序码分享图"></a>绘制小程序码分享图</h3><p>效果如下：</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://upload-images.jianshu.io/upload_images/2929536-17bf7d2c8e1a39b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://upload-images.jianshu.io/upload_images/2929536-b0b72b321df6c691.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><ul><li><p>说明<br>1、使用awt在画布上一层层画上去，文字、图片均可以<br>2、画上去的文字及图片有坐标的概念，需要底图和上层图片素材，以及坐标（用方形框住图片或文字，左上角即为原点，团队上的协作可交由设计人员给出即可）</p></li><li><p>编码</p></li></ul><p>以下代码已附上注释，够详细了！</p><figure class="highlight pony"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">public byte[] drawPicture(<span class="type">String</span> backImg, <span class="type">String</span> qrCodeImg, <span class="type">String</span> kaiImg, <span class="type">String</span> avatarImg,<span class="type">String</span> activityText, <span class="type">String</span> text1) throws <span class="type">IOException</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//底图</span></span><br><span class="line">        <span class="type">ClassPathResource</span> redResource = <span class="function"><span class="keyword">new</span> <span class="title">ClassPathResource</span>(backImg);</span></span><br><span class="line"><span class="function">        <span class="title">BufferedImage</span> <span class="title">red</span> = <span class="title">ImageIO</span>.<span class="title">read</span>(redResource.getInputStream());</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//头像</span></span></span><br><span class="line"><span class="function">        <span class="title">URL</span> <span class="title">avatarUrl</span> = <span class="title">new</span> <span class="title">URL</span>(avatarImg);</span></span><br><span class="line"><span class="function">        <span class="title">BufferedImage</span> <span class="title">avatar</span> = <span class="title">ImageIO</span>.<span class="title">read</span>(avatarUrl);</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//小程序码</span></span></span><br><span class="line"><span class="function">        <span class="title">URL</span> <span class="title">qrCodeUrl</span> = <span class="title">new</span> <span class="title">URL</span>(qrCodeImg);</span></span><br><span class="line"><span class="function">        <span class="title">BufferedImage</span> <span class="title">qrCode</span> = <span class="title">ImageIO</span>.<span class="title">read</span>(qrCodeUrl);</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//开</span></span></span><br><span class="line"><span class="function">        <span class="title">ClassPathResource</span> <span class="title">kaiResource</span> = <span class="title">new</span> <span class="title">ClassPathResource</span>(kaiImg);</span></span><br><span class="line"><span class="function">        <span class="title">BufferedImage</span> <span class="title">kai</span> = <span class="title">ImageIO</span>.<span class="title">read</span>(kaiResource.getInputStream());</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//白底</span></span></span><br><span class="line"><span class="function">        <span class="title">ClassPathResource</span> <span class="title">whiteResource</span> = <span class="title">new</span> <span class="title">ClassPathResource</span>("white.jpeg");</span></span><br><span class="line"><span class="function">        <span class="title">BufferedImage</span> <span class="title">white</span> = <span class="title">ImageIO</span>.<span class="title">read</span>(whiteResource.getInputStream());</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">// --- 画图 ---</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//底层空白 bufferedImage</span></span></span><br><span class="line"><span class="function">        <span class="title">BufferedImage</span> <span class="title">imgB</span> = <span class="title">new</span> <span class="title">BufferedImage</span>(red.getWidth(), <span class="title">red</span>.<span class="title">getHeight</span>(), <span class="title">BufferedImage</span>.<span class="title">TYPE_4BYTE_ABGR</span>);</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//画上头像</span></span></span><br><span class="line"><span class="function">        <span class="title">drawImgInImg</span>(imgB, avatar, <span class="number">277</span>, <span class="number">90</span>, <span class="number">145</span>, <span class="number">145</span>);</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//白底</span></span></span><br><span class="line"><span class="function">        <span class="title">drawImgInImg</span>(imgB, white, <span class="number">200</span>, <span class="number">400</span>, <span class="number">250</span>, <span class="number">250</span>);</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//画上小程序码</span></span></span><br><span class="line"><span class="function">        <span class="title">drawImgInImg</span>(imgB, qrCode, <span class="number">255</span>, <span class="number">434</span>, <span class="number">190</span>, <span class="number">190</span>);</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//画上图片</span></span></span><br><span class="line"><span class="function">        <span class="title">drawImgInImg</span>(imgB, red, <span class="number">0</span>, <span class="number">0</span>, red.getWidth(), <span class="title">red</span>.<span class="title">getHeight</span>());</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//画上开</span></span></span><br><span class="line"><span class="function">        <span class="title">drawImgInImg</span>(imgB, kai, <span class="number">309</span>, <span class="number">488</span>, <span class="number">83</span>, <span class="number">83</span>);</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//写上文字，上</span></span></span><br><span class="line"><span class="function">        <span class="title">drawTextInImg</span>(imgB, text1, <span class="number">350</span>, <span class="number">315</span>);</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//写上文字，活动</span></span></span><br><span class="line"><span class="function">        <span class="title">drawTextInImg</span>(imgB, activityText, <span class="number">350</span>, <span class="number">395</span>);</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//转jpg</span></span></span><br><span class="line"><span class="function">        <span class="title">BufferedImage</span> <span class="title">result</span> = <span class="title">new</span> <span class="title">BufferedImage</span>(imgB.getWidth(), <span class="title">imgB</span></span></span><br><span class="line"><span class="function">                .<span class="title">getHeight</span>(), <span class="title">BufferedImage</span>.<span class="title">TYPE_3BYTE_BGR</span>);</span></span><br><span class="line"><span class="function">        <span class="title">result</span>.<span class="title">getGraphics</span>().<span class="title">drawImage</span>(imgB, <span class="number">0</span>, <span class="number">0</span>, null);</span></span><br><span class="line"><span class="function">        <span class="title">ByteArrayOutputStream</span> <span class="title">bs</span> = <span class="title">new</span> <span class="title">ByteArrayOutputStream</span>();</span></span><br><span class="line"><span class="function">        <span class="title">ImageIO</span>.<span class="title">write</span>(result, "jpg", bs);</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//最终byte数组</span></span></span><br><span class="line"><span class="function">        <span class="title">return</span> <span class="title">bs</span>.<span class="title">toByteArray</span>();</span></span><br><span class="line"><span class="function">    &#125;</span></span><br></pre></td></tr></table></figure><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上即为小程序码生成及绘制分享图的常见场景，在此基础上拓展出业务所需的功能，基本足够了！！！共勉~~~</p>]]></content>
+    <content type="html"><![CDATA[<meta name="referrer" content="no-referrer"><h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>项目需求为用户创建活动，且生成了小程序码，进而再生成小程序码分享图，即在原小程序码的基础上绘制一张完整的分享图，并展示给用户进行分享。个中过程均交由后台生成并绘制（原因：用户在小程序直接点击某选项，直接转至分享图页面，而图片存储七牛云之上，若由前端生成再交由后台处理并返回，便影响响应速度）</p><h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>开发环境：<strong>JDK1.8</strong><br>开发语言：<strong>Java</strong></p><h2 id="正题"><a href="#正题" class="headerlink" title="正题"></a>正题</h2><h3 id="生成小程序码"><a href="#生成小程序码" class="headerlink" title="生成小程序码"></a>生成小程序码</h3><p>调用微信SDK，最好的文档便是官网文档了，虽然坑是真的多…<br>进入正题！！！</p><p>参考文档：<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/api/qrcode.html" target="_blank" rel="noopener">https://mp.weixin.qq.com/debug/wxadoc/dev/api/qrcode.html</a></p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://upload-images.jianshu.io/upload_images/2929536-1a0846174ac1eca4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><p>根据业务需求选择调用的相应接口，博主所做的小程序业务需求是用于临时场景，且需要多次分享、频繁分享，因此选了接口B类型。</p><h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><ul><li>看文档</li></ul><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://upload-images.jianshu.io/upload_images/2929536-45292efa73668cc0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><p>坑点：<br>1、注意场景值scene的说明，这个也很重要<br>2、注意page参数的说明，“必须是已经发布的小程序页面”（之前做的小程序由于前期未通过审核没发布，很同意略过关键字眼。<strong>经验：未发布的小程序，无需传该参数，可正常获取小程序码，与scene不一样，scene会涉及后续的业务需求，里面的值会有具体的业务操作</strong>）</p><ul><li>编码</li></ul><p>说明：<br>1、获取小程序码需要获取access_token。<br>2、scene值需跟前端进行规约，具体的传值格式（以下代码scene值以加密形式传入，可自定义加密规则）<br>3、以下 <strong>七牛上传</strong> 功能使用的便是博主介绍到的七牛云模块化，想了解的见上篇 <a href="http://joryun.com/2018/01/03/qiniu-module/" target="_blank" rel="noopener">《七牛云模块化文档》</a></p><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">String</span> getminiqrQr(<span class="keyword">String</span> sceneStr, <span class="keyword">String</span> accessToken) &#123;</span><br><span class="line">        RestTemplate rest = <span class="keyword">new</span> RestTemplate();</span><br><span class="line">        InputStream inputStream = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">String</span> path = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">String</span> url = <span class="string">"https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token="</span> + accessToken;</span><br><span class="line">            Map&lt;<span class="keyword">String</span>, <span class="keyword">Object</span>&gt; param = <span class="keyword">new</span> <span class="keyword">HashMap</span>&lt;&gt;();</span><br><span class="line">            param.put(<span class="string">"scene"</span>, <span class="string">"activity_"</span> + sceneStr);</span><br><span class="line"><span class="comment">//            param.put("page", "pages/Activity/Situation/Situation");</span></span><br><span class="line">            param.put(<span class="string">"width"</span>, <span class="number">200</span>);</span><br><span class="line">            logger.info(<span class="string">"调用生成微信URL接口传参："</span> + param);</span><br><span class="line"></span><br><span class="line">            MultiValueMap&lt;<span class="keyword">String</span>, <span class="keyword">String</span>&gt; headers = <span class="keyword">new</span> LinkedMultiValueMap&lt;&gt;();</span><br><span class="line">            org.springframework.http.HttpEntity requestEntity = <span class="keyword">new</span> org.springframework.http.HttpEntity(param, headers);</span><br><span class="line">            ResponseEntity&lt;<span class="built_in">byte</span>[]&gt; entity = rest.exchange(url, HttpMethod.POST, requestEntity, <span class="built_in">byte</span>[].class);</span><br><span class="line">            logger.info(<span class="string">"调用小程序生成微信小程序码URL接口返回结果："</span> + entity.getBody());</span><br><span class="line"></span><br><span class="line">            <span class="built_in">byte</span>[] result = entity.getBody();</span><br><span class="line">            logger.info(Base64.encodeBase64String(result));</span><br><span class="line">            inputStream = <span class="keyword">new</span> ByteArrayInputStream(result);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//七牛上传</span></span><br><span class="line">            path = qiniuService.uploadByStream(inputStream);</span><br><span class="line">            logger.info(<span class="string">"----------------path：&#123;&#125;"</span>, path);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            logger.error(<span class="string">"调用小程序生成微信小程序码URL接口异常"</span>, e);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (inputStream != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    inputStream.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> path;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><p>以上最终便会返回小程序码的url，算挺简单的吧！</p><h3 id="绘制小程序码分享图"><a href="#绘制小程序码分享图" class="headerlink" title="绘制小程序码分享图"></a>绘制小程序码分享图</h3><p>效果如下：</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://upload-images.jianshu.io/upload_images/2929536-17bf7d2c8e1a39b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://upload-images.jianshu.io/upload_images/2929536-b0b72b321df6c691.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><ul><li><p>说明<br>1、使用awt在画布上一层层画上去，文字、图片均可以<br>2、画上去的文字及图片有坐标的概念，需要底图和上层图片素材，以及坐标（用方形框住图片或文字，左上角即为原点，团队上的协作可交由设计人员给出即可）</p></li><li><p>编码</p></li></ul><p>以下代码已附上注释，够详细了！</p><figure class="highlight pony"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">public byte[] drawPicture(<span class="type">String</span> backImg, <span class="type">String</span> qrCodeImg, <span class="type">String</span> kaiImg, <span class="type">String</span> avatarImg,<span class="type">String</span> activityText, <span class="type">String</span> text1) throws <span class="type">IOException</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//底图</span></span><br><span class="line">        <span class="type">ClassPathResource</span> redResource = <span class="function"><span class="keyword">new</span> <span class="title">ClassPathResource</span>(backImg);</span></span><br><span class="line"><span class="function">        <span class="title">BufferedImage</span> <span class="title">red</span> = <span class="title">ImageIO</span>.<span class="title">read</span>(redResource.getInputStream());</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//头像</span></span></span><br><span class="line"><span class="function">        <span class="title">URL</span> <span class="title">avatarUrl</span> = <span class="title">new</span> <span class="title">URL</span>(avatarImg);</span></span><br><span class="line"><span class="function">        <span class="title">BufferedImage</span> <span class="title">avatar</span> = <span class="title">ImageIO</span>.<span class="title">read</span>(avatarUrl);</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//小程序码</span></span></span><br><span class="line"><span class="function">        <span class="title">URL</span> <span class="title">qrCodeUrl</span> = <span class="title">new</span> <span class="title">URL</span>(qrCodeImg);</span></span><br><span class="line"><span class="function">        <span class="title">BufferedImage</span> <span class="title">qrCode</span> = <span class="title">ImageIO</span>.<span class="title">read</span>(qrCodeUrl);</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//开</span></span></span><br><span class="line"><span class="function">        <span class="title">ClassPathResource</span> <span class="title">kaiResource</span> = <span class="title">new</span> <span class="title">ClassPathResource</span>(kaiImg);</span></span><br><span class="line"><span class="function">        <span class="title">BufferedImage</span> <span class="title">kai</span> = <span class="title">ImageIO</span>.<span class="title">read</span>(kaiResource.getInputStream());</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//白底</span></span></span><br><span class="line"><span class="function">        <span class="title">ClassPathResource</span> <span class="title">whiteResource</span> = <span class="title">new</span> <span class="title">ClassPathResource</span>("white.jpeg");</span></span><br><span class="line"><span class="function">        <span class="title">BufferedImage</span> <span class="title">white</span> = <span class="title">ImageIO</span>.<span class="title">read</span>(whiteResource.getInputStream());</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">// --- 画图 ---</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//底层空白 bufferedImage</span></span></span><br><span class="line"><span class="function">        <span class="title">BufferedImage</span> <span class="title">imgB</span> = <span class="title">new</span> <span class="title">BufferedImage</span>(red.getWidth(), <span class="title">red</span>.<span class="title">getHeight</span>(), <span class="title">BufferedImage</span>.<span class="title">TYPE_4BYTE_ABGR</span>);</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//画上头像</span></span></span><br><span class="line"><span class="function">        <span class="title">drawImgInImg</span>(imgB, avatar, <span class="number">277</span>, <span class="number">90</span>, <span class="number">145</span>, <span class="number">145</span>);</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//白底</span></span></span><br><span class="line"><span class="function">        <span class="title">drawImgInImg</span>(imgB, white, <span class="number">200</span>, <span class="number">400</span>, <span class="number">250</span>, <span class="number">250</span>);</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//画上小程序码</span></span></span><br><span class="line"><span class="function">        <span class="title">drawImgInImg</span>(imgB, qrCode, <span class="number">255</span>, <span class="number">434</span>, <span class="number">190</span>, <span class="number">190</span>);</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//画上图片</span></span></span><br><span class="line"><span class="function">        <span class="title">drawImgInImg</span>(imgB, red, <span class="number">0</span>, <span class="number">0</span>, red.getWidth(), <span class="title">red</span>.<span class="title">getHeight</span>());</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//画上开</span></span></span><br><span class="line"><span class="function">        <span class="title">drawImgInImg</span>(imgB, kai, <span class="number">309</span>, <span class="number">488</span>, <span class="number">83</span>, <span class="number">83</span>);</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//写上文字，上</span></span></span><br><span class="line"><span class="function">        <span class="title">drawTextInImg</span>(imgB, text1, <span class="number">350</span>, <span class="number">315</span>);</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//写上文字，活动</span></span></span><br><span class="line"><span class="function">        <span class="title">drawTextInImg</span>(imgB, activityText, <span class="number">350</span>, <span class="number">395</span>);</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//转jpg</span></span></span><br><span class="line"><span class="function">        <span class="title">BufferedImage</span> <span class="title">result</span> = <span class="title">new</span> <span class="title">BufferedImage</span>(imgB.getWidth(), <span class="title">imgB</span></span></span><br><span class="line"><span class="function">                .<span class="title">getHeight</span>(), <span class="title">BufferedImage</span>.<span class="title">TYPE_3BYTE_BGR</span>);</span></span><br><span class="line"><span class="function">        <span class="title">result</span>.<span class="title">getGraphics</span>().<span class="title">drawImage</span>(imgB, <span class="number">0</span>, <span class="number">0</span>, null);</span></span><br><span class="line"><span class="function">        <span class="title">ByteArrayOutputStream</span> <span class="title">bs</span> = <span class="title">new</span> <span class="title">ByteArrayOutputStream</span>();</span></span><br><span class="line"><span class="function">        <span class="title">ImageIO</span>.<span class="title">write</span>(result, "jpg", bs);</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        <span class="comment">//最终byte数组</span></span></span><br><span class="line"><span class="function">        <span class="title">return</span> <span class="title">bs</span>.<span class="title">toByteArray</span>();</span></span><br><span class="line"><span class="function">    &#125;</span></span><br></pre></td></tr></table></figure><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上即为小程序码生成及绘制分享图的常见场景，在此基础上拓展出业务所需的功能，基本足够了！！！共勉~~~</p>]]></content>
     
     <summary type="html">
     
@@ -67,19 +67,19 @@
     
     </summary>
     
-      <category term="Coding" scheme="http://joryun.com/categories/Coding/"/>
+      <category term="Coding" scheme="http://notes.joryun.com/categories/Coding/"/>
     
     
-      <category term="微信" scheme="http://joryun.com/tags/%E5%BE%AE%E4%BF%A1/"/>
+      <category term="微信" scheme="http://notes.joryun.com/tags/%E5%BE%AE%E4%BF%A1/"/>
     
-      <category term="小程序" scheme="http://joryun.com/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+      <category term="小程序" scheme="http://notes.joryun.com/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
     
   </entry>
   
   <entry>
     <title>七牛云模块化</title>
-    <link href="http://joryun.com/2018/01/03/%E4%B8%83%E7%89%9B%E4%BA%91%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
-    <id>http://joryun.com/2018/01/03/七牛云模块化/</id>
+    <link href="http://notes.joryun.com/2018/01/03/%E4%B8%83%E7%89%9B%E4%BA%91%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
+    <id>http://notes.joryun.com/2018/01/03/七牛云模块化/</id>
     <published>2018-01-03T02:54:31.000Z</published>
     <updated>2020-04-06T15:14:40.191Z</updated>
     
@@ -96,21 +96,21 @@
     
     </summary>
     
-      <category term="Coding" scheme="http://joryun.com/categories/Coding/"/>
+      <category term="Coding" scheme="http://notes.joryun.com/categories/Coding/"/>
     
     
-      <category term="七牛" scheme="http://joryun.com/tags/%E4%B8%83%E7%89%9B/"/>
+      <category term="七牛" scheme="http://notes.joryun.com/tags/%E4%B8%83%E7%89%9B/"/>
     
-      <category term="模块化" scheme="http://joryun.com/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
+      <category term="模块化" scheme="http://notes.joryun.com/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
     
-      <category term="spring boot" scheme="http://joryun.com/tags/spring-boot/"/>
+      <category term="spring boot" scheme="http://notes.joryun.com/tags/spring-boot/"/>
     
   </entry>
   
   <entry>
     <title>Linux进程监控 + 钉钉通知</title>
-    <link href="http://joryun.com/2017/12/22/Linux%E8%BF%9B%E7%A8%8B%E7%9B%91%E6%8E%A7%20+%20%E9%92%89%E9%92%89%E9%80%9A%E7%9F%A5/"/>
-    <id>http://joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/</id>
+    <link href="http://notes.joryun.com/2017/12/22/Linux%E8%BF%9B%E7%A8%8B%E7%9B%91%E6%8E%A7%20+%20%E9%92%89%E9%92%89%E9%80%9A%E7%9F%A5/"/>
+    <id>http://notes.joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/</id>
     <published>2017-12-22T01:59:26.000Z</published>
     <updated>2020-04-06T15:15:10.255Z</updated>
     
@@ -127,21 +127,21 @@
     
     </summary>
     
-      <category term="Coding" scheme="http://joryun.com/categories/Coding/"/>
+      <category term="Coding" scheme="http://notes.joryun.com/categories/Coding/"/>
     
     
-      <category term="linux" scheme="http://joryun.com/tags/linux/"/>
+      <category term="linux" scheme="http://notes.joryun.com/tags/linux/"/>
     
-      <category term="shell" scheme="http://joryun.com/tags/shell/"/>
+      <category term="shell" scheme="http://notes.joryun.com/tags/shell/"/>
     
-      <category term="服务器" scheme="http://joryun.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+      <category term="服务器" scheme="http://notes.joryun.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
   </entry>
   
   <entry>
     <title>Spring Data JPA坑点记录</title>
-    <link href="http://joryun.com/2017/12/22/Spring%20Data%20JPA%E5%9D%91%E7%82%B9%E8%AE%B0%E5%BD%95/"/>
-    <id>http://joryun.com/2017/12/22/Spring Data JPA坑点记录/</id>
+    <link href="http://notes.joryun.com/2017/12/22/Spring%20Data%20JPA%E5%9D%91%E7%82%B9%E8%AE%B0%E5%BD%95/"/>
+    <id>http://notes.joryun.com/2017/12/22/Spring Data JPA坑点记录/</id>
     <published>2017-12-22T01:58:37.000Z</published>
     <updated>2020-04-06T15:15:34.933Z</updated>
     
@@ -158,19 +158,19 @@
     
     </summary>
     
-      <category term="Coding" scheme="http://joryun.com/categories/Coding/"/>
+      <category term="Coding" scheme="http://notes.joryun.com/categories/Coding/"/>
     
     
-      <category term="spring" scheme="http://joryun.com/tags/spring/"/>
+      <category term="spring" scheme="http://notes.joryun.com/tags/spring/"/>
     
-      <category term="spring data jpa" scheme="http://joryun.com/tags/spring-data-jpa/"/>
+      <category term="spring data jpa" scheme="http://notes.joryun.com/tags/spring-data-jpa/"/>
     
   </entry>
   
   <entry>
     <title>三方银行微信支付流程及配置相关</title>
-    <link href="http://joryun.com/2017/10/22/%E4%B8%89%E6%96%B9%E9%93%B6%E8%A1%8C%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E6%B5%81%E7%A8%8B%E5%8F%8A%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3/"/>
-    <id>http://joryun.com/2017/10/22/三方银行微信支付流程及配置相关/</id>
+    <link href="http://notes.joryun.com/2017/10/22/%E4%B8%89%E6%96%B9%E9%93%B6%E8%A1%8C%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E6%B5%81%E7%A8%8B%E5%8F%8A%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3/"/>
+    <id>http://notes.joryun.com/2017/10/22/三方银行微信支付流程及配置相关/</id>
     <published>2017-10-22T08:42:38.000Z</published>
     <updated>2020-04-06T15:14:48.263Z</updated>
     
@@ -187,19 +187,19 @@
     
     </summary>
     
-      <category term="Coding" scheme="http://joryun.com/categories/Coding/"/>
+      <category term="Coding" scheme="http://notes.joryun.com/categories/Coding/"/>
     
     
-      <category term="微信" scheme="http://joryun.com/tags/%E5%BE%AE%E4%BF%A1/"/>
+      <category term="微信" scheme="http://notes.joryun.com/tags/%E5%BE%AE%E4%BF%A1/"/>
     
-      <category term="三方服务" scheme="http://joryun.com/tags/%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8A%A1/"/>
+      <category term="三方服务" scheme="http://notes.joryun.com/tags/%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8A%A1/"/>
     
   </entry>
   
   <entry>
     <title>企业项目之迁移正式服</title>
-    <link href="http://joryun.com/2017/10/15/%E4%BC%81%E4%B8%9A%E9%A1%B9%E7%9B%AE%E4%B9%8B%E8%BF%81%E7%A7%BB%E6%AD%A3%E5%BC%8F%E6%9C%8D/"/>
-    <id>http://joryun.com/2017/10/15/企业项目之迁移正式服/</id>
+    <link href="http://notes.joryun.com/2017/10/15/%E4%BC%81%E4%B8%9A%E9%A1%B9%E7%9B%AE%E4%B9%8B%E8%BF%81%E7%A7%BB%E6%AD%A3%E5%BC%8F%E6%9C%8D/"/>
+    <id>http://notes.joryun.com/2017/10/15/企业项目之迁移正式服/</id>
     <published>2017-10-15T09:27:10.000Z</published>
     <updated>2020-04-06T15:14:44.920Z</updated>
     
@@ -216,23 +216,23 @@
     
     </summary>
     
-      <category term="Coding" scheme="http://joryun.com/categories/Coding/"/>
+      <category term="Coding" scheme="http://notes.joryun.com/categories/Coding/"/>
     
     
-      <category term="java" scheme="http://joryun.com/tags/java/"/>
+      <category term="java" scheme="http://notes.joryun.com/tags/java/"/>
     
-      <category term="shell" scheme="http://joryun.com/tags/shell/"/>
+      <category term="shell" scheme="http://notes.joryun.com/tags/shell/"/>
     
-      <category term="服务器" scheme="http://joryun.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+      <category term="服务器" scheme="http://notes.joryun.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
-      <category term="centos" scheme="http://joryun.com/tags/centos/"/>
+      <category term="centos" scheme="http://notes.joryun.com/tags/centos/"/>
     
   </entry>
   
   <entry>
     <title>Java8：Lambda表达式</title>
-    <link href="http://joryun.com/2017/09/18/Java8%EF%BC%9ALambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
-    <id>http://joryun.com/2017/09/18/Java8：Lambda表达式/</id>
+    <link href="http://notes.joryun.com/2017/09/18/Java8%EF%BC%9ALambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    <id>http://notes.joryun.com/2017/09/18/Java8：Lambda表达式/</id>
     <published>2017-09-18T03:52:58.000Z</published>
     <updated>2020-04-06T15:15:04.434Z</updated>
     
@@ -249,17 +249,17 @@
     
     </summary>
     
-      <category term="Coding" scheme="http://joryun.com/categories/Coding/"/>
+      <category term="Coding" scheme="http://notes.joryun.com/categories/Coding/"/>
     
     
-      <category term="java8" scheme="http://joryun.com/tags/java8/"/>
+      <category term="java8" scheme="http://notes.joryun.com/tags/java8/"/>
     
   </entry>
   
   <entry>
     <title>谈谈Java对象序列化</title>
-    <link href="http://joryun.com/2017/05/28/%E8%B0%88%E8%B0%88Java%E5%AF%B9%E8%B1%A1%E5%BA%8F%E5%88%97%E5%8C%96/"/>
-    <id>http://joryun.com/2017/05/28/谈谈Java对象序列化/</id>
+    <link href="http://notes.joryun.com/2017/05/28/%E8%B0%88%E8%B0%88Java%E5%AF%B9%E8%B1%A1%E5%BA%8F%E5%88%97%E5%8C%96/"/>
+    <id>http://notes.joryun.com/2017/05/28/谈谈Java对象序列化/</id>
     <published>2017-05-28T01:17:58.000Z</published>
     <updated>2020-04-06T15:14:52.906Z</updated>
     
@@ -273,21 +273,21 @@
     
     </summary>
     
-      <category term="Coding" scheme="http://joryun.com/categories/Coding/"/>
+      <category term="Coding" scheme="http://notes.joryun.com/categories/Coding/"/>
     
     
-      <category term="java" scheme="http://joryun.com/tags/java/"/>
+      <category term="java" scheme="http://notes.joryun.com/tags/java/"/>
     
-      <category term="序列化" scheme="http://joryun.com/tags/%E5%BA%8F%E5%88%97%E5%8C%96/"/>
+      <category term="序列化" scheme="http://notes.joryun.com/tags/%E5%BA%8F%E5%88%97%E5%8C%96/"/>
     
-      <category term="对象" scheme="http://joryun.com/tags/%E5%AF%B9%E8%B1%A1/"/>
+      <category term="对象" scheme="http://notes.joryun.com/tags/%E5%AF%B9%E8%B1%A1/"/>
     
   </entry>
   
   <entry>
     <title>Java之普通web项目转换为Maven项目</title>
-    <link href="http://joryun.com/2017/05/21/Java%E4%B9%8B%E6%99%AE%E9%80%9Aweb%E9%A1%B9%E7%9B%AE%E8%BD%AC%E6%8D%A2%E4%B8%BAMaven%E9%A1%B9%E7%9B%AE/"/>
-    <id>http://joryun.com/2017/05/21/Java之普通web项目转换为Maven项目/</id>
+    <link href="http://notes.joryun.com/2017/05/21/Java%E4%B9%8B%E6%99%AE%E9%80%9Aweb%E9%A1%B9%E7%9B%AE%E8%BD%AC%E6%8D%A2%E4%B8%BAMaven%E9%A1%B9%E7%9B%AE/"/>
+    <id>http://notes.joryun.com/2017/05/21/Java之普通web项目转换为Maven项目/</id>
     <published>2017-05-21T09:24:50.000Z</published>
     <updated>2020-04-06T15:15:07.528Z</updated>
     
@@ -308,19 +308,19 @@
     
     </summary>
     
-      <category term="Coding" scheme="http://joryun.com/categories/Coding/"/>
+      <category term="Coding" scheme="http://notes.joryun.com/categories/Coding/"/>
     
     
-      <category term="java" scheme="http://joryun.com/tags/java/"/>
+      <category term="java" scheme="http://notes.joryun.com/tags/java/"/>
     
-      <category term="maven" scheme="http://joryun.com/tags/maven/"/>
+      <category term="maven" scheme="http://notes.joryun.com/tags/maven/"/>
     
   </entry>
   
   <entry>
     <title>Spring全家桶：Spring JMS + ActiveMQ起步</title>
-    <link href="http://joryun.com/2017/05/21/Spring%E5%85%A8%E5%AE%B6%E6%A1%B6%EF%BC%9ASpring%20JMS%20+%20ActiveMQ%E8%B5%B7%E6%AD%A5/"/>
-    <id>http://joryun.com/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/</id>
+    <link href="http://notes.joryun.com/2017/05/21/Spring%E5%85%A8%E5%AE%B6%E6%A1%B6%EF%BC%9ASpring%20JMS%20+%20ActiveMQ%E8%B5%B7%E6%AD%A5/"/>
+    <id>http://notes.joryun.com/2017/05/21/Spring全家桶：Spring JMS + ActiveMQ起步/</id>
     <published>2017-05-21T03:46:40.000Z</published>
     <updated>2020-04-06T15:15:37.602Z</updated>
     
@@ -338,23 +338,23 @@
     
     </summary>
     
-      <category term="Coding" scheme="http://joryun.com/categories/Coding/"/>
+      <category term="Coding" scheme="http://notes.joryun.com/categories/Coding/"/>
     
     
-      <category term="java" scheme="http://joryun.com/tags/java/"/>
+      <category term="java" scheme="http://notes.joryun.com/tags/java/"/>
     
-      <category term="spring" scheme="http://joryun.com/tags/spring/"/>
+      <category term="spring" scheme="http://notes.joryun.com/tags/spring/"/>
     
-      <category term="jms" scheme="http://joryun.com/tags/jms/"/>
+      <category term="jms" scheme="http://notes.joryun.com/tags/jms/"/>
     
-      <category term="avtivemq" scheme="http://joryun.com/tags/avtivemq/"/>
+      <category term="avtivemq" scheme="http://notes.joryun.com/tags/avtivemq/"/>
     
   </entry>
   
   <entry>
     <title>Think in Java：对象篇</title>
-    <link href="http://joryun.com/2017/05/09/Think%20in%20Java%EF%BC%9A%E5%AF%B9%E8%B1%A1%E7%AF%87/"/>
-    <id>http://joryun.com/2017/05/09/Think in Java：对象篇/</id>
+    <link href="http://notes.joryun.com/2017/05/09/Think%20in%20Java%EF%BC%9A%E5%AF%B9%E8%B1%A1%E7%AF%87/"/>
+    <id>http://notes.joryun.com/2017/05/09/Think in Java：对象篇/</id>
     <published>2017-05-09T15:56:18.000Z</published>
     <updated>2020-04-06T15:15:43.790Z</updated>
     
@@ -368,29 +368,29 @@
     
     </summary>
     
-      <category term="Learning" scheme="http://joryun.com/categories/Learning/"/>
+      <category term="Learning" scheme="http://notes.joryun.com/categories/Learning/"/>
     
     
-      <category term="java" scheme="http://joryun.com/tags/java/"/>
+      <category term="java" scheme="http://notes.joryun.com/tags/java/"/>
     
-      <category term="thinking-in-java" scheme="http://joryun.com/tags/thinking-in-java/"/>
+      <category term="thinking-in-java" scheme="http://notes.joryun.com/tags/thinking-in-java/"/>
     
   </entry>
   
   <entry>
     <title>webservice(2)：体验查询号码归属地demo</title>
-    <link href="http://joryun.com/2017/04/15/webservice(2)%EF%BC%9A%E4%BD%93%E9%AA%8C%E6%9F%A5%E8%AF%A2%E5%8F%B7%E7%A0%81%E5%BD%92%E5%B1%9E%E5%9C%B0demo/"/>
-    <id>http://joryun.com/2017/04/15/webservice(2)：体验查询号码归属地demo/</id>
+    <link href="http://notes.joryun.com/2017/04/15/webservice(2)%EF%BC%9A%E4%BD%93%E9%AA%8C%E6%9F%A5%E8%AF%A2%E5%8F%B7%E7%A0%81%E5%BD%92%E5%B1%9E%E5%9C%B0demo/"/>
+    <id>http://notes.joryun.com/2017/04/15/webservice(2)：体验查询号码归属地demo/</id>
     <published>2017-04-15T13:48:04.000Z</published>
     <updated>2020-04-06T15:15:49.315Z</updated>
     
-    <content type="html"><![CDATA[<meta name="referrer" content="no-referrer"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>对于webservice的介绍，本文就不再赘余讲述。<br>详见文章 <a href="http://joryun.com/2016/05/26/build-webservice/">webservice:(1)新手搭建调用webservice那些坑</a></p><p>首先，先给出一个站点，该站点提供了许多webservice服务，可供调用测试。<br>站点： <strong><a href="http://www.webxml.com.cn/zh_cn/index.aspx" target="_blank" rel="noopener">http://www.webxml.com.cn/zh_cn/index.aspx</a></strong></p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://upload-images.jianshu.io/upload_images/2929536-af65f5ffb80d2fc0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><a id="more"></a><p>如上图所示，我们本文将测试归属地webservice。<br>我们先查询该webservice相关服务。</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://upload-images.jianshu.io/upload_images/2929536-9af27cda29ec84f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://upload-images.jianshu.io/upload_images/2929536-32812af9e617e56c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><p>大家可以在该文本框中输入手机号，userID忽略，点击调用即可查询手机归属地。<br>接下来我们通过代码测试该ws。</p><p>注：请求方式有很多种，分别为post、get、soap、wsimport。在这里，使用wsimport方式请求！！！</p><h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><h4 id="1-记录所调用webservice的WSDL"><a href="#1-记录所调用webservice的WSDL" class="headerlink" title="1.记录所调用webservice的WSDL"></a>1.记录所调用webservice的WSDL</h4><p>进入之前的站点，找到相应webservice，点击服务说明</p><p><img src="http://upload-images.jianshu.io/upload_images/2929536-1da007cd96f3c75e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p><p>以下即为相应WSDL，一份xml文档</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://upload-images.jianshu.io/upload_images/2929536-44fab3a2cf49aab2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><p>copy该站点的URL，如下</p><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://<span class="keyword">ws</span>.webxml.<span class="keyword">com</span>.<span class="keyword">cn</span>/WebServices/MobileCodeWS.asmx?WSDL</span><br></pre></td></tr></table></figure><h4 id="2-使用JDK目录下的工具-wsimport，生成调用webservice相应的代码"><a href="#2-使用JDK目录下的工具-wsimport，生成调用webservice相应的代码" class="headerlink" title="2.使用JDK目录下的工具-wsimport，生成调用webservice相应的代码"></a>2.使用JDK目录下的工具-wsimport，生成调用webservice相应的代码</h4><p><strong>wsimport</strong> 是一个命令，jdk1.6及以上才可以使用，ws针对不同的语言都会有个wsimport命令，我们可以在自己安装的jdk的bin目录下找到这个 <strong>wsimport.exe</strong> ，正因为有了这个，所以我们可以在命令行中使用wsimport命令。<br>输入以下命令，会在特定的包中生成java与class文件，接着将其copy至项目路径下即可。</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsimport -s . -<span class="selector-tag">p</span> ws<span class="selector-class">.client</span><span class="selector-class">.c</span> http:<span class="comment">//ws.webxml.com.cn/WebServices/MobileCodeWS.asmx?WSDL</span></span><br></pre></td></tr></table></figure><p>Problem：在mac下的终端，若使用到了zsh，可能会出现以下情况。</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://upload-images.jianshu.io/upload_images/2929536-1a6ca77b85376765.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><p>这是由于 <strong>zsh</strong> 不兼容的问题！！！<br>具体原因：<br>因为zsh缺省情况下始终自己解释这个 <em>.h，而不会传递给 find 来解释。<br>解决方案：<br>打开 <strong>terminal</strong>，在~/.zshrc中加入:<br><strong>setopt no_nomatch</strong>, 然后进行 <em>*source .zshrc</em></em> 命令即可</p><p>以下为copy入项目空间的示例图<br>注：ws.client.test下的WebserviceTest为webservice测试类，暂时忽略。</p><p><img src="http://upload-images.jianshu.io/upload_images/2929536-203d30b3fd49012a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p><p>这样就有了号码归属地查询这个ws服务相关的API了，且是通过官方的WSDL来生成的。接着，便是编写测试类测试功能了。</p><h4 id="3-编写测试类测试"><a href="#3-编写测试类测试" class="headerlink" title="3.编写测试类测试"></a>3.编写测试类测试</h4><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> ws.client.test;</span><br><span class="line"><span class="keyword">import</span> ws.client.c.MobileCodeWS;</span><br><span class="line"><span class="keyword">import</span> ws.client.c.MobileCodeWSSoap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebserviceTest</span> </span>&#123;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> void main(<span class="keyword">String</span>[] args) &#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取一个webservice服务</span></span><br><span class="line">MobileCodeWS ws = <span class="keyword">new</span> <span class="type">MobileCodeWS</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取具体服务类型：get post soap1.1 and soap1.2</span></span><br><span class="line">MobileCodeWSSoap wsSoap = ws.getMobileCodeWSSoap();</span><br><span class="line"><span class="keyword">String</span> address = wsSoap.getMobileCodeInfo(<span class="string">"你的手机号码"</span>, <span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"手机归属地信息："</span>+ address);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>测试结果示例</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://upload-images.jianshu.io/upload_images/2929536-590d9b117d0bda5e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><p>OK！！！到这里我们就体验完了该webservice。</p><h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><p>webservice中WSDL很重要，里面用xml描述了webservice的信息，所以我们可以通过解析WSDL来获取该webservice相关的API，然后在自己的项目中调用这些API即可调用该webservice。</p><hr><p>愿全天下的代码均不负辛勤的程序员！</p><p>CSDN：<a href="http://blog.csdn.net/joryun" target="_blank" rel="noopener">Joryun’s CSDN</a></p><p>简书：<a href="https://www.jianshu.com/u/85656cc35708" target="_blank" rel="noopener">简书</a></p>]]></content>
+    <content type="html"><![CDATA[<meta name="referrer" content="no-referrer"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>对于webservice的介绍，本文就不再赘余讲述。<br>详见文章 <a href="http://joryun.com/2016/05/26/build-webservice/" target="_blank" rel="noopener">webservice:(1)新手搭建调用webservice那些坑</a></p><p>首先，先给出一个站点，该站点提供了许多webservice服务，可供调用测试。<br>站点： <strong><a href="http://www.webxml.com.cn/zh_cn/index.aspx" target="_blank" rel="noopener">http://www.webxml.com.cn/zh_cn/index.aspx</a></strong></p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://upload-images.jianshu.io/upload_images/2929536-af65f5ffb80d2fc0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><a id="more"></a><p>如上图所示，我们本文将测试归属地webservice。<br>我们先查询该webservice相关服务。</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://upload-images.jianshu.io/upload_images/2929536-9af27cda29ec84f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://upload-images.jianshu.io/upload_images/2929536-32812af9e617e56c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><p>大家可以在该文本框中输入手机号，userID忽略，点击调用即可查询手机归属地。<br>接下来我们通过代码测试该ws。</p><p>注：请求方式有很多种，分别为post、get、soap、wsimport。在这里，使用wsimport方式请求！！！</p><h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><h4 id="1-记录所调用webservice的WSDL"><a href="#1-记录所调用webservice的WSDL" class="headerlink" title="1.记录所调用webservice的WSDL"></a>1.记录所调用webservice的WSDL</h4><p>进入之前的站点，找到相应webservice，点击服务说明</p><p><img src="http://upload-images.jianshu.io/upload_images/2929536-1da007cd96f3c75e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p><p>以下即为相应WSDL，一份xml文档</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://upload-images.jianshu.io/upload_images/2929536-44fab3a2cf49aab2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><p>copy该站点的URL，如下</p><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://<span class="keyword">ws</span>.webxml.<span class="keyword">com</span>.<span class="keyword">cn</span>/WebServices/MobileCodeWS.asmx?WSDL</span><br></pre></td></tr></table></figure><h4 id="2-使用JDK目录下的工具-wsimport，生成调用webservice相应的代码"><a href="#2-使用JDK目录下的工具-wsimport，生成调用webservice相应的代码" class="headerlink" title="2.使用JDK目录下的工具-wsimport，生成调用webservice相应的代码"></a>2.使用JDK目录下的工具-wsimport，生成调用webservice相应的代码</h4><p><strong>wsimport</strong> 是一个命令，jdk1.6及以上才可以使用，ws针对不同的语言都会有个wsimport命令，我们可以在自己安装的jdk的bin目录下找到这个 <strong>wsimport.exe</strong> ，正因为有了这个，所以我们可以在命令行中使用wsimport命令。<br>输入以下命令，会在特定的包中生成java与class文件，接着将其copy至项目路径下即可。</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsimport -s . -<span class="selector-tag">p</span> ws<span class="selector-class">.client</span><span class="selector-class">.c</span> http:<span class="comment">//ws.webxml.com.cn/WebServices/MobileCodeWS.asmx?WSDL</span></span><br></pre></td></tr></table></figure><p>Problem：在mac下的终端，若使用到了zsh，可能会出现以下情况。</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://upload-images.jianshu.io/upload_images/2929536-1a6ca77b85376765.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><p>这是由于 <strong>zsh</strong> 不兼容的问题！！！<br>具体原因：<br>因为zsh缺省情况下始终自己解释这个 <em>.h，而不会传递给 find 来解释。<br>解决方案：<br>打开 <strong>terminal</strong>，在~/.zshrc中加入:<br><strong>setopt no_nomatch</strong>, 然后进行 <em>*source .zshrc</em></em> 命令即可</p><p>以下为copy入项目空间的示例图<br>注：ws.client.test下的WebserviceTest为webservice测试类，暂时忽略。</p><p><img src="http://upload-images.jianshu.io/upload_images/2929536-203d30b3fd49012a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p><p>这样就有了号码归属地查询这个ws服务相关的API了，且是通过官方的WSDL来生成的。接着，便是编写测试类测试功能了。</p><h4 id="3-编写测试类测试"><a href="#3-编写测试类测试" class="headerlink" title="3.编写测试类测试"></a>3.编写测试类测试</h4><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> ws.client.test;</span><br><span class="line"><span class="keyword">import</span> ws.client.c.MobileCodeWS;</span><br><span class="line"><span class="keyword">import</span> ws.client.c.MobileCodeWSSoap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebserviceTest</span> </span>&#123;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> void main(<span class="keyword">String</span>[] args) &#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取一个webservice服务</span></span><br><span class="line">MobileCodeWS ws = <span class="keyword">new</span> <span class="type">MobileCodeWS</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取具体服务类型：get post soap1.1 and soap1.2</span></span><br><span class="line">MobileCodeWSSoap wsSoap = ws.getMobileCodeWSSoap();</span><br><span class="line"><span class="keyword">String</span> address = wsSoap.getMobileCodeInfo(<span class="string">"你的手机号码"</span>, <span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"手机归属地信息："</span>+ address);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>测试结果示例</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="http://upload-images.jianshu.io/upload_images/2929536-590d9b117d0bda5e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><p>OK！！！到这里我们就体验完了该webservice。</p><h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><p>webservice中WSDL很重要，里面用xml描述了webservice的信息，所以我们可以通过解析WSDL来获取该webservice相关的API，然后在自己的项目中调用这些API即可调用该webservice。</p><hr><p>愿全天下的代码均不负辛勤的程序员！</p><p>CSDN：<a href="http://blog.csdn.net/joryun" target="_blank" rel="noopener">Joryun’s CSDN</a></p><p>简书：<a href="https://www.jianshu.com/u/85656cc35708" target="_blank" rel="noopener">简书</a></p>]]></content>
     
     <summary type="html">
     
       &lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
 
-&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;对于webservice的介绍，本文就不再赘余讲述。&lt;br&gt;详见文章 &lt;a href=&quot;http://joryun.com/2016/05/26/build-webservice/&quot;&gt;webservice:(1)新手搭建调用webservice那些坑&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;对于webservice的介绍，本文就不再赘余讲述。&lt;br&gt;详见文章 &lt;a href=&quot;http://joryun.com/2016/05/26/build-webservice/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;webservice:(1)新手搭建调用webservice那些坑&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;首先，先给出一个站点，该站点提供了许多webservice服务，可供调用测试。&lt;br&gt;站点： &lt;strong&gt;&lt;a href=&quot;http://www.webxml.com.cn/zh_cn/index.aspx&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://www.webxml.com.cn/zh_cn/index.aspx&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;figure class=&quot;image-bubble&quot;&gt;
                 &lt;div class=&quot;img-lightbox&quot;&gt;
@@ -402,19 +402,19 @@
     
     </summary>
     
-      <category term="Coding" scheme="http://joryun.com/categories/Coding/"/>
+      <category term="Coding" scheme="http://notes.joryun.com/categories/Coding/"/>
     
     
-      <category term="java" scheme="http://joryun.com/tags/java/"/>
+      <category term="java" scheme="http://notes.joryun.com/tags/java/"/>
     
-      <category term="webservice" scheme="http://joryun.com/tags/webservice/"/>
+      <category term="webservice" scheme="http://notes.joryun.com/tags/webservice/"/>
     
   </entry>
   
   <entry>
     <title>提高Github Clone速度</title>
-    <link href="http://joryun.com/2017/02/27/%E6%8F%90%E9%AB%98Github%20Clone%E9%80%9F%E5%BA%A6/"/>
-    <id>http://joryun.com/2017/02/27/提高Github Clone速度/</id>
+    <link href="http://notes.joryun.com/2017/02/27/%E6%8F%90%E9%AB%98Github%20Clone%E9%80%9F%E5%BA%A6/"/>
+    <id>http://notes.joryun.com/2017/02/27/提高Github Clone速度/</id>
     <published>2017-02-27T13:57:27.000Z</published>
     <updated>2020-04-06T15:14:55.731Z</updated>
     
@@ -429,19 +429,19 @@
     
     </summary>
     
-      <category term="Coding" scheme="http://joryun.com/categories/Coding/"/>
+      <category term="Coding" scheme="http://notes.joryun.com/categories/Coding/"/>
     
     
-      <category term="github" scheme="http://joryun.com/tags/github/"/>
+      <category term="github" scheme="http://notes.joryun.com/tags/github/"/>
     
-      <category term="git" scheme="http://joryun.com/tags/git/"/>
+      <category term="git" scheme="http://notes.joryun.com/tags/git/"/>
     
   </entry>
   
   <entry>
     <title>Sublime Text 3(Mac版)常用插件篇</title>
-    <link href="http://joryun.com/2017/02/05/Sublime%20Text%203(Mac%E7%89%88)%E5%B8%B8%E7%94%A8%E6%8F%92%E4%BB%B6%E7%AF%87/"/>
-    <id>http://joryun.com/2017/02/05/Sublime Text 3(Mac版)常用插件篇/</id>
+    <link href="http://notes.joryun.com/2017/02/05/Sublime%20Text%203(Mac%E7%89%88)%E5%B8%B8%E7%94%A8%E6%8F%92%E4%BB%B6%E7%AF%87/"/>
+    <id>http://notes.joryun.com/2017/02/05/Sublime Text 3(Mac版)常用插件篇/</id>
     <published>2017-02-05T08:57:40.000Z</published>
     <updated>2020-04-06T15:15:40.704Z</updated>
     
@@ -456,21 +456,21 @@
     
     </summary>
     
-      <category term="Coding" scheme="http://joryun.com/categories/Coding/"/>
+      <category term="Coding" scheme="http://notes.joryun.com/categories/Coding/"/>
     
     
-      <category term="mac" scheme="http://joryun.com/tags/mac/"/>
+      <category term="mac" scheme="http://notes.joryun.com/tags/mac/"/>
     
-      <category term="编辑器" scheme="http://joryun.com/tags/%E7%BC%96%E8%BE%91%E5%99%A8/"/>
+      <category term="编辑器" scheme="http://notes.joryun.com/tags/%E7%BC%96%E8%BE%91%E5%99%A8/"/>
     
-      <category term="插件" scheme="http://joryun.com/tags/%E6%8F%92%E4%BB%B6/"/>
+      <category term="插件" scheme="http://notes.joryun.com/tags/%E6%8F%92%E4%BB%B6/"/>
     
   </entry>
   
   <entry>
     <title>webservice(1)：新手搭建调用webservice那些坑</title>
-    <link href="http://joryun.com/2016/05/26/webservice(1)%EF%BC%9A%E6%96%B0%E6%89%8B%E6%90%AD%E5%BB%BA%E8%B0%83%E7%94%A8webservice%E9%82%A3%E4%BA%9B%E5%9D%91/"/>
-    <id>http://joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/</id>
+    <link href="http://notes.joryun.com/2016/05/26/webservice(1)%EF%BC%9A%E6%96%B0%E6%89%8B%E6%90%AD%E5%BB%BA%E8%B0%83%E7%94%A8webservice%E9%82%A3%E4%BA%9B%E5%9D%91/"/>
+    <id>http://notes.joryun.com/2016/05/26/webservice(1)：新手搭建调用webservice那些坑/</id>
     <published>2016-05-26T05:40:30.000Z</published>
     <updated>2020-04-06T15:15:46.464Z</updated>
     
@@ -484,14 +484,14 @@
     
     </summary>
     
-      <category term="Coding" scheme="http://joryun.com/categories/Coding/"/>
+      <category term="Coding" scheme="http://notes.joryun.com/categories/Coding/"/>
     
     
-      <category term="java" scheme="http://joryun.com/tags/java/"/>
+      <category term="java" scheme="http://notes.joryun.com/tags/java/"/>
     
-      <category term="webservice" scheme="http://joryun.com/tags/webservice/"/>
+      <category term="webservice" scheme="http://notes.joryun.com/tags/webservice/"/>
     
-      <category term="php" scheme="http://joryun.com/tags/php/"/>
+      <category term="php" scheme="http://notes.joryun.com/tags/php/"/>
     
   </entry>
   

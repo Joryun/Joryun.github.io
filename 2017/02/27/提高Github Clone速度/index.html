@@ -24,7 +24,7 @@
 <meta name="keywords" content="github,git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="提高Github Clone速度">
-<meta property="og:url" content="http://joryun.com/2017/02/27/提高Github Clone速度/index.html">
+<meta property="og:url" content="http://notes.joryun.com/2017/02/27/提高Github Clone速度/index.html">
 <meta property="og:site_name" content="Joryun&#39;s Notes">
 <meta property="og:description" content="前言以下操作均在mac下，当然，windows也类似。如题。使用git clone速度之慢，简直绝了。因此，在这里将提出一种较为简单的解决方法，有兴趣花丢丢时间折腾的朋友可以试试。 虽说git clone跟网速离不了干系（有些地区较快，有些地区较慢），但总体来说，大部分都在10KiB/s-20KiB/s之间，及其慢。若是需要clone大repo，那速度简直捉急。">
 <meta property="og:locale" content="zh-Hans">
@@ -103,8 +103,8 @@
         
             <li class="waves-block waves-effect">
               <a href="https://www.jianshu.com/u/85656cc35708" target="_blank" >
-                <i class="icon icon-lg icon-jianshu"></i>
-                Jianshu
+                <i class="icon icon-lg icon-link"></i>
+                Link
               </a>
             </li>
         
@@ -166,7 +166,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#解决方案"><span class="post-toc-number">2.</span> <span class="post-toc-text">解决方案</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-用-git-内置代理，直接走系统中运行的代理工具中转，比如，你的-SS-本地端口是-1080（一般port均为1080），那么可以如下方式走代理："><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">1. 用 git 内置代理，直接走系统中运行的代理工具中转，比如，你的 SS 本地端口是 1080（一般port均为1080），那么可以如下方式走代理：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-此外，git-clone或者git-push特别慢，并不是因为-http-github-com-的这个域名被限制了。而是-http-github-global-ssl-fastly-Net-这个域名被限制了。那么可以在hosts文件里进行绑定映射。"><span class="post-toc-number">2.0.2.</span> <span class="post-toc-text">2. 此外，git clone或者git push特别慢，并不是因为 http://github.com 的这个域名被限制了。而是 http://github.global.ssl.fastly.Net 这个域名被限制了。那么可以在hosts文件里进行绑定映射。</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#具体步骤如下："><span class="post-toc-number">2.0.2.1.</span> <span class="post-toc-text">具体步骤如下：</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">3.</span> <span class="post-toc-text">总结</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#解决方案"><span class="post-toc-text">解决方案</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-用-git-内置代理，直接走系统中运行的代理工具中转，比如，你的-SS-本地端口是-1080（一般port均为1080），那么可以如下方式走代理："><span class="post-toc-text">1. 用 git 内置代理，直接走系统中运行的代理工具中转，比如，你的 SS 本地端口是 1080（一般port均为1080），那么可以如下方式走代理：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-此外，git-clone或者git-push特别慢，并不是因为-http-github-com-的这个域名被限制了。而是-http-github-global-ssl-fastly-Net-这个域名被限制了。那么可以在hosts文件里进行绑定映射。"><span class="post-toc-text">2. 此外，git clone或者git push特别慢，并不是因为 http://github.com 的这个域名被限制了。而是 http://github.global.ssl.fastly.Net 这个域名被限制了。那么可以在hosts文件里进行绑定映射。</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#具体步骤如下："><span class="post-toc-text">具体步骤如下：</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
         </nav>
     </aside>
     
@@ -265,11 +265,11 @@
 
 
         
-        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/02/27/提高Github Clone速度/" target="_blank" rel="external">http://joryun.com/2017/02/27/提高Github Clone速度/</a>
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/02/27/提高Github Clone速度/" target="_blank" rel="external">http://notes.joryun.com/2017/02/27/提高Github Clone速度/</a>
         
     </div>
     <footer>
-        <a href="http://joryun.com">
+        <a href="http://notes.joryun.com">
             <img src="/img/yuan.jpg" alt="刘家源">
             刘家源
         </a>
@@ -277,10 +277,6 @@
 </blockquote>
 
         
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
 
 
         <div class="post-footer">
@@ -295,7 +291,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2017/02/27/提高Github Clone速度/&title=《提高Github Clone速度》 — Joryun's Notes&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://notes.joryun.com/2017/02/27/提高Github Clone速度/&title=《提高Github Clone速度》 — Joryun's Notes&pic=http://notes.joryun.com/img/yuan.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -305,24 +301,24 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2017/02/27/提高Github Clone速度/&title=《提高Github Clone速度》 — Joryun's Notes&source=
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://notes.joryun.com/2017/02/27/提高Github Clone速度/&title=《提高Github Clone速度》 — Joryun's Notes&source=
 
 前言以下操作均在mac下，当然，windows也类似。如题。使用git clone速度之慢，简直绝了。因此，在这里将提出一种较为简单的解决方法，有兴趣..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2017/02/27/提高Github Clone速度/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://notes.joryun.com/2017/02/27/提高Github Clone速度/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《提高Github Clone速度》 — Joryun's Notes&url=http://joryun.com/2017/02/27/提高Github Clone速度/&via=http://joryun.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《提高Github Clone速度》 — Joryun's Notes&url=http://notes.joryun.com/2017/02/27/提高Github Clone速度/&via=http://notes.joryun.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2017/02/27/提高Github Clone速度/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://notes.joryun.com/2017/02/27/提高Github Clone速度/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -381,22 +377,6 @@
 
 </article>
 
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        undefined
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/" alt="打赏二维码">
-        </div>
-        
-    </div>
-</div>
-
 
 
 </div>
@@ -440,7 +420,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2017/02/27/提高Github Clone速度/&title=《提高Github Clone速度》 — Joryun's Notes&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://notes.joryun.com/2017/02/27/提高Github Clone速度/&title=《提高Github Clone速度》 — Joryun's Notes&pic=http://notes.joryun.com/img/yuan.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -450,24 +430,24 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2017/02/27/提高Github Clone速度/&title=《提高Github Clone速度》 — Joryun's Notes&source=
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://notes.joryun.com/2017/02/27/提高Github Clone速度/&title=《提高Github Clone速度》 — Joryun's Notes&source=
 
 前言以下操作均在mac下，当然，windows也类似。如题。使用git clone速度之慢，简直绝了。因此，在这里将提出一种较为简单的解决方法，有兴趣..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2017/02/27/提高Github Clone速度/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://notes.joryun.com/2017/02/27/提高Github Clone速度/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《提高Github Clone速度》 — Joryun's Notes&url=http://joryun.com/2017/02/27/提高Github Clone速度/&via=http://joryun.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《提高Github Clone速度》 — Joryun's Notes&url=http://notes.joryun.com/2017/02/27/提高Github Clone速度/&via=http://notes.joryun.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2017/02/27/提高Github Clone速度/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://notes.joryun.com/2017/02/27/提高Github Clone速度/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -478,7 +458,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACNElEQVR42u3ay07jQBAF0Pz/T2e2SAP2vdUEyd3Hq8gEuw6LouvxesXXO7j+/2Zy5+v9rz99feLCwMB4LGM9uCSUn56QfL6ODQMD4xzGTxnsOqzrvHcdVvu7N2/HwMDACELJX59gMDAwMNYTbhLcNTg/gGJgYGDkRez195Nu2Kyg/eVaHAMD44GMvOv+958/Mt/AwMB4FONdXm0bbiV9F1FhYGBszcgTXF6OtqVvfv8mHgwMjE0ZSeqcNcvyUWW7UvZNtBgYGFsz8gNcnl7z0GeHSAwMjNMYKwe+ttHfpulkAPBNLY6BgbEdY2XNK2/Mzf4PJIm7qLMxMDAezlgZKM5WH1pMsWaBgYGxKSNptLWpc6UkzlP/zXwDAwNjC8Z6w6s9IObjyeItGBgYBzBmr1kpQa/DrRc1MDAwtmb87qPXh5H5agUGBsY5jLZcbJNsfkBsy+ZX+2IMDIwtGOtrXnnJ2jbjbp6AgYGxNaNNi23J2g4A8hUQDAyMMxkrjf62KJ0tlt38CTAwMA5gzBpeswSdL5/lSxgYGBjnMPJ1h1dwzRYs8ifXvUMMDIyHM9pR5aygbRNuPcjEwMDYjvEurzyxtqVpu66BgYFxDqM9iiWYNrG2Cx9DAAYGxsMZeYN+NubMW3htwsXAwDiNkSfKPMSVpYq6MYeBgYGxcLqclcrDAhUDAwMjOLp9bgX2JpVjYGAcwMhb+fkwYOUoWR8oMTAwtmbMFiNa9qy1lwxKMTAwtmb8AwIrqHZcoONnAAAAAElFTkSuQmCC" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIUlEQVR42u3aS3LCMBAFQO5/aXICzHsjkypL7RVFXEbtxWR+r1d8vS+v5P7rez59c/OFgYHxWEZyxOSv+fMTTP36MDAwDmB8+vnrz9c/3D4tf0EYGBgYM0ZyoDxlxMDAwPgdo00Z8zQRAwMDIy9T88Qu/5V/rcUxMDAeyMi77v//+SfzDQwMjEcx3uWVF673BuIvp8LAwNiakQe4uzD52LI+DwYGxgGMtrxcCbJJ061eFMPAwDiYkQS7JInMA/ewtYeBgXEAY73RloTmWQ9taRKLgYHxcMZ6c22WILYh+0toxsDAOICRHyU/bnugdi3sleSeGBgYWzDyArJ9EdevYLZS9mWEgIGBcQAjiV1JUboSfJPzFO02DAyM7RizB9WDxqC4Hb5cDAyMTRmzcnSl3G2DdZSkYmBgHMDIy8VZIyynDpctMDAwtmbkaV+eMrYLFrPQXPz3wMDAeDijTdpm08OkHF0K9BgYGFszZondrAG3NJ6MQzwGBsaujNniV/t9W762nTQMDIwTGHnsmg0PVsaWxSATAwNja8avx5bteked22JgYGzKeJdXMpKcHTR/Zp3bYmBgPJzRNt2K1YfRPXkDbql3iIGB8UBGG2STMeQ6ow64GBgYBzDy4WKLuXeLregaYmBgHMyYteF+B8PAwMDIm2V5gG6PG40fMDAwDmDk6xQri1z1sleehmJgYGzNaPOuYlVruTBeD9YYGBgPZ/wBWKHwLjoCgnYAAAAASUVORK5CYII=" alt="微信分享二维码">
 </div>
 
 
@@ -486,7 +466,7 @@
 
     <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 <script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 
 
 </script>

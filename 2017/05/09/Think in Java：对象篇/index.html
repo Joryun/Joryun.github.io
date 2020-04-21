@@ -24,7 +24,7 @@
 <meta name="keywords" content="java,thinking-in-java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Think in Java：对象篇">
-<meta property="og:url" content="http://joryun.com/2017/05/09/Think in Java：对象篇/index.html">
+<meta property="og:url" content="http://notes.joryun.com/2017/05/09/Think in Java：对象篇/index.html">
 <meta property="og:site_name" content="Joryun&#39;s Notes">
 <meta property="og:description" content="前言略读了一些内容，觉得还是不太适合初学者入门，倒适合一开始偏向于项目而后想回头重新拾回Java点点滴滴的猿们。以下总结的都是一些博主觉得有意思的解释，或者忘却了的知识点。正在学习或者已经读完的朋友们，互勉！！！">
 <meta property="og:locale" content="zh-Hans">
@@ -96,8 +96,8 @@
         
             <li class="waves-block waves-effect">
               <a href="https://www.jianshu.com/u/85656cc35708" target="_blank" >
-                <i class="icon icon-lg icon-jianshu"></i>
-                Jianshu
+                <i class="icon icon-lg icon-link"></i>
+                Link
               </a>
             </li>
         
@@ -159,7 +159,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#笔记"><span class="post-toc-number">2.</span> <span class="post-toc-text">笔记</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-基类-导出类"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">1. 基类 导出类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-OOP-“后期绑定”"><span class="post-toc-number">2.0.2.</span> <span class="post-toc-text">2. OOP “后期绑定”</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-向上转型"><span class="post-toc-number">2.0.3.</span> <span class="post-toc-text">3. 向上转型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-单根继承结构的优点"><span class="post-toc-number">2.0.4.</span> <span class="post-toc-text">4. 单根继承结构的优点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-参数化类型"><span class="post-toc-number">2.0.5.</span> <span class="post-toc-text">5. 参数化类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-线程的基本解释"><span class="post-toc-number">2.0.6.</span> <span class="post-toc-text">6. 线程的基本解释</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-引用操纵对象"><span class="post-toc-number">2.0.7.</span> <span class="post-toc-text">7. 引用操纵对象</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8-数据存储在什么地方"><span class="post-toc-number">2.0.8.</span> <span class="post-toc-text">8. 数据存储在什么地方</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-包装器类"><span class="post-toc-number">2.0.9.</span> <span class="post-toc-text">9. 包装器类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#10-对象的作用域"><span class="post-toc-number">2.0.10.</span> <span class="post-toc-text">10. 对象的作用域</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#11-初始化"><span class="post-toc-number">2.0.11.</span> <span class="post-toc-text">11. 初始化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#12-“向前引用”"><span class="post-toc-number">2.0.12.</span> <span class="post-toc-text">12. “向前引用”</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#13-static"><span class="post-toc-number">2.0.13.</span> <span class="post-toc-text">13. static</span></a></li></ol></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#笔记"><span class="post-toc-text">笔记</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-基类-导出类"><span class="post-toc-text">1. 基类 导出类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-OOP-“后期绑定”"><span class="post-toc-text">2. OOP “后期绑定”</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-向上转型"><span class="post-toc-text">3. 向上转型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-单根继承结构的优点"><span class="post-toc-text">4. 单根继承结构的优点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-参数化类型"><span class="post-toc-text">5. 参数化类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-线程的基本解释"><span class="post-toc-text">6. 线程的基本解释</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-引用操纵对象"><span class="post-toc-text">7. 引用操纵对象</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8-数据存储在什么地方"><span class="post-toc-text">8. 数据存储在什么地方</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-包装器类"><span class="post-toc-text">9. 包装器类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#10-对象的作用域"><span class="post-toc-text">10. 对象的作用域</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#11-初始化"><span class="post-toc-text">11. 初始化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#12-“向前引用”"><span class="post-toc-text">12. “向前引用”</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#13-static"><span class="post-toc-text">13. static</span></a></li></ol></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -258,11 +258,11 @@
 
 
         
-        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/05/09/Think in Java：对象篇/" target="_blank" rel="external">http://joryun.com/2017/05/09/Think in Java：对象篇/</a>
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/05/09/Think in Java：对象篇/" target="_blank" rel="external">http://notes.joryun.com/2017/05/09/Think in Java：对象篇/</a>
         
     </div>
     <footer>
-        <a href="http://joryun.com">
+        <a href="http://notes.joryun.com">
             <img src="/img/yuan.jpg" alt="刘家源">
             刘家源
         </a>
@@ -270,10 +270,6 @@
 </blockquote>
 
         
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
 
 
         <div class="post-footer">
@@ -288,7 +284,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2017/05/09/Think in Java：对象篇/&title=《Think in Java：对象篇》 — Joryun's Notes&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://notes.joryun.com/2017/05/09/Think in Java：对象篇/&title=《Think in Java：对象篇》 — Joryun's Notes&pic=http://notes.joryun.com/img/yuan.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -298,24 +294,24 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2017/05/09/Think in Java：对象篇/&title=《Think in Java：对象篇》 — Joryun's Notes&source=
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://notes.joryun.com/2017/05/09/Think in Java：对象篇/&title=《Think in Java：对象篇》 — Joryun's Notes&source=
 
 前言略读了一些内容，觉得还是不太适合初学者入门，倒适合一开始偏向于项目而后想回头重新拾回Java点点滴滴的猿们。以下总结的都是一些博主觉得有意思的解释..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2017/05/09/Think in Java：对象篇/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://notes.joryun.com/2017/05/09/Think in Java：对象篇/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Think in Java：对象篇》 — Joryun's Notes&url=http://joryun.com/2017/05/09/Think in Java：对象篇/&via=http://joryun.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Think in Java：对象篇》 — Joryun's Notes&url=http://notes.joryun.com/2017/05/09/Think in Java：对象篇/&via=http://notes.joryun.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2017/05/09/Think in Java：对象篇/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://notes.joryun.com/2017/05/09/Think in Java：对象篇/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -374,22 +370,6 @@
 
 </article>
 
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        undefined
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/" alt="打赏二维码">
-        </div>
-        
-    </div>
-</div>
-
 
 
 </div>
@@ -433,7 +413,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2017/05/09/Think in Java：对象篇/&title=《Think in Java：对象篇》 — Joryun's Notes&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://notes.joryun.com/2017/05/09/Think in Java：对象篇/&title=《Think in Java：对象篇》 — Joryun's Notes&pic=http://notes.joryun.com/img/yuan.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -443,24 +423,24 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2017/05/09/Think in Java：对象篇/&title=《Think in Java：对象篇》 — Joryun's Notes&source=
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://notes.joryun.com/2017/05/09/Think in Java：对象篇/&title=《Think in Java：对象篇》 — Joryun's Notes&source=
 
 前言略读了一些内容，觉得还是不太适合初学者入门，倒适合一开始偏向于项目而后想回头重新拾回Java点点滴滴的猿们。以下总结的都是一些博主觉得有意思的解释..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2017/05/09/Think in Java：对象篇/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://notes.joryun.com/2017/05/09/Think in Java：对象篇/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Think in Java：对象篇》 — Joryun's Notes&url=http://joryun.com/2017/05/09/Think in Java：对象篇/&via=http://joryun.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Think in Java：对象篇》 — Joryun's Notes&url=http://notes.joryun.com/2017/05/09/Think in Java：对象篇/&via=http://notes.joryun.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2017/05/09/Think in Java：对象篇/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://notes.joryun.com/2017/05/09/Think in Java：对象篇/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -471,7 +451,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJElEQVR42u3aQXIjIQwFUN//0p7tVKWc/I+YqTQ8VinbTfNYKAjp9YrH+6/x9ZOv336a4dOzn365eWBgYDyW8f52rP1mbSMS8Me3YGBgXMBIQmQbjiebla8NAwMDo2W0gbvdDgwMDIyc0R4KE3a+fRgYGHcy8qnzpeQbkV/MbcjFMTAwHsjIb93//9//pL6BgYHxKMa7HN8fBOcFg7WBgYFxNiMPcPOLs1GCGqwHAwPjVMa8JJAH0PygmQf3bZUNDAyMX8xYe31eaEyezWeOMBgYGIcy5g0QSQBda8IYlTAxMDAOZexKZSeXa4tlAwwMjAsYSbjchUmaxvIDKwYGxg2M5ICYHxPb5baXaz+8HQMD4wJGG+aSI91kthaMgYFxHmMt+Zynwe213Q//EjAwMI5m5IWBSRlgkh6ParAYGBgHMdqGsEl4zUuYbekUAwPjVMZk0fkneWmh3SwMDIx7GJPSYx5G1y7yom3FwMA4mtGmpnl5si1etkvHwMC4jVG0MiwVHfOQurYdGBgY9zD2HtHa8N2+/TVZEAYGxnGMdlkTXrvOIuBiYGA8lvEuRz71WrNFO0N084eBgfFwRj7mk+5qO1s8OGJgYDycMWnJapPSNj0ukmEMDIwLGLuuzPK0du2o9/GoioGBgbHUbJGDN7S0YmBgYAzy43yJbZvFhqMhBgbGoxh503yevrZPtSEeAwPjHkaeOs4/mVzVtVQMDIwjGH8AT7uTYdWNXOUAAAAASUVORK5CYII=" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACL0lEQVR42u3aQW7DMAwEwPz/0y7Qa2FlSTlBTY9OQWvLGh0IieTrFY/jd/z9vX5+/eTfZ5K3tgYGBsZtGcdynC397JPrd3v/Xa8NAwPjOYwkyFZD4RqZfzeZGQMDA+NsQdWwiIGBgfGdgJtPnV9lMTAwMBJGcomtXm7XS0ze+shdHAMD44aMncLAp39/qb6BgYHxjxlHcewHwZ2ZT9/FwMAYzUiukdULZ/XimsPehGMMDIyhjN5r+V/yELxVOsXAwBjNyF/Op662ixVS/wkMAwNjKCM5xvWKAdVgWm2/eHOJxcDAGMHYLzf22iZ6B9DTLcPAwBjNqNYHq21bOy0azeYwDAyMBzB2miF6F9dqKTR6EgMDYxAjSX59Iq3WywiezomBgTGaUc2rV9NweRnyq+UBDAyM2zLWQa2XGkuuqfvbh4GBMZsR9bduLyjfmjy19+aEi4GBMY6Rp8B2Co3JopuHUQwMjNGMpCRQPURWT6Y9armygYGBMZqRfGYnyOZzNhNtGBgYN2ccwdgpNPZKDuUmDAwMjAcwqpfPq2oRV4V1DAyM2YxqqTIvGFz15Kv3eQwMjEGMoziq6bmdw2UhPYeBgTGaUY1pvcaLXvmzV37AwMCYysiXUp26t5f5URUDA+NpjKvSYTslh17Qx8DAwEhCZ7X9Yod9uhEYGBgYxeCbh9ReIeG0hImBgTGakYe5pEiQXG6v2j4MDIwnMHphMcfk5YHkWLnVroGBgXE/xg8yodsZeMuw+gAAAABJRU5ErkJggg==" alt="微信分享二维码">
 </div>
 
 
@@ -479,7 +459,7 @@
 
     <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 <script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 
 
 </script>

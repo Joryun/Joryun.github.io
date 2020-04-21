@@ -24,7 +24,7 @@
 <meta name="keywords" content="java,webservice">
 <meta property="og:type" content="article">
 <meta property="og:title" content="webservice(2)：体验查询号码归属地demo">
-<meta property="og:url" content="http://joryun.com/2017/04/15/webservice(2)：体验查询号码归属地demo/index.html">
+<meta property="og:url" content="http://notes.joryun.com/2017/04/15/webservice(2)：体验查询号码归属地demo/index.html">
 <meta property="og:site_name" content="Joryun&#39;s Notes">
 <meta property="og:description" content="前言对于webservice的介绍，本文就不再赘余讲述。详见文章 webservice:(1)新手搭建调用webservice那些坑 首先，先给出一个站点，该站点提供了许多webservice服务，可供调用测试。站点： http://www.webxml.com.cn/zh_cn/index.aspx">
 <meta property="og:locale" content="zh-Hans">
@@ -105,8 +105,8 @@
         
             <li class="waves-block waves-effect">
               <a href="https://www.jianshu.com/u/85656cc35708" target="_blank" >
-                <i class="icon icon-lg icon-jianshu"></i>
-                Jianshu
+                <i class="icon icon-lg icon-link"></i>
+                Link
               </a>
             </li>
         
@@ -168,7 +168,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#步骤"><span class="post-toc-number">2.</span> <span class="post-toc-text">步骤</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-记录所调用webservice的WSDL"><span class="post-toc-number">2.0.0.1.</span> <span class="post-toc-text">1.记录所调用webservice的WSDL</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-使用JDK目录下的工具-wsimport，生成调用webservice相应的代码"><span class="post-toc-number">2.0.0.2.</span> <span class="post-toc-text">2.使用JDK目录下的工具-wsimport，生成调用webservice相应的代码</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-编写测试类测试"><span class="post-toc-number">2.0.0.3.</span> <span class="post-toc-text">3.编写测试类测试</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结："><span class="post-toc-number">3.</span> <span class="post-toc-text">总结：</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#步骤"><span class="post-toc-text">步骤</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-记录所调用webservice的WSDL"><span class="post-toc-text">1.记录所调用webservice的WSDL</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-使用JDK目录下的工具-wsimport，生成调用webservice相应的代码"><span class="post-toc-text">2.使用JDK目录下的工具-wsimport，生成调用webservice相应的代码</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-编写测试类测试"><span class="post-toc-text">3.编写测试类测试</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结："><span class="post-toc-text">总结：</span></a></li></ol>
         </nav>
     </aside>
     
@@ -195,7 +195,7 @@
         <div class="post-content" id="post-content" itemprop="postContent">
             <meta name="referrer" content="no-referrer">
 
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>对于webservice的介绍，本文就不再赘余讲述。<br>详见文章 <a href="http://joryun.com/2016/05/26/build-webservice/">webservice:(1)新手搭建调用webservice那些坑</a></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>对于webservice的介绍，本文就不再赘余讲述。<br>详见文章 <a href="http://joryun.com/2016/05/26/build-webservice/" target="_blank" rel="noopener">webservice:(1)新手搭建调用webservice那些坑</a></p>
 <p>首先，先给出一个站点，该站点提供了许多webservice服务，可供调用测试。<br>站点： <strong><a href="http://www.webxml.com.cn/zh_cn/index.aspx" target="_blank" rel="noopener">http://www.webxml.com.cn/zh_cn/index.aspx</a></strong></p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
@@ -275,11 +275,11 @@
 
 
         
-        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/04/15/webservice(2)：体验查询号码归属地demo/" target="_blank" rel="external">http://joryun.com/2017/04/15/webservice(2)：体验查询号码归属地demo/</a>
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/04/15/webservice(2)：体验查询号码归属地demo/" target="_blank" rel="external">http://notes.joryun.com/2017/04/15/webservice(2)：体验查询号码归属地demo/</a>
         
     </div>
     <footer>
-        <a href="http://joryun.com">
+        <a href="http://notes.joryun.com">
             <img src="/img/yuan.jpg" alt="刘家源">
             刘家源
         </a>
@@ -287,10 +287,6 @@
 </blockquote>
 
         
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
 
 
         <div class="post-footer">
@@ -305,7 +301,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2017/04/15/webservice(2)：体验查询号码归属地demo/&title=《webservice(2)：体验查询号码归属地demo》 — Joryun's Notes&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://notes.joryun.com/2017/04/15/webservice(2)：体验查询号码归属地demo/&title=《webservice(2)：体验查询号码归属地demo》 — Joryun's Notes&pic=http://notes.joryun.com/img/yuan.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -315,7 +311,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2017/04/15/webservice(2)：体验查询号码归属地demo/&title=《webservice(2)：体验查询号码归属地demo》 — Joryun's Notes&source=
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://notes.joryun.com/2017/04/15/webservice(2)：体验查询号码归属地demo/&title=《webservice(2)：体验查询号码归属地demo》 — Joryun's Notes&source=
 
 前言对于webservice的介绍，本文就不再赘余讲述。详见文章 webservice:(1)新手搭建调用webservice那些坑
 首先，先给出一个..." data-title=" QQ">
@@ -323,17 +319,17 @@
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2017/04/15/webservice(2)：体验查询号码归属地demo/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://notes.joryun.com/2017/04/15/webservice(2)：体验查询号码归属地demo/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《webservice(2)：体验查询号码归属地demo》 — Joryun's Notes&url=http://joryun.com/2017/04/15/webservice(2)：体验查询号码归属地demo/&via=http://joryun.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《webservice(2)：体验查询号码归属地demo》 — Joryun's Notes&url=http://notes.joryun.com/2017/04/15/webservice(2)：体验查询号码归属地demo/&via=http://notes.joryun.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2017/04/15/webservice(2)：体验查询号码归属地demo/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://notes.joryun.com/2017/04/15/webservice(2)：体验查询号码归属地demo/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -392,22 +388,6 @@
 
 </article>
 
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        undefined
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/" alt="打赏二维码">
-        </div>
-        
-    </div>
-</div>
-
 
 
 </div>
@@ -451,7 +431,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2017/04/15/webservice(2)：体验查询号码归属地demo/&title=《webservice(2)：体验查询号码归属地demo》 — Joryun's Notes&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://notes.joryun.com/2017/04/15/webservice(2)：体验查询号码归属地demo/&title=《webservice(2)：体验查询号码归属地demo》 — Joryun's Notes&pic=http://notes.joryun.com/img/yuan.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -461,7 +441,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2017/04/15/webservice(2)：体验查询号码归属地demo/&title=《webservice(2)：体验查询号码归属地demo》 — Joryun's Notes&source=
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://notes.joryun.com/2017/04/15/webservice(2)：体验查询号码归属地demo/&title=《webservice(2)：体验查询号码归属地demo》 — Joryun's Notes&source=
 
 前言对于webservice的介绍，本文就不再赘余讲述。详见文章 webservice:(1)新手搭建调用webservice那些坑
 首先，先给出一个..." data-title=" QQ">
@@ -469,17 +449,17 @@
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2017/04/15/webservice(2)：体验查询号码归属地demo/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://notes.joryun.com/2017/04/15/webservice(2)：体验查询号码归属地demo/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《webservice(2)：体验查询号码归属地demo》 — Joryun's Notes&url=http://joryun.com/2017/04/15/webservice(2)：体验查询号码归属地demo/&via=http://joryun.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《webservice(2)：体验查询号码归属地demo》 — Joryun's Notes&url=http://notes.joryun.com/2017/04/15/webservice(2)：体验查询号码归属地demo/&via=http://notes.joryun.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2017/04/15/webservice(2)：体验查询号码归属地demo/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://notes.joryun.com/2017/04/15/webservice(2)：体验查询号码归属地demo/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -490,7 +470,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsUlEQVR42u3aQW7cMBAEQP3/05urgURKN4dc61A8GWt5xZIBcdAz1xWvz4/185Pnn/NP7u54d/fNCw8PD2+w9b9Xwss3l/9V8hCf94yHh4d3mpds8Xm7z5883yW/Mt8zHh4e3jt5a2V08VovjyU8PDy8d/LaTdcbKuMPPDw8vN/itZubXJ98vvYo8fDw8L7Dy7tI7/n5SH8PDw8Pb9xVb6PV/EhoC+61hYeHh3eC145AJY3/vCWWlNprZTceHh7ead6knZ/HDZNDZRJb4OHh4X2ft6t9NW+q3T36xWQFDw8PbxNvUhAnzbBJoys/PPDw8PDO8SZjUs8v6L3DB3mZfq3dAA8PD28wRpC/+p9f4u0L/ZmdHBv1/xMPDw/vGG+tkb+G3zWgcEvFw8PD28TLX8TP17ejWmtBQx3s4uHh4W3lTZr9eTmbHCFtYBF9Dx4eHt4xXvLV19Jq8fNIAg8PD+80bzJQtYu6NhZQtMTw8PDwtvJOtPzbb8vjifyOeHh4eKd5bUxQ58TlvdZK6n/sDQ8PD+8ALy+C25Z/PQ61FDTkBTceHh7eLt58BKoNgvPiOw8sbh8oHh4e3gFespX8YFj7bZK7ro014OHh4Z3jJQdDvukklk2CjHzQ6j+PAA8PD++LvLYs3jVw8IlXFOPi4eHhHeO1W2kbXWuhQ1uyRxvFw8PD28prW/vJA5oMFkz+AXh4eHinee1g04lwIT9CijYbHh4e3lbep1xtmyqJLdoWV37A4OHh4Z3g5SuPUFtMGz1MomQ8PDy8Xby1w2D+5PLhg/z6a/7k8PDw8GJeHtS25ey5GCLaAx4eHt6LeUnIm0cY7TFwey88PDy8F/AmKy+j20ZaXePj4eHhjXltmTsZpcqHtNr44/ZgwMPDw9vKm4SzeZsquXJXJIGHh4d3jPcHwaUNAXFIujEAAAAASUVORK5CYII=" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACpUlEQVR42u3aQU7EMAwF0N7/0rAECTrzbcfVLF5XCKZtXpASz3euK76+/ly/f//6k3fX6yfcPfPauPDw8PDGQ78bxN1r7l6c3HVHrY7ndgrw8PDw1nh3g3v9mdercXVq8i0kGTMeHh7e5/DyJX6C6U03Hh4e3mfyet/3kzdOphgPDw/ved4kbO0FCknBXd1U8PDw8J7hnVqgn/x5pb+Hh4eHN+6qVxfcvOSdbD+F0eLh4eEt8PIFNxnK/LhAPhH5OPHw8PDO8przcSpgjYOMZCT/PAcPDw9vgZc3parHWPMjU9VwNmfj4eHhbfB6D+pFDPnGkE909F0BDw8Pb5lXfkS8zfQODSQF/TXZzfDw8PCKvF63fR4iVA9X9VpieHh4eHu8XiF7KmBN5r73Gzw8PLxneElEO/9rb4LysrscSeDh4eG1eNXgoLpYT5b7UdCMh4eHd5SXF7vzZb1XZE+aZHh4eHgbvF4kMQ9nq8/sxRx4eHh4e7xTcUOylPdihclhLDw8PLw93uSA1KTR1Rt0oeDGw8PDW+P1ooReqX2qvI62EDw8PLw1XhIfVBtg1eZZXqDnYQceHh7eWd6kHTXZNvKjBm+yZzw8PLzHeZMDUnvNrWp4ET0TDw8Pb4FXbVxV/7rRk8o/j4eHh3eW1xtW78U95DW58PDw8NZ4vWb/JLzoxbjltAEPDw9vjZcv0Pn2kIcR+XbSzKrx8PDwDvG+itekMZYEB727bkeFh4eHt8A7+40+ubf6nOrRq8XAAg8PD28QOvQaYwmyOs5CAwwPDw9vgVcIRuPNIy+4V1pfeHh4eB/Dm8S+1bvye/Hw8PA+mVeNVudha16y4+Hh4T3JyyOG6muq5XK1yH7zb8DDw8Nb4M3r0pyUH7rqTc1KYIGHh4f3c30DqVbuAzOLVoAAAAAASUVORK5CYII=" alt="微信分享二维码">
 </div>
 
 
@@ -498,7 +478,7 @@
 
     <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 <script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 
 
 </script>
