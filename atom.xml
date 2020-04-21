@@ -219,11 +219,11 @@
       <category term="Coding" scheme="http://notes.joryun.com/categories/Coding/"/>
     
     
-      <category term="java" scheme="http://notes.joryun.com/tags/java/"/>
-    
       <category term="shell" scheme="http://notes.joryun.com/tags/shell/"/>
     
       <category term="服务器" scheme="http://notes.joryun.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+      <category term="java" scheme="http://notes.joryun.com/tags/java/"/>
     
       <category term="centos" scheme="http://notes.joryun.com/tags/centos/"/>
     
