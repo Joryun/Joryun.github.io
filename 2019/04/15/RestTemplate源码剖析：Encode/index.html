@@ -27,7 +27,7 @@
 <meta property="og:url" content="http://notes.joryun.com/2019/04/15/RestTemplate源码剖析：Encode/index.html">
 <meta property="og:site_name" content="Joryun&#39;s Notes">
 <meta property="og:description" content="背景业务方经过某些业务处理之后，带过来了一系列参数。其中，有个url参数供回调使用，但这个url经业务方处理后很特殊，带过来回调时频频出错，无法正常回调给业务方。于是，通过分析部分源码，剖析一下回调的流程。 编码 解码说到url的回调，很容易联想到decode、encode，即编码解码操作。 12通常来说，需要编码操作即意味着不适合直接传输，某些字符可能有歧义，如中文、特殊字符等等。而通过编码">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2929536-8119d0fdedfa08dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2929536-4a5ca9875d27f738.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2929536-914cb12e3f14ace2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -150,7 +150,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -526,7 +526,7 @@
     <div class="content">
         
 <span class="post-time">
-    最終更新：<time datetime="2020-04-21T17:10:37.832Z" itemprop="dateUpdated">2020-04-22 01:10:37</time>
+    最后更新时间：<time datetime="2020-04-21T17:10:37.832Z" itemprop="dateUpdated">2020-04-22 01:10:37</time>
 </span><br>
 
 
@@ -655,7 +655,7 @@
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
         </p>
     </div>
     <div class="bottom">
