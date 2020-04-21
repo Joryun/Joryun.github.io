@@ -1,102 +1,26 @@
 <!DOCTYPE html>
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html>
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
-<meta name="theme-color" content="#222"/>
+    
+
+    
+
+    
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0"/>
-
-<link rel="stylesheet" href="/css/main.css?v=7.1.2"/>
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.2">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
-
-
-
-
-
-
-
-<script id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Gemini',
-    version: '7.1.2',
-    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
-    back2top: true,
-    back2top_sidebar: false,
-    fancybox: false,
-    fastclick: false,
-    lazyload: false,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-  
-
-
-
-
-  <meta name="description" content="进程监控脚本背景启动于正式服务器的项目，有时会因为某种因素，例如docker内存超限因而容器崩溃（前不久就遇过…），如服务器内存不足或IO读写异常而崩溃….等等等等。而这些原因，都可能影响到项目的正常运行，严重地将会被kill掉。那么，在服务器上弄一套进程监控方案就很有必要了！ 说明进程监控采用shell脚本的形式，结合日常开发使用的CI工具（如Jenkins），再通过Linux服务器的定时器">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Linux进程监控 + 钉钉通知 | Joryun&#39;s Notes | 多读书多看报少吃零食多睡觉</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="linux,shell,服务器">
+    <meta name="description" content="进程监控脚本背景启动于正式服务器的项目，有时会因为某种因素，例如docker内存超限因而容器崩溃（前不久就遇过…），如服务器内存不足或IO读写异常而崩溃….等等等等。而这些原因，都可能影响到项目的正常运行，严重地将会被kill掉。那么，在服务器上弄一套进程监控方案就很有必要了！ 说明进程监控采用shell脚本的形式，结合日常开发使用的CI工具（如Jenkins），再通过Linux服务器的定时器">
 <meta name="keywords" content="linux,shell,服务器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux进程监控 + 钉钉通知">
@@ -112,358 +36,159 @@
 <meta name="twitter:title" content="Linux进程监控 + 钉钉通知">
 <meta name="twitter:description" content="进程监控脚本背景启动于正式服务器的项目，有时会因为某种因素，例如docker内存超限因而容器崩溃（前不久就遇过…），如服务器内存不足或IO读写异常而崩溃….等等等等。而这些原因，都可能影响到项目的正常运行，严重地将会被kill掉。那么，在服务器上弄一套进程监控方案就很有必要了！ 说明进程监控采用shell脚本的形式，结合日常开发使用的CI工具（如Jenkins），再通过Linux服务器的定时器">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2929536-fef7603e393bcd95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+    
+        <link rel="alternate" type="application/atom+xml" title="Joryun&#39;s Notes" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
 
-
-
-  <link rel="alternate" href="/atom.xml" title="Joryun's Notes" type="application/atom+xml"/>
-
-
-
-  
-  
-  <link rel="canonical" href="http://joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/"/>
-
-
-
-<script id="page.configurations">
-  CONFIG.page = {
-    sidebar: "",
-  };
-</script>
-
-  <title>Linux进程监控 + 钉钉通知 | Joryun's Notes</title>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .motion-element,
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
-
-  .use-motion .logo,
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
+    <!-- custom head -->
+    
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body>
+    <div id="loading" class="active"></div>
 
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Joryun's Notes</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/yuan.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">刘家源</h5>
+          <a href="mailto:me@joryun.com" title="me@joryun.com" class="mail">me@joryun.com</a>
+        </hgroup>
+      </div>
     </div>
-    
-      
-        <p class="site-subtitle">多读书多看报少吃零食多睡觉</p>
-      
-    
-    
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/Joryun" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
   </div>
+</aside>
 
-  <div class="site-nav-toggle">
-    <button aria-label="Toggle navigation bar">
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-
-
-<nav class="site-nav">
-  
-    <ul id="menu" class="menu">
-      
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Linux进程监控 + 钉钉通知</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
         
         
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
         
-          
-          <li class="menu-item menu-item-home">
+    </div>
+</header>
+<header class="content-header post-header">
 
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>Home</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-about">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>About</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-tags">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>Tags</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-categories">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>Categories</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>Archives</a>
-
-  </li>
-
-      
-      
-    </ul>
-  
-
-  
-
-  
-</nav>
-
-
-
-  
-
-
-
-</div>
-    </header>
-
-    
-
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
+    <div class="container fade-scale">
+        <h1 class="title">Linux进程监控 + 钉钉通知</h1>
+        <h5 class="subtitle">
             
+                <time datetime="2017-12-22T01:59:26.000Z" itemprop="datePublished" class="page-time">
+  2017-12-22
+</time>
 
-          
-          <div id="content" class="content">
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Coding/">Coding</a></li></ul>
+
             
+        </h5>
+    </div>
 
-  <div id="posts" class="posts-expand">
     
 
-  
 
-  
-  
-  
+</header>
 
-  
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="刘家源"/>
-      <meta itemprop="description" content="TO BE IS TO DO"/>
-      <meta itemprop="image" content="/images/avatar.gif"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Joryun's Notes"/>
-    </span>
-
+<div class="container body-wrap">
     
-      <header class="post-header">
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程监控脚本"><span class="post-toc-number">1.</span> <span class="post-toc-text">进程监控脚本</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#背景"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">背景</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#说明"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">说明</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简单介绍Jenkins"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">简单介绍Jenkins</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#进入主题"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">进入主题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#流程"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">流程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#一、Jenkins-shell脚本"><span class="post-toc-number">1.4.1.1.</span> <span class="post-toc-text">一、Jenkins shell脚本</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#二、Linux服务器执行的初始脚本"><span class="post-toc-number">1.4.1.2.</span> <span class="post-toc-text">二、Linux服务器执行的初始脚本</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#三、监控脚本的初始脚本"><span class="post-toc-number">1.4.1.3.</span> <span class="post-toc-text">三、监控脚本的初始脚本</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#四、重点：监控脚本"><span class="post-toc-number">1.4.1.4.</span> <span class="post-toc-text">四、重点：监控脚本</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#拓展部分：集成钉钉通知"><span class="post-toc-number">2.</span> <span class="post-toc-text">拓展部分：集成钉钉通知</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#相关截图"><span class="post-toc-number">3.</span> <span class="post-toc-text">相关截图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">4.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Linux进程监控 + 钉钉通知"
+  class="post-article article-type-post fade" itemprop="blogPost">
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">Linux进程监控 + 钉钉通知
-
-              
-            
-          </h1>
-        
-
+    <div class="post-card">
+        <h1 class="post-card-title">Linux进程监控 + 钉钉通知</h1>
         <div class="post-meta">
-          <span class="post-time">
+            <time class="post-time" title="2017-12-22 09:59:26" datetime="2017-12-22T01:59:26.000Z"  itemprop="datePublished">2017-12-22</time>
 
             
-            
-            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Coding/">Coding</a></li></ul>
+
+
 
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
 
-              
-                
-              
-
-              <time title="Created: 2017-12-22 09:59:26" itemprop="dateCreated datePublished" datetime="2017-12-22T09:59:26+08:00">2017-12-22</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2020-04-06 23:15:10" itemprop="dateModified" datetime="2020-04-06T23:15:10+08:00">2020-04-06</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Coding/" itemprop="url" rel="index"><span itemprop="name">Coding</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
 
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <meta name="referrer" content="no-referrer">
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <meta name="referrer" content="no-referrer">
 
 <h2 id="进程监控脚本"><a href="#进程监控脚本" class="headerlink" title="进程监控脚本"></a>进程监控脚本</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>启动于正式服务器的项目，有时会因为某种因素，例如docker内存超限因而容器崩溃（前不久就遇过…），如服务器内存不足或IO读写异常而崩溃….等等等等。而这些原因，都可能影响到项目的正常运行，严重地将会被kill掉。那么，在服务器上弄一套进程监控方案就很有必要了！</p>
 <h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>进程监控采用shell脚本的形式，结合日常开发使用的CI工具（如Jenkins），再通过Linux服务器的定时器，定时监控进程，当进程被killed，服务自动重启。</p>
@@ -503,466 +228,314 @@
 <p>说明：<br><strong>xxx</strong>：填上对应钉钉机器人的access_token即可。</p>
 <p>注：脚本现在还一直在迭代，为了让脚本更强大、更健壮，我也会一直持续地完善…</p>
 <h2 id="相关截图"><a href="#相关截图" class="headerlink" title="相关截图"></a>相关截图</h2><p><strong>日志</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2929536-fef7603e393bcd95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://upload-images.jianshu.io/upload_images/2929536-fef7603e393bcd95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p><strong>钉钉通知</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2929536-8641e255b1e8fb23.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://upload-images.jianshu.io/upload_images/2929536-8641e255b1e8fb23.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p>查看定时任务</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2929536-4d8d86c3e64d1e71.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://upload-images.jianshu.io/upload_images/2929536-4d8d86c3e64d1e71.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>好了，真真真好久没写博客了，最近有些许忙，虽然有好多好多新鲜玩意想写，但一直没机会分享！</p>
 <p>本篇依旧介绍一直以来颇有兴趣的服务器部分，但架构一个更完善、更健壮的开发体系，还有很多很多东西要学…</p>
 
-      
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-04-06T15:15:10.255Z" itemprop="dateUpdated">2020-04-06 23:15:10</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/12/22/Linux进程监控 + 钉钉通知/" target="_blank" rel="external">http://joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/</a>
+        
     </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-        
-          
-        
-        <div class="post-tags">
-          
-            <a href="/tags/linux/" rel="tag"># linux</a>
-          
-            <a href="/tags/shell/" rel="tag"># shell</a>
-          
-            <a href="/tags/服务器/" rel="tag"># 服务器</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/12/22/Spring Data JPA坑点记录/" rel="next" title="Spring Data JPA坑点记录">
-                <i class="fa fa-chevron-left"></i> Spring Data JPA坑点记录
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/03/七牛云模块化/" rel="prev" title="七牛云模块化">
-                七牛云模块化 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
+    <footer>
+        <a href="http://joryun.com">
+            <img src="/img/yuan.jpg" alt="刘家源">
+            刘家源
+        </a>
     </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-  </div>
-
-
-          </div>
-          
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">刘家源</p>
-              <div class="site-description motion-element" itemprop="description">TO BE IS TO DO</div>
-          </div>
-
-          
-            <nav class="site-state motion-element">
-              
-                <div class="site-state-item site-state-posts">
-                
-                  <a href="/archives/">
-                
-                    <span class="site-state-item-count">16</span>
-                    <span class="site-state-item-name">posts</span>
-                  </a>
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-categories">
-                  
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">3</span>
-                    <span class="site-state-item-name">categories</span>
-                  
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">30</span>
-                    <span class="site-state-item-name">tags</span>
-                  
-                </div>
-              
-            </nav>
-          
-
-          
-            <div class="feed-link motion-element">
-              <a href="/atom.xml" rel="alternate">
-                <i class="fa fa-rss"></i>
-                RSS
-              </a>
-            </div>
-          
-
-          
-
-          
-
-          
-
-          
-          
-
-          
-            
-          
-          
-
-        </div>
-      </div>
-
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程监控脚本"><span class="nav-number">1.</span> <span class="nav-text">进程监控脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说明"><span class="nav-number">1.2.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单介绍Jenkins"><span class="nav-number">1.3.</span> <span class="nav-text">简单介绍Jenkins</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进入主题"><span class="nav-number">1.4.</span> <span class="nav-text">进入主题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#流程"><span class="nav-number">1.4.1.</span> <span class="nav-text">流程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、Jenkins-shell脚本"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">一、Jenkins shell脚本</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、Linux服务器执行的初始脚本"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">二、Linux服务器执行的初始脚本</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三、监控脚本的初始脚本"><span class="nav-number">1.4.1.3.</span> <span class="nav-text">三、监控脚本的初始脚本</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#四、重点：监控脚本"><span class="nav-number">1.4.1.4.</span> <span class="nav-text">四、重点：监控脚本</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拓展部分：集成钉钉通知"><span class="nav-number">2.</span> <span class="nav-text">拓展部分：集成钉钉通知</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关截图"><span class="nav-number">3.</span> <span class="nav-text">相关截图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-  
-
+</blockquote>
 
         
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
-  <span class="with-love" id="animate">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">刘家源</span>
-
-  
-
-  
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.4.4</div>
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/服务器/">服务器</a></li></ul>
 
 
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.2</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
+            
+<div class="page-share-wrap">
     
 
-    
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/&title=《Linux进程监控 + 钉钉通知》 — Joryun's Notes&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/&title=《Linux进程监控 + 钉钉通知》 — Joryun's Notes&source=TO BE IS TO DO" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux进程监控 + 钉钉通知》 — Joryun's Notes&url=http://joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/&via=http://joryun.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
 
     
-
-    
-  </div>
-
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/01/03/七牛云模块化/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">七牛云模块化</h4>
+      </a>
+    </div>
   
 
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/12/22/Spring Data JPA坑点记录/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Spring Data JPA坑点记录</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        undefined
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>刘家源 &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/&title=《Linux进程监控 + 钉钉通知》 — Joryun's Notes&pic=http://joryun.com/img/yuan.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/&title=《Linux进程监控 + 钉钉通知》 — Joryun's Notes&source=TO BE IS TO DO" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux进程监控 + 钉钉通知》 — Joryun's Notes&url=http://joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/&via=http://joryun.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://joryun.com/2017/12/22/Linux进程监控 + 钉钉通知/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACM0lEQVR42u3aQW7DMAxEUd//0i7QVYFEzgzHDirya2Ukqa3nBUuRPA55nb/r9Xr1yd/PX9f1PVd3u2HBgAFjW8Z5ua63vvqly74mXe8NBgwYcxhukF1tWsHU/urDnmHAgAFDfnDtddReHwwYMGB8J+DqaSIMGDBgKIdY/eCqbLcGvuEsDgMGjA0ZSWPg6esv9TdgwIDxjxlnsJTkspY+2juBAQNGa4ZeMssHMmpHWSMQw4ABYwBDGaqoPUAvmbnH1DcBFwYMGGMYtTaAcjd31Mz4NwADBowBjOTgquDdBoPeeIABA0Zvhv4Ae/QhSBldPAwYMCYw3EOsm6fpv9HD+rK/AQMGjHaMvPTvHl/dgO4mizBgwOjKcMte+aE0edPLb2HAgNGa4SZzemuzNmDh1v9hwIDRm+GGSzekuuMabsvzqEV9GDBgbMVQQupdI1zJIdkOzTBgwGjE0AteSqsyL8C5FcE3wxYwYMBox9DTxLuamnqZTz88w4ABYwLjuZK9Mk6RtD/tFiYMGDA2Z7hF+VrorBXgjIgOAwaMMQyl0JYklEkaavRgYcCA0YihtzOV67wtqo9Z2OU2GDBgbMg4zZU0GmtppRT6YcCA0Zrx9BiEkvbVBj6KQx4wYMDYluEG2QSvvwh7DzBgwBjAqG0iSdrc2G93YmHAgDGecVvr0Ww5fGgJwIABYzxDL5/VGqLunWHAgDGNobcea2ncE6dOGDBgzGG4SVvyGyV8J0EZBgwY7Rg/negD8TlogbwAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 <script>
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '别跑呀！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
 </script>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-
-  
-
-
-  <script src="/js/utils.js?v=7.1.2"></script>
-
-  <script src="/js/motion.js?v=7.1.2"></script>
-
-
-
-  
-  
-
-
-  <script src="/js/affix.js?v=7.1.2"></script>
-
-  <script src="/js/schemes/pisces.js?v=7.1.2"></script>
-
-
-
-
-  
-  <script src="/js/scrollspy.js?v=7.1.2"></script>
-<script src="/js/post-details.js?v=7.1.2"></script>
-
-
-
-  
-
-
-  <script src="/js/next-boot.js?v=7.1.2"></script>
-
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-
-  
-
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 </body>
 </html>
